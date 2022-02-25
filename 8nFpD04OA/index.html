@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>Docker实验四:Docker 容器互联 | 囧囧JOJO - 博客</title>
+
+    <meta name="description" content="&lt;h1 id=&#34;实验四-Docker-容器互联&#34;&gt;&lt;a href=&#34;#实验四-Docker-容器互联&#34; class=&#34;headerlink&#34; title=&#34;实验四 Docker 容器互联&#34;&gt;&lt;/a&gt;实验四 Docker 容器互联&lt;/h1&gt;&lt;h2 id=&#34;0-目录&#34;&gt;&lt;a href=&#34;#0-目录&#34; class=&#34;headerlink&#34; title=&#34;0 目录&#34;&gt;&lt;/a&gt;0 目录&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#1-%E7%BD%91%E7%BB%9C%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84&#34;&gt;1 网络端口映射&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#2-docker-%E5%AE%B9%E5%99%A8%E4%BA%92%E8%81%94-link&#34;&gt;2 Docker 容器互联：–link&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#3-docker-%E7%BD%91%E7%BB%9C&#34;&gt;3 Docker 网络&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#31-%E6%96%B0%E5%BB%BA%E7%BD%91%E7%BB%9C&#34;&gt;3.1 新建网络&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#32-%E8%BF%9E%E6%8E%A5%E5%AE%B9%E5%99%A8&#34;&gt;3.2 连接容器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#33-%E8%AE%BE%E5%AE%9A%E7%BD%91%E6%AE%B5%E5%92%8Cip&#34;&gt;3.3 设定网段和IP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#34-%E9%85%8D%E7%BD%AE-dns&#34;&gt;3.4 配置 DNS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl02tinmz0009rg9mbiha6su5" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Docker实验四:Docker 容器互联
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-12-02T02:12:01.000Z" itemprop="datePublished">2021-12-02</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="实验四-Docker-容器互联"><a href="#实验四-Docker-容器互联" class="headerlink" title="实验四 Docker 容器互联"></a>实验四 Docker 容器互联</h1><h2 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h2><ul>
+<li><a href="#1-%E7%BD%91%E7%BB%9C%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84">1 网络端口映射</a></li>
+<li><a href="#2-docker-%E5%AE%B9%E5%99%A8%E4%BA%92%E8%81%94-link">2 Docker 容器互联：–link</a></li>
+<li><a href="#3-docker-%E7%BD%91%E7%BB%9C">3 Docker 网络</a><ul>
+<li><a href="#31-%E6%96%B0%E5%BB%BA%E7%BD%91%E7%BB%9C">3.1 新建网络</a></li>
+<li><a href="#32-%E8%BF%9E%E6%8E%A5%E5%AE%B9%E5%99%A8">3.2 连接容器</a></li>
+<li><a href="#33-%E8%AE%BE%E5%AE%9A%E7%BD%91%E6%AE%B5%E5%92%8Cip">3.3 设定网段和IP</a></li>
+<li><a href="#34-%E9%85%8D%E7%BD%AE-dns">3.4 配置 DNS</a></li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="1-网络端口映射"><a href="#1-网络端口映射" class="headerlink" title="1 网络端口映射"></a>1 网络端口映射</h2><p>首先，创建了一个 Python Web 应用的容器。</p>
+<pre><code class="bash">cd ~/course/docker/webapp/webapp
+docker run -d -P training/webapp python app.py
+docker ps -l
+</code></pre>
+<p><img src="/8nFpD04OA/1638411421257.png"></p>
+<p>通过 -P 参数创建一个容器，使用 docker ps 可以看到容器端口 5000 绑定主机端口 49153。<br>使用地址：localhost:49153访问容器内的Web服务。</p>
+<p><img src="/8nFpD04OA/1638411433747.png"></p>
+<p>也可以使用 -p 指定容器端口所绑定的主机端口。</p>
+<p>两种方式的区别是:</p>
+<ul>
+<li>-P ：容器内部端口随机映射到主机端口。</li>
+<li>-p ：容器内部端口绑定到指定的主机端口。</li>
+</ul>
+<pre><code class="bash">docker run -d -p 80:5000 training/webapp python app.py
+docker ps -l
+</code></pre>
+<p><img src="/8nFpD04OA/1638411446132.png"></p>
+<p>通过chrome浏览器访问容器服务，由于80是Web服务的默认端口，因此可以直接输入IP地址访问服务。<br>注意：本地的IP地址可以直接用localhost代替。</p>
+<p><img src="/8nFpD04OA/1638411457795.png"></p>
+<p>另外，可以指定容器绑定的网络地址，比如绑定 127.0.0.1。</p>
+<pre><code class="bash">docker run -d -p 127.0.0.1:5001:5000 training/webapp python app.py
+docker ps -l
+</code></pre>
+<p><img src="/8nFpD04OA/1638411469306.png"></p>
+<p>这样就可以通过访问 127.0.0.1:5001 来访问容器的 5001 端口。</p>
+<p><img src="/8nFpD04OA/1638411479061.png"></p>
+<p>上面的例子中，默认都是绑定 tcp 端口，如果要绑定 UDP 端口，可以在端口后面加上 &#x2F;udp。<br>例如：docker run -d -p IP:端口:Docker端口&#x2F;udp example&#x2F;example_app python example.py<br>-P 和 -p 选项使得在容器外部通过宿主机可以访问容器内部的服务，例如对于主机 H 和容器 A，通过 -P 或 -p 进行端口映射后， 可以通过主机 H 的 IP 地址和所映射的端口号来访问服务。<br>对于容器B，如果容器 B 到主机 H 的网络是互通的，也可以通过 H 的IP地址和端口号来访问服务。<br>下面演示上述访问过程，验证操作包括以下几部分：</p>
+<ul>
+<li>查看宿主机的IP地址</li>
+<li>使用Ubuntu镜像启动容器作为容器 B</li>
+<li>为容器A安装wget工具，需要分别执行：<code>apt-get update</code>和<code>apt-get install wget</code>两条命令</li>
+<li>使用命令 <code>wget IP:32771</code> 获取容器 A 内的Web服务的页面 index.html 。</li>
+<li>使用命令 <code>cat index.html</code> 查看页面内容 。</li>
+</ul>
+<p>上述步骤的操作过程如下：</p>
+<p>通过查询本机的ip为<code>192.168.52.131</code>（由于使用的是虚拟机，所以会是内网IP）</p>
+<p><img src="/8nFpD04OA/1638411491697.png"></p>
+<pre><code class="bash">docker run -itd ubuntu #启动容器B
+docker ps -l
+docker exec -it e0c7e0884bf6 /bin/bash
+apt-get update
+apt-get install wget
+apt install iputils-ping #安装ping命令
+ping 192.168.52.131
+wget 192.168.52.131
+cat index.html
+</code></pre>
+<p><img src="/8nFpD04OA/1638411502020.png"></p>
+<p><img src="/8nFpD04OA/1638411511113.png"></p>
+<p>可以看到，</p>
+<ul>
+<li>容器B可以正常访问容器A中的服务，即文件index.html可以正常下载。</li>
+<li>cat index.html 也正确地输出了容器A中的Web服务的首页内容。</li>
+</ul>
+<p>然而，上述操作存在的问题是，容器A在访问容器B最好的方式是直接访问，而不是先绕到宿主机上，然后再绕到容器A上。同时，假如容器A中的服务只被容器B使用，将容器A的服务暴露在宿主机上也不是一种安全的做法。</p>
+<p>因此，需要一种，在容器B内直接访问容器A中的服务的方法，而且最好可以使用容器名称，而不是IP地址。</p>
+<p>事实上，Docker提供了一种简便的容器互联的方式：–link</p>
+<h2 id="2-Docker-容器互联：–link"><a href="#2-Docker-容器互联：–link" class="headerlink" title="2 Docker 容器互联：–link"></a>2 Docker 容器互联：–link</h2><p>容器的互联是一种让多个容器中的应用进行快速交互的方式。它会在源和接收容器之间创建连接关系，接收容器可以通过容器名快速访问到源容器，而不用指定具体的IP地址。</p>
+<p>连接系统依据容器的名称来执行。因此，首先需要自定义一个好记的容器命名。虽然当创建容器的时候，系统默认会分配一个名字，但自定义命名容器有两个好处：</p>
+<ul>
+<li>自定义的命名，比较好记，一目了然，使用–name标记可以为容器自定义命令。</li>
+<li>当要连接其他容器时候（即便重启），也可以使用容器名而不用改变</li>
+</ul>
+<p>注： 容器的名称是唯一的。如果已经命名了一个叫web的容器，当再次使用web这个名字的时候，需要先docker rm命令删除之前创建的同名容器。<br>使用–link 参数可以让容器之间安全的进行交互。–link参数的格式为：<br>–link name:alias<br>其中，name是要链接的容器的名称，alias是别名。<br>接下来，使用–link的方式实现容器B到容器A的访问，</p>
+<pre><code class="bash">docker run -d --name web training/webapp python app.py
+docker run -itd --link web:pyweb ubuntu
+docker ps -l
+docker exec -it fc185e95a931 /bin/bash
+apt-get update
+apt-get install wget -y
+apt install iputils-ping -y #安装ping命令
+wget pyweb:5000
+cat index.html
+</code></pre>
+<p><img src="/8nFpD04OA/1638411525055.png"></p>
+<p>在上述过程中，首先使用training&#x2F;webapp创建了容器web（作为容器A），然后使用ubuntu镜像创建了容器B，在容器B内安装wget。<br>安装完毕后，访问容器A的web服务，可以看到正确地获取到了index.html文件，且文件中的内容正确。<br>Docker相当于在两个互联的容器之间创建了一个虚拟通道，而且不用映射他们的端口到宿主主机上。在启动db容器的时候并没有使用-p和-P标记，从而避免了暴露数据库服务端口到外部网络上。</p>
+<p>Docker通过两种方式为容器公开连接信息：</p>
+<ul>
+<li>更新环境变量；</li>
+<li>更新&#x2F;etc&#x2F;hosts文件。</li>
+</ul>
+<p>使用env命令来查看 web 容器的环境变量：</p>
+<pre><code class="bash">docker run --rm --name test2 --link web:pyweb ubuntu env
+</code></pre>
+<p><img src="/8nFpD04OA/1638411538872.png"></p>
+<p>其中PYWEB_PORT开头的环境变量是提供给 test2 容器连接 web 容器使用的环境变量。前缀采用大写的连接别名。<br>上述命令中的–rm表示容器运行完毕后，删除容器。<br>除了环境变量，Docker还添加host信息到 test2 容器的&#x2F;etc&#x2F;hosts的文件中。</p>
+<pre><code class="bash">docker run --rm --name test2 --link web:pyweb ubuntu cat /etc/hosts
+</code></pre>
+<p><img src="/8nFpD04OA/1638411548851.png"></p>
+<p>这里有两个host信息，一个是 test2 容器，test2 容器用自己的id 176bd8985190 作为默认主机名，另一个是 web 容器的IP和主机名(226377a53e4d)。</p>
+<p>可以连接多个容器到一个容器，例如有容器A1、A2、A3，可以通过–link A1:A1 –link A2:A2 –link A3:A3将A1~A3都连接到容器B。</p>
+<h2 id="3-Docker-网络"><a href="#3-Docker-网络" class="headerlink" title="3 Docker 网络"></a>3 Docker 网络</h2><p>接下来介绍如何使用Docker网络实现多个容器之间的互联互通。</p>
+<p>将学习以下内容：</p>
+<ul>
+<li>如何创建Docker网络。</li>
+<li>如何将容器连接网络。</li>
+<li>如何为容器配置DNS。</li>
+</ul>
+<h3 id="3-1-新建网络"><a href="#3-1-新建网络" class="headerlink" title="3.1 新建网络"></a>3.1 新建网络</h3><p>下面先创建一个新的 Docker 网络。</p>
+<pre><code class="bash">docker network create -d bridge mynet
+</code></pre>
+<p><img src="/8nFpD04OA/1638411583946.png"></p>
+<p>参数说明：</p>
+<ul>
+<li>-d：参数指定 Docker 网络类型，有 bridge、overlay。</li>
+</ul>
+<p>其中 overlay 网络类型用于 Swarm mode，本实验中可以先不考虑 overlay 模式。</p>
+<p>使用 docker network ls 可查看当前的Docker网络列表。可以看到mynet已成功创建，mynet的网络ID为：55f6a336932e。</p>
+<h3 id="3-2-连接容器"><a href="#3-2-连接容器" class="headerlink" title="3.2 连接容器"></a>3.2 连接容器</h3><p>运行两个ubuntu容器并连接到新建的 mynet 网络:</p>
+<pre><code class="bash">docker run -itd --name test1 --network mynet ubuntu 
+docker run -itd --name test2 --network mynet ubuntu 
+docker ps
+</code></pre>
+<p><img src="/8nFpD04OA/1638411623533.png"></p>
+<p>下面通过 ping 来证明 test1 容器和 test2 容器建立了互联关系。</p>
+<p>由于test1和test2容器中没有ping命令，可以先制作一个安装了ping和wget这两个工具的Ubuntu镜像，操作过程如下：</p>
+<pre><code class="bash">docker run -itd --name test --network mynet ubuntu 
+docker exec -it test /bin/bash
+apt-get update -qqy
+apt-get install iputils-ping -qqy
+apt-get install wget -qqy
+which ping
+which wget
+exit
+docker ps -l
+docker commit 2a839a2cb497 jojo/ubuntu_net:v1.0 
+docker images
+</code></pre>
+<p><img src="/8nFpD04OA/1638411640399.png"></p>
+<p><img src="/8nFpD04OA/1638411650793.png"></p>
+<p>jojo&#x2F;ubuntu_net就是集成了ping和wget的新镜像。</p>
+<p>接着使用jojo&#x2F;ubuntu_net创建两个容器test1和test2，并连接到mynet，然后测试是否互通。</p>
+<p>操作命令如下：</p>
+<pre><code class="bash">docker run -itd --name test1 --network mynet jojo/ubuntu_net:v1.0 
+docker run -itd --name test2 --network mynet jojo/ubuntu_net:v1.0 
+docker exec -it test1 /bin/bash
+ping test2 
+exit
+docker exec -it test2 /bin/bash
+ping test1
+</code></pre>
+<p><img src="/8nFpD04OA/1638411666508.png"></p>
+<p>由此可见，连接到mynet的test1和test2之间的网络是互通的。因此，test1 容器和 test2 容器建立了互联关系。</p>
+<p>注意：在ping命令执行过程中，按CTRL+C可退出执行。</p>
+<p>如果有多个容器之间需要互相连接，推荐使用 Docker Compose，后续实验会详细介绍。</p>
+<h3 id="3-3-设定网段和IP"><a href="#3-3-设定网段和IP" class="headerlink" title="3.3 设定网段和IP"></a>3.3 设定网段和IP</h3><p>创建网络时，可以指定网段和子网掩码。</p>
+<p>首先把之前的网络和容器清除了。</p>
+<pre><code class="bash">docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+docker network rm mynet
+</code></pre>
+<p><img src="/8nFpD04OA/1638411681304.png"></p>
+<p>创建网络，指定网段和掩码。然后，创建容器，并手工指定IP地址：</p>
+<pre><code class="bash">docker network create --subnet=172.19.0.0/16 mynet
+docker run -itd --name test1 --network mynet --ip 172.19.1.1 jojo/ubuntu_net:v1.0
+docker run -itd --name test2 --network mynet --ip 172.19.1.2 jojo/ubuntu_net:v1.0 
+</code></pre>
+<p><img src="/8nFpD04OA/1638411690815.png"></p>
+<p>设定mynet的网段为：172.19.0.0&#x2F;16，为test1和test2分别分配的ip为172.19.1.1和172.19.1.2。</p>
+<p>分别查看test1和test2的ip，并测试连通性。</p>
+<pre><code class="bash">docker exec -it test1 /bin/bash 
+hostname -I
+ping -c 3 test2 
+exit
+docker exec -it test2 /bin/bash
+hostname -I
+ping -c 3 test1
+exit
+</code></pre>
+<p><img src="/8nFpD04OA/1638411705655.png"></p>
+<p>可以通过 <code>hostname -I</code> 查看ip，也可以通过ifconfig查看，使用ifconfig时会找不到命令的错误。可以通过命令 <code>apt-get install net-tools</code> 安装网络工具后解决。</p>
+<p>可以看出，test1和test2的地址为设定的地址，而且可以互通。</p>
+<h3 id="3-4-配置-DNS"><a href="#3-4-配置-DNS" class="headerlink" title="3.4 配置 DNS"></a>3.4 配置 DNS</h3><p>如果需要为指定的容器设置 DNS，则可以使用以下命令：</p>
+<pre><code class="bash">docker run -it --rm --hostname=ubuntu_test jojo/ubuntu_net:v1.0 cat /etc/hosts
+docker run -it --rm --dns=114.114.114.114 jojo/ubuntu_net:v1.0 cat /etc/resolv.conf
+docker run -it --rm --dns=114.114.114.114 --dns=8.8.8.8 --hostname=ubuntu_test jojo/ubuntu_net:v1.0 cat /etc/resolv.conf
+</code></pre>
+<p><img src="/8nFpD04OA/1638411720065.png"></p>
+<p>参数说明：</p>
+<ul>
+<li>–hostname&#x3D;HOSTNAME：设定容器的主机名，它会被写到容器内的 &#x2F;etc&#x2F;hostname 和 &#x2F;etc&#x2F;hosts。也可以使用 -h HOSTNAME 。</li>
+<li>–dns&#x3D;IP_ADDRESS：添加 DNS 服务器到容器的 &#x2F;etc&#x2F;resolv.conf 中，让容器用这个服务器来解析所有不在 &#x2F;etc&#x2F;hosts 中的主机名。</li>
+</ul>
+<p>如果在容器启动时没有指定 –dns ，Docker 会默认用宿主主机上的 &#x2F;etc&#x2F;resolv.conf 来配置容器的 DNS。</p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/S6P9lKS8E/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Docker实验五：Docker 仓库管理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/EAswvY27K/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">《疯狂Java讲义（第5版）》 - 踩坑与填坑</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=Docker实验四:Docker 容器互联 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/8nFpD04OA/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Docker实验四:Docker 容器互联 - 囧囧JOJO - 博客&u=https://jiongjiongjojo.gitee.io/8nFpD04OA/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Docker实验四:Docker 容器互联 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/8nFpD04OA/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

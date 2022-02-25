@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>Docker实验三:Docker 镜像 | 囧囧JOJO - 博客</title>
+
+    <meta name="description" content="&lt;h1 id=&#34;0-目录&#34;&gt;&lt;a href=&#34;#0-目录&#34; class=&#34;headerlink&#34; title=&#34;0 目录&#34;&gt;&lt;/a&gt;0 目录&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#0-%E7%9B%AE%E5%BD%95&#34;&gt;0 目录&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#1-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9&#34;&gt;1 实验内容&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#2-%E5%AE%9E%E9%AA%8C%E8%A6%81%E7%82%B9&#34;&gt;2 实验要点&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#3-%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83&#34;&gt;3 实验环境&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9&#34;&gt;4 注意事项&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#5-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9&#34;&gt;5 实验内容&lt;/a&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl02tinoi007zrg9m2fpg4fu0" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Docker实验三:Docker 镜像
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-09-23T17:10:33.000Z" itemprop="datePublished">2021-09-24</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h1><ul>
+<li><p><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></p>
+</li>
+<li><p><a href="#1-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9">1 实验内容</a></p>
+</li>
+<li><p><a href="#2-%E5%AE%9E%E9%AA%8C%E8%A6%81%E7%82%B9">2 实验要点</a></p>
+</li>
+<li><p><a href="#3-%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83">3 实验环境</a></p>
+</li>
+<li><p><a href="#4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">4 注意事项</a></p>
+</li>
+<li><p><a href="#5-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9">5 实验内容</a><span id="more"></span></p>
+<ul>
+<li><a href="#51-%E5%87%86%E5%A4%87%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83">5.1 准备实验环境</a></li>
+<li><a href="#52-%E5%88%97%E5%87%BA%E9%95%9C%E5%83%8F%E5%88%97%E8%A1%A8">5.2 列出镜像列表</a></li>
+<li><a href="#53-%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E9%95%9C%E5%83%8F">5.3 获取一个新的镜像</a></li>
+<li><a href="#54-%E6%9F%A5%E6%89%BE%E9%95%9C%E5%83%8F">5.4 查找镜像</a></li>
+<li><a href="#55-%E6%8B%96%E5%8F%96%E9%95%9C%E5%83%8F">5.5 拖取镜像</a></li>
+<li><a href="#56-%E5%88%A0%E9%99%A4%E9%95%9C%E5%83%8F">5.6 删除镜像</a></li>
+<li><a href="#57-%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8F">5.7 创建镜像</a></li>
+<li><a href="#58-%E6%9B%B4%E6%96%B0%E9%95%9C%E5%83%8F">5.8 更新镜像</a></li>
+<li><a href="#59-%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F">5.9 构建镜像</a></li>
+<li><a href="#510-%E8%AE%BE%E7%BD%AE%E9%95%9C%E5%83%8F%E6%A0%87%E7%AD%BE">5.10 设置镜像标签</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="1-实验内容"><a href="#1-实验内容" class="headerlink" title="1 实验内容"></a>1 实验内容</h1><ul>
+<li>学习<code>Docker</code>镜像的常用命令。</li>
+</ul>
+<h1 id="2-实验要点"><a href="#2-实验要点" class="headerlink" title="2 实验要点"></a>2 实验要点</h1><ul>
+<li>掌握<code>Docker</code>镜像的常用命令。</li>
+</ul>
+<h1 id="3-实验环境"><a href="#3-实验环境" class="headerlink" title="3 实验环境"></a>3 实验环境</h1><ul>
+<li>Windows10</li>
+</ul>
+<h1 id="4-注意事项"><a href="#4-注意事项" class="headerlink" title="4 注意事项"></a>4 注意事项</h1><p>如果<code>docker pull</code>由于网络原因无法使用，可手动下载相关镜像并使用<code>docker load</code>命令直接加载相应的镜像。</p>
+<h1 id="5-实验内容"><a href="#5-实验内容" class="headerlink" title="5 实验内容"></a>5 实验内容</h1><h2 id="5-1-准备实验环境"><a href="#5-1-准备实验环境" class="headerlink" title="5.1 准备实验环境"></a>5.1 准备实验环境</h2><p>打开终端，执行以下命令，拉取所需的镜像。</p>
+<pre><code class="bash">docker pull ubuntu
+docker pull ubuntu:16.04
+docker pull ubuntu:15.10
+docker pull hello-world
+docker pull training/webapp
+</code></pre>
+<p><img src="/vDsoHY-if/1632419401179.png" alt="image-20210923224957339"></p>
+<h2 id="5-2-列出镜像列表"><a href="#5-2-列出镜像列表" class="headerlink" title="5.2 列出镜像列表"></a>5.2 列出镜像列表</h2><pre><code class="bash">docker images
+</code></pre>
+<p><img src="/vDsoHY-if/1632419421776.png" alt="image-20210923224645581"><br>各个选项说明:</p>
+<ul>
+<li>REPOSITORY：镜像的仓库源</li>
+<li>TAG：镜像的标签</li>
+<li>IMAGE ID：镜像ID</li>
+<li>CREATED：镜像创建时间</li>
+<li>SIZE：镜像大小</li>
+</ul>
+<p>同一仓库源可以有多个 TAG，代表这个仓库源的不同个版本，如 ubuntu 仓库源里，有 latest、16.04、15.10 等多个不同的版本，通过使用 REPOSITORY:TAG 来定义不同的镜像。</p>
+<p>所以，如果要使用版本为16.04的ubuntu系统镜像来运行容器时，命令如下：</p>
+<pre><code class="bash">docker run -i -t ubuntu:16.04 /bin/bash
+</code></pre>
+<p><img src="/vDsoHY-if/1632419441344.png" alt="image-20210923224903867"><br>参数说明：</p>
+<ul>
+<li>-i: 交互式操作。</li>
+<li>-t: 终端。</li>
+<li>ubuntu:16.04: 这是指用 ubuntu 16.04 版本镜像为基础来启动容器。</li>
+<li>&#x2F;bin&#x2F;bash：放在镜像名后的是命令，这里我们希望有个交互式 Shell，因此用的是 &#x2F;bin&#x2F;bash。 如果要使用版本为 15.10 的 ubuntu 系统镜像来运行容器时，命令如下：</li>
+</ul>
+<pre><code class="bash">docker run -i -t ubuntu:15.10 /bin/bash
+</code></pre>
+<p><img src="/vDsoHY-if/1632419457024.png" alt="image-20210923225129222"><br>如果不指定镜像的版本标签，例如只使用 ubuntu，docker 将默认使用 ubuntu:latest 镜像。</p>
+<h2 id="5-3-获取一个新的镜像"><a href="#5-3-获取一个新的镜像" class="headerlink" title="5.3 获取一个新的镜像"></a>5.3 获取一个新的镜像</h2><p>当在本地主机上使用一个不存在的镜像时, Docker会自动下载这个镜像。</p>
+<p>使用 docker pull 命令可预先下载这个镜像。</p>
+<pre><code class="bash">docker run -i -t ubuntu:14.04 /bin/bash
+</code></pre>
+<p><img src="/vDsoHY-if/1632419470594.png" alt="image-20210923225510357"><br>直接运行不存在的镜像会自动下载并执行。</p>
+<h2 id="5-4-查找镜像"><a href="#5-4-查找镜像" class="headerlink" title="5.4 查找镜像"></a>5.4 查找镜像</h2><p>如果需要某个镜像时，可以从 Docker Hub 网站搜索镜像。</p>
+<p>Docker Hub 网址为： <a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com/</a></p>
+<p>也可以使用 <code>docker search</code> 命令搜索镜像。比如需要一个 httpd 镜像来用于构建 web 服务。可通过 <code>docker search httpd </code>，从而找到适合的镜像。<br><img src="/vDsoHY-if/1632419489540.png" alt="image-20210923225735309"><br>其中，各字段含义如下：</p>
+<ul>
+<li>NAME: 镜像仓库源的名称</li>
+<li>DESCRIPTION: 镜像的描述</li>
+<li>OFFICIAL: 是否 docker 官方发布</li>
+<li>stars: 类似 Github 里面的 star，表示点赞、喜欢的意思。</li>
+<li>AUTOMATED: 自动构建。</li>
+</ul>
+<h2 id="5-5-拖取镜像"><a href="#5-5-拖取镜像" class="headerlink" title="5.5 拖取镜像"></a>5.5 拖取镜像</h2><p>使用上图中的 httpd 官方版本的镜像，使用命令 docker pull 来下载该镜像。</p>
+<pre><code class="bash">docker pull httpd
+</code></pre>
+<p><img src="/vDsoHY-if/1632419503568.png" alt="image-20210923230035752"><br>下载完成后，就可以使用该镜像了。</p>
+<pre><code class="bash">docker run -itd -P --name httpd_test httpd
+docker ps -l
+</code></pre>
+<p><img src="/vDsoHY-if/1632419517200.png" alt="image-20210923230123295"><br>使用 docker run 启动 httpd 容器，通过 docker ps 可查看到 httpd 容器的 80 端口已映射给宿主机的 32768 端口。</p>
+<p>双击桌面上的Chrome浏览器，c在地址栏中输入：localhost:32768，显示页面如下：<br><img src="/vDsoHY-if/1632419534064.png" alt="image-20210923230322886"><br><img src="/vDsoHY-if/1632419548233.png" alt="image-20210923230448998"><br>因此，httpd服务已顺利启动。</p>
+<h2 id="5-6-删除镜像"><a href="#5-6-删除镜像" class="headerlink" title="5.6 删除镜像"></a>5.6 删除镜像</h2><p>镜像删除使用 docker rmi 命令，比如我们删除 hello-world 镜像：</p>
+<pre><code class="bash">docker rmi hello-world
+docker images
+</code></pre>
+<p><img src="/vDsoHY-if/1632419562044.png" alt="image-20210923230639672"></p>
+<h2 id="5-7-创建镜像"><a href="#5-7-创建镜像" class="headerlink" title="5.7 创建镜像"></a>5.7 创建镜像</h2><p>当 docker 镜像仓库中的镜像不能满足需求时，可通过以下两种方式对镜像进行更改。</p>
+<ul>
+<li>从已经创建的容器中更新镜像，并且提交这个镜像。</li>
+<li>使用 Dockerfile 指令来创建一个新的镜像。</li>
+</ul>
+<h2 id="5-8-更新镜像"><a href="#5-8-更新镜像" class="headerlink" title="5.8 更新镜像"></a>5.8 更新镜像</h2><p>假如现在需要在 ubuntu 16.04 镜像中使用 gcc 编译 C 源文件。</p>
+<p>使用 ubuntu 16.04 创建一个新容器，在该容器内运行 gcc -v 可查看 gcc 是否安装。</p>
+<pre><code class="bash">docker run -i -t ubuntu:16.04 /bin/bash
+gcc -v 
+</code></pre>
+<p><img src="/vDsoHY-if/1632419578417.png" alt="image-20210923230902882"><br>可见，当前 gcc 并未安装。</p>
+<p>在容器19ee0a94ff82内使用 <code>apt-get update</code> 命令进行更新，然后使用 <code>apt-get install gcc -y</code> 安装 gcc 。<br><img src="/vDsoHY-if/1632419594183.png" alt="image-20210923232258218"><br><img src="/vDsoHY-if/1632419611981.png" alt="image-20210923232335933"><br>待安装命令执行完毕后，使用命令 <code>gcc -v</code> 查看 gcc 的版本号。</p>
+<p>完成这些操作之后，输入 exit 命令退出容器 19ee0a94ff82。</p>
+<p>此时 容器 19ee0a94ff82 即为按我们的需求更改的容器。</p>
+<p>在容器所运行的宿主机上通过命令 docker commit 基于更新后的容器生成新镜像。使用 docker images 命令来查看新镜像 cg&#x2F;my_ubuntu:v2.0。</p>
+<pre><code class="bash">docker commit -m &quot;gcc installed&quot; -a &quot;jiongjiong&quot; 19ee0a94ff82 jiongjiong/ubuntu_gcc:v2.0
+docker images
+</code></pre>
+<p><img src="/vDsoHY-if/1632419631375.png" alt="image-20210923232525466"><br>各个参数说明：</p>
+<ul>
+<li>-m: 提交的描述信息</li>
+<li>-a: 指定镜像作者</li>
+<li>19ee0a94ff82：容器 ID</li>
+<li>jiongjiong&#x2F;ubuntu_gcc:v2.0: 指定要创建的目标镜像名</li>
+</ul>
+<p>接下来使用新镜像创建容器，使用 gcc 编译该 hello_world.c 文件，并运行编译后的二进制程序。</p>
+<p>hello_world.c 文件位于 <code>./code/c_hello_world</code>，首先使用<code> cd</code> 命令进入该目录，在创建容器后，将 hello_world.c 文件通过 docker cp 命令拷贝到容器中。</p>
+<p>具体操作过程如下：</p>
+<pre><code class="bash">docker run -itd --name ubuntu_gcc jiongjiong/ubuntu_gcc:v2.0
+docker ps -l
+docker cp ./code/c_hello_world/hello_world.c f5bcea22e2ca:/home
+docker exec -it f5bcea22e2ca /bin/bash
+cd home
+ls -l 
+gcc hello_world.c -o hello_world
+./hello_world
+</code></pre>
+<p><img src="/vDsoHY-if/1632419648100.png" alt="image-20210924002450516"><br>最后，使用 exit 退出容器。</p>
+<h2 id="5-9-构建镜像"><a href="#5-9-构建镜像" class="headerlink" title="5.9 构建镜像"></a>5.9 构建镜像</h2><p>接下来，使用命令 docker build ， 从零开始构建一个新的镜像。</p>
+<p>首先需要一个 Dockerfile 文件，其中包含一系列告诉 Docker 如何构建镜像的指令。</p>
+<p>该Dockerfile文件位于 <code>./core/</code>，使用命令 cd 切换到该目录， 通过命令 cat 查看 Dockerfile 内容。<br><img src="/vDsoHY-if/1632419664626.png" alt="image-20210924002933736"><br>每一个指令都会在镜像上创建一个新的层，每一个指令的前缀都必须是大写的。</p>
+<p>第一条FROM，指定使用哪个镜像源。</p>
+<p>第二条MAINTAINER，说明当前镜像的维护人的信息。</p>
+<p>RUN 指令用于说明在构建 docker 镜像时执行哪些命令，例如安装哪些软件。</p>
+<p>EXPOSE 指令说明开放哪些端口。</p>
+<p>然后，基于 Dockerfile 文件，通过 docker build 命令构建镜像。</p>
+<pre><code class="bash">docker build -t jiongjiong/ubuntu_gcc:v1.0 .
+</code></pre>
+<p><img src="/vDsoHY-if/1632419678583.png" alt="image-20210924004425548"><br>参数说明：</p>
+<ul>
+<li>-t ：指定要创建的目标镜像名</li>
+<li>. ：Dockerfile 文件所在目录，可以指定Dockerfile 的绝对路径</li>
+</ul>
+<p>使用 docker images 查看创建的镜像</p>
+<pre><code class="bash">docker images
+</code></pre>
+<p><img src="/vDsoHY-if/1632419693400.png" alt="image-20210924004511114"><br>可见，该镜像已成功创建，镜像名称为：jiongjiong&#x2F;ubuntu_gcc，镜像ID为：03161c1ac130。</p>
+<p>接下来，使用新的镜像创建容器</p>
+<pre><code class="bash">docker run -itd jiongjiong/ubuntu_gcc:v1.0 
+docker ps -l
+docker exec -it fd5463368ea5 /bin/bash
+id jiongjiong
+</code></pre>
+<p><img src="/vDsoHY-if/1632419709021.png" alt="image-20210924004946653"><br>从上面看到新镜像已经包含新创建的用户 cg 。</p>
+<p>在容器中，编译和运行 <code>hello_world.c</code> 文件。</p>
+<pre><code class="bash">cd ./code/c_hello_world
+ls -l
+docker cp hello_world.c fd5463368ea5:/tmp
+docker exec -it fd5463368ea5 /bin/bash
+cd /tmp
+ls -l
+gcc hello_world.c -o hello_world
+./hello_world 
+</code></pre>
+<p><img src="/vDsoHY-if/1632419730049.png" alt="image-20210924005949452"></p>
+<h2 id="5-10-设置镜像标签"><a href="#5-10-设置镜像标签" class="headerlink" title="5.10 设置镜像标签"></a>5.10 设置镜像标签</h2><p>可以使用 <code>docker tag</code> 命令，为镜像添加一个新的标签。</p>
+<p>docker tag 命令的语法为：</p>
+<p><code>docker tag &lt;镜像ID&gt; </code>新镜像名:新tag。</p>
+<pre><code class="bash">docker images
+docker tag 03161c1ac130 jiongjiong/ubuntu_gcc:dev
+docker images
+</code></pre>
+<p><img src="/vDsoHY-if/1632419743552.png" alt="image-20210924010211079"><br>使用 docker images 命令可以看到，ID为 03161c1ac130 的镜像多一个标签dev。</p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/dxdhlMjMt/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          WSL2环境下安装Docker保姆级教程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/8tB-3dU7K/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Docker实验二:Docker容器</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=Docker实验三:Docker 镜像 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/vDsoHY-if/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Docker实验三:Docker 镜像 - 囧囧JOJO - 博客&u=https://jiongjiongjojo.gitee.io/vDsoHY-if/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Docker实验三:Docker 镜像 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/vDsoHY-if/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

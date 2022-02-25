@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>Hadoop实验4：MapReduce编程 | 囧囧JOJO - 博客</title>
+
+    <meta name="description" content="&lt;hr&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl02tinn1000crg9m10mz6h2u" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Hadoop实验4：MapReduce编程
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-11-20T08:56:52.000Z" itemprop="datePublished">2021-11-20</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <hr>
+<span id="more"></span>
+
+<h1 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h1><ul>
+<li><p><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></p>
+</li>
+<li><p><a href="#1-%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86">1 实验原理</a></p>
+<ul>
+<li><a href="#11-mapreduce%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86">1.1 MapReduce组成原理</a></li>
+<li><a href="#12-wrodcount%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B">1.2 WrodCount处理过程</a></li>
+</ul>
+</li>
+<li><p><a href="#2-%E5%AE%9E%E9%AA%8C%E5%87%86%E5%A4%87">2 实验准备</a></p>
+<ul>
+<li><a href="#21-%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95">2.1 创建工作目录</a></li>
+<li><a href="#22-%E5%90%AF%E5%8A%A8docker%E5%92%8Chadoop%E9%9B%86%E7%BE%A4">2.2 启动Docker和Hadoop集群</a></li>
+<li><a href="#23-%E6%89%93%E5%BC%80eclipse%E5%B9%B6%E9%85%8D%E7%BD%AE%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4">2.3 打开eclipse并配置工作空间</a></li>
+</ul>
+</li>
+<li><p><a href="#3-wordcount">3 WordCount</a></p>
+<ul>
+<li><a href="#31-%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE">3.1 新建项目</a></li>
+<li><a href="#32-%E5%87%86%E5%A4%87%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE">3.2 准备测试数据</a></li>
+<li><a href="#33-%E6%B7%BB%E5%8A%A0-mapreduce-%E7%BC%96%E7%A8%8B%E6%A1%86%E6%9E%B6">3.3 添加 MapReduce 编程框架</a></li>
+<li><a href="#34-map%E8%BF%87%E7%A8%8B">3.4 Map过程</a></li>
+<li><a href="#35-reduce%E8%BF%87%E7%A8%8B">3.5 Reduce过程</a></li>
+<li><a href="#36-%E6%89%A7%E8%A1%8Cmapreduce%E4%BB%BB%E5%8A%A1">3.6 执行MapReduce任务</a></li>
+<li><a href="#37-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">3.7 实验结果</a></li>
+</ul>
+</li>
+<li><p><a href="#4-%E7%A5%96%E5%AD%99%E8%BE%88%E5%85%B3%E7%B3%BB">4 祖孙辈关系</a></p>
+<ul>
+<li><a href="#41-%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE">4.1 新建项目</a></li>
+<li><a href="#42-%E5%87%86%E5%A4%87relationdat">4.2 准备relation.dat</a></li>
+<li><a href="#43-%E6%B7%BB%E5%8A%A0-mapreduce-%E7%BC%96%E7%A8%8B%E6%A1%86%E6%9E%B6">4.3 添加 MapReduce 编程框架</a></li>
+<li><a href="#44-map%E8%BF%87%E7%A8%8B">4.4 Map过程</a></li>
+<li><a href="#45-reduce%E8%BF%87%E7%A8%8B">4.5 Reduce过程</a></li>
+<li><a href="#46-%E6%89%A7%E8%A1%8Cmapreduce%E4%BB%BB%E5%8A%A1">4.6 执行MapReduce任务</a></li>
+<li><a href="#47-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">4.7 实验结果</a></li>
+</ul>
+</li>
+<li><p><a href="#5-%E7%B4%A2%E5%BC%95%E5%80%92%E6%8E%92">5 索引倒排</a></p>
+<ul>
+<li><a href="#51-%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE">5.1 新建项目</a></li>
+<li><a href="#52-%E5%87%86%E5%A4%87-inputdat">5.2 准备 input.dat</a></li>
+<li><a href="#53-%E6%B7%BB%E5%8A%A0-mapreduce-%E7%BC%96%E7%A8%8B%E6%A1%86%E6%9E%B6">5.3 添加 MapReduce 编程框架</a></li>
+<li><a href="#54-map%E8%BF%87%E7%A8%8B">5.4 Map过程</a></li>
+<li><a href="#55-combine%E8%BF%87%E7%A8%8B">5.5 Combine过程</a></li>
+<li><a href="#56-reduce%E8%BF%87%E7%A8%8B">5.6 Reduce过程</a></li>
+<li><a href="#57-%E6%89%A7%E8%A1%8Cmapreduce%E8%BF%87%E7%A8%8B">5.7 执行MapReduce过程</a></li>
+<li><a href="#58-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">5.8 实验结果</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="1-实验原理"><a href="#1-实验原理" class="headerlink" title="1 实验原理"></a>1 实验原理</h1><h2 id="1-1-MapReduce组成原理"><a href="#1-1-MapReduce组成原理" class="headerlink" title="1.1 MapReduce组成原理"></a>1.1 MapReduce组成原理</h2><p>最简单的MapReduce应用程序至少包含 3 个部分：一个 Map 函数、一个 Reduce 函数和一个 main 函数。在运行一个mapreduce计算任务时候，任务过程被分为两个阶段：map阶段和reduce阶段，每个阶段都是用键值对（key&#x2F;value）作为输入（input）和输出（output）。main 函数将作业控制和文件输入&#x2F;输出结合起来。</p>
+<p><img src="/CFSN2qKgP/1637399562048.png"></p>
+<p>并行读取文本中的内容，然后进行MapReduce操作。</p>
+<p><img src="/CFSN2qKgP/1637399583115.png"></p>
+<p>一个有三行文本的文件进行MapReduce操作。</p>
+<p>读取第一行<code>Hello World Bye World</code> ，分割单词形成Map。</p>
+<p><code>&lt;Hello,1&gt; &lt;World,1&gt; &lt;Bye,1&gt; &lt;World,1&gt;</code></p>
+<p>读取第二行<code>Hello Hadoop Bye Hadoop</code>，分割单词形成Map。</p>
+<p><code>&lt;Hello,1&gt; &lt;Hadoop,1&gt; &lt;Bye,1&gt; &lt;Hadoop,1&gt;</code></p>
+<p>读取第三行<code>Bye Hadoop Hello Hadoop</code>，分割单词形成Map。</p>
+<p><code>&lt;Bye,1&gt; &lt;Hadoop,1&gt; &lt;Hello,1&gt; &lt;Hadoop,1&gt;</code></p>
+<p><img src="/CFSN2qKgP/1637399606801.png"></p>
+<p>Reduce操作是对map的结果进行排序，合并，最后得出词频。</p>
+<p>经过进一步处理(<code>combiner</code>),将形成的Map根据相同的key组合成value数组。</p>
+<p><code>&lt;Bye,1,1,1&gt; &lt;Hadoop,1,1,1,1&gt; &lt;Hello,1,1,1&gt; &lt;World,1,1&gt;</code></p>
+<p>循环执行Reduce(K,V[])，分别统计每个单词出现的次数。</p>
+<p><code>&lt;Bye,3&gt; &lt;Hadoop,4&gt; &lt;Hello,3&gt; &lt;World,2&gt;</code></p>
+<p><img src="/CFSN2qKgP/1637399698579.png"></p>
+<h2 id="1-2-WrodCount处理过程"><a href="#1-2-WrodCount处理过程" class="headerlink" title="1.2 WrodCount处理过程"></a>1.2 WrodCount处理过程</h2><p>**1.**将文件拆分成splits，由于测试用的文件较小，所以每个文件为一个split，并将文件按行分割形成<code>&lt;key,value&gt;</code>对，如下图所示。这一步由MapReduce框架自动完成，其中偏移量（即key值）包括了回车所占的字符数（Windows和Linux环境会不同）。</p>
+<p><img src="/CFSN2qKgP/1637399747265.png"></p>
+<p>**2.**将分割好的<code>&lt;key,value&gt;</code>对交给用户定义的map方法进行处理，生成新的<code>&lt;key,value&gt;</code>对，如下图所示。</p>
+<p><img src="/CFSN2qKgP/1637399846987.png"></p>
+<p>**3.**得到map方法输出的<code>&lt;key,value&gt;</code>对后，Mapper会将它们按照key值进行排序，并执行Combine过程，将key至相同value值累加，得到Mapper的最终输出结果，如下图所示。</p>
+<p><img src="/CFSN2qKgP/1637399883196.png"></p>
+<p>**4.**Reducer先对从Mapper接收的数据进行排序，再交由用户自定义的reduce方法进行处理，得到新的<code>&lt;key,value&gt;</code>对，并作为WordCount的输出结果，如下图所示。</p>
+<p><img src="/CFSN2qKgP/1637399907380.png"></p>
+<h1 id="2-实验准备"><a href="#2-实验准备" class="headerlink" title="2 实验准备"></a>2 实验准备</h1><h2 id="2-1-创建工作目录"><a href="#2-1-创建工作目录" class="headerlink" title="2.1 创建工作目录"></a>2.1 创建工作目录</h2><p>本实验的工作目录为<code>~/course/hadoop/mr_pro</code>，使用以下命令创建和初始化工作目录：</p>
+<pre><code class="bash">mkdir -p ~/course/hadoop/mr_pro
+cd ~/course/hadoop/mr_pro
+</code></pre>
+<h2 id="2-2-启动Docker和Hadoop集群"><a href="#2-2-启动Docker和Hadoop集群" class="headerlink" title="2.2 启动Docker和Hadoop集群"></a>2.2 启动Docker和Hadoop集群</h2><p>首先按照顺序启动四个Docker容器</p>
+<pre><code class="bash">docker start master
+docker start slave1
+docker start slave2
+docker start slave3
+</code></pre>
+<p>接着使用以下命令，进入到master环境内：</p>
+<pre><code class="bash">docker exec -it --privileged master /bin/bash
+</code></pre>
+<p>然后在master容器内启动Hadoop服务</p>
+<pre><code class="bash">start-dfs.sh
+start-yarn.sh
+mr-jobhistory-daemon.sh start historyserver
+</code></pre>
+<h2 id="2-3-打开eclipse并配置工作空间"><a href="#2-3-打开eclipse并配置工作空间" class="headerlink" title="2.3 打开eclipse并配置工作空间"></a>2.3 打开eclipse并配置工作空间</h2><p>在桌面右键打开终端输入如下命令打开eclipse:</p>
+<pre><code>eclipse &amp;
+</code></pre>
+<p>打开eclipse后选择<code>/headless/course/hadoop/mr_pro</code>做为工作空间。</p>
+<h1 id="3-WordCount"><a href="#3-WordCount" class="headerlink" title="3 WordCount"></a>3 WordCount</h1><h2 id="3-1-新建项目"><a href="#3-1-新建项目" class="headerlink" title="3.1 新建项目"></a>3.1 新建项目</h2><p>1.在eclipse中依次点击：<code>File-&gt;New-&gt;Project-&gt;Map/Reduce Project-&gt;Next</code>。</p>
+<p>2.在项目名称（Project Name）处填入<code>WordCount</code>，将工程位置设置为文件夹<code>/headless/course/hadoop/mr_pro/WordCount</code>，点击<code>Finish</code>。</p>
+<h2 id="3-2-准备测试数据"><a href="#3-2-准备测试数据" class="headerlink" title="3.2 准备测试数据"></a>3.2 准备测试数据</h2><p>新建终端，使用如下命令新建一个文本文件：</p>
+<pre><code class="bash">cd ~/course/hadoop/mr_pro/WordCount/ 
+mkdir target
+mkdir data
+cd data
+echo &quot;Hello World&quot; &gt;&gt; file1.txt
+echo &quot;Hello MapReduce&quot; &gt;&gt; file2.txt
+</code></pre>
+<p>使用如下命令进入master节点：</p>
+<pre><code class="bash">docker exec -it --privileged master /bin/bash
+</code></pre>
+<p>主机的<code>~/course</code>目录挂载到了master节点的<code>/course</code>目录。</p>
+<p><strong>在master节点中</strong>使用如下命令新建目录，并将文本文件上传到目录：</p>
+<pre><code class="bash">hadoop fs -mkdir -p mapreduce/WordCount/input
+cd /course/hadoop/mr_pro/WordCount/data
+hadoop fs -put file1.txt file2.txt mapreduce/WordCount/input
+hadoop fs -ls mapreduce/WordCount/input
+</code></pre>
+<p><img src="/CFSN2qKgP/1637399943346.png"></p>
+<h2 id="3-3-添加-MapReduce-编程框架"><a href="#3-3-添加-MapReduce-编程框架" class="headerlink" title="3.3 添加 MapReduce 编程框架"></a>3.3 添加 MapReduce 编程框架</h2><p>MapReduce 编程框架分为三个部分，请在 Eclipse 中的 <code>WordCount</code> 下分别创建如下三个类：</p>
+<p><code>WcMap</code>、<code>WcReducer</code>、<code>WcRunner</code></p>
+<p>接着在类中编写代码。</p>
+<h2 id="3-4-Map过程"><a href="#3-4-Map过程" class="headerlink" title="3.4 Map过程"></a>3.4 Map过程</h2><p>Map过程需要继承<code>org.apache.hadoop.mapreduce</code>包中<code>Mapper</code>类，并重写其<code>map</code>方法。通过在<code>map</code>方法中添加两句把<code>key</code>值和<code>value</code>值输出到控制台的代码，可以发现<code>map</code>方法中<code>value</code>值存储的是文本文件中的一行（以回车符为行结束标记），而<code>key</code>值为该行的首字母相对于文本文件的首地址的偏移量。然后<code>StringTokenizer</code>类将每一行拆分成为一个个的单词，并将<code>&lt;word,1&gt;</code>作为<code>map</code>方法的结果输出，其余的工作都交有<code>MapReduce</code>框架处理。</p>
+<pre><code class="java">import java.io.IOException;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Mapper;
+
+public class WcMap extends Mapper&lt;LongWritable, Text, Text, LongWritable&gt; &#123;
+    @Override
+    public void map(LongWritable key, Text value, Context context) 
+            throws IOException, InterruptedException &#123;
+        String str = value.toString();
+        String[] words = StringUtils.split(str,&quot; &quot;);
+        for (String word:words) &#123;
+            context.write(new Text(word), new LongWritable(1));
+        &#125;
+    &#125;
+
+&#125;
+</code></pre>
+<h2 id="3-5-Reduce过程"><a href="#3-5-Reduce过程" class="headerlink" title="3.5 Reduce过程"></a>3.5 Reduce过程</h2><p><code>Reduce</code>过程需要继承<code>org.apache.hadoop.mapreduce</code>包中<code>Reducer</code>类，并重写其<code>reduce</code>方法。<code>Map</code>过程输出<code>&lt;key,values&gt;</code>中<code>key</code>为单个单词，而<code>values</code>是对应单词的计数值所组成的列表，<code>Map</code>的输出就是<code>Reduce</code>的输入，所以<code>reduce</code>方法只要遍历<code>values</code>并求和，即可得到某个单词的总次数。</p>
+<pre><code class="java">import java.io.IOException;
+
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+
+public class WcReduce extends Reducer&lt;Text, LongWritable, Text, LongWritable&gt; &#123;
+
+    public void reduce(Text key, Iterable&lt;LongWritable&gt; values, Context context) 
+            throws IOException, InterruptedException &#123;
+        long count = 0;
+        for(LongWritable value:values) &#123;
+            count += value.get();
+        &#125;
+        context.write(key, new LongWritable(count));
+    &#125;
+
+&#125;
+</code></pre>
+<h2 id="3-6-执行MapReduce任务"><a href="#3-6-执行MapReduce任务" class="headerlink" title="3.6 执行MapReduce任务"></a>3.6 执行MapReduce任务</h2><p>在MapReduce中，由<code>Job</code>对象负责管理和运行一个计算任务，并通过<code>Job</code>的一些方法对任务的参数进行相关的设置。此处设置了使用<code>TokenizerMapper</code>完成<code>Map</code>过程中的处理和使用<code>IntSumReducer</code>完成<code>Combine</code>和<code>Reduce</code>过程中的处理。还设置了<code>Map</code>过程和<code>Reduce</code>过程的输出类型：<code>key</code>的类型为<code>Text</code>，<code>value</code>的类型为<code>IntWritable</code>。任务的输出和输入路径则由命令行参数指定，并由<code>FileInputFormat</code>和<code>FileOutputFormat</code>分别设定。完成相应任务的参数设定后，即可调用<code>job.waitForCompletion()</code>方法执行任务。</p>
+<pre><code class="java">import java.io.IOException;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+
+
+
+public class WcRunner &#123;
+    public static void main(String[] args)
+            throws IOException,ClassNotFoundException,InterruptedException
+    &#123;
+        Configuration conf = new Configuration();
+        Job job = Job.getInstance(conf);
+        job.setJarByClass(WcRunner.class);
+        job.setMapperClass(WcMap.class);
+        job.setReducerClass(WcReduce.class);
+        
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(LongWritable.class);
+        
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(LongWritable.class);
+        
+        FileInputFormat.setInputPaths(job, new Path(args[0]));
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        
+        job.waitForCompletion(true);
+        
+    &#125;
+
+&#125;
+</code></pre>
+<h2 id="3-7-实验结果"><a href="#3-7-实验结果" class="headerlink" title="3.7 实验结果"></a>3.7 实验结果</h2><p>将项目导出为<code>WordCount.jar</code> 到本实验工作目录的<code>WordCount/target</code>子目录下，进入master节点，切换到 jar 包所在目录<code>/course/hadoop/mr_pro/WordCount/target</code>，输入以下命令提交作业到集群运行：</p>
+<pre><code class="bash">hadoop jar WordCount.jar mapreduce/WordCount/input mapreduce/WordCount/output
+</code></pre>
+<p>运行结果如下：</p>
+<p><img src="/CFSN2qKgP/1637400005200.png"></p>
+<h1 id="4-祖孙辈关系"><a href="#4-祖孙辈关系" class="headerlink" title="4 祖孙辈关系"></a>4 祖孙辈关系</h1><h2 id="4-1-新建项目"><a href="#4-1-新建项目" class="headerlink" title="4.1 新建项目"></a>4.1 新建项目</h2><p>在本实验工作目录下创建文件夹Relation。</p>
+<p>在eclipse中依次点击：File-&gt;New-&gt;Project-&gt;Map&#x2F;Reduce Project-&gt;Next。</p>
+<p>在项目名称（Project Name）处填入“Relation”，将工程位置设置为上述的文件夹，点击“Finish”。</p>
+<p>下载<code>log4j</code>配置文件：log4j.properties.txt</p>
+<p>然后将该文件上传至实验环境内的“Relation”项目的<code>src</code>目录下，并将文件重命名为<code>log4j.properties</code>。</p>
+<h2 id="4-2-准备relation-dat"><a href="#4-2-准备relation-dat" class="headerlink" title="4.2 准备relation.dat"></a>4.2 准备relation.dat</h2><p>在eclipse的Relation目录上，单击右键-&gt;New-&gt;Folder，填入data，创建数据目录。</p>
+<p>在data目录上，单击右键-&gt;New-&gt;File，填入relation.dat，创建数据文件，数据文件内容如下：</p>
+<pre><code>Tom Lucy
+Tom Jack
+Jone Lucy
+Jone Jack
+Lucy Mary
+Lucy Ben
+Jack Alice
+Jack Jesse
+Terry Alice
+Terry Jesse
+Philip Terry
+Philip Alma
+Mark Terry
+Mark Alma
+</code></pre>
+<p>接着，在HDFS创建目录，将数据上传到该目录，</p>
+<p><strong>在master节点上</strong>执行的命令如下：</p>
+<pre><code class="bash">cd /course/hadoop/mr_pro/Relation/data  #进入数据目录
+hadoop fs -mkdir -p mapreduce/relation/input #在HDFS上创建目录
+hadoop fs -put relation.dat mapreduce/relation/input #上传数据到HDFS
+hadoop fs -ls mapreduce/relation/input #查看数据
+</code></pre>
+<p><img src="/CFSN2qKgP/1637400066183.png"></p>
+<h2 id="4-3-添加-MapReduce-编程框架"><a href="#4-3-添加-MapReduce-编程框架" class="headerlink" title="4.3 添加 MapReduce 编程框架"></a>4.3 添加 MapReduce 编程框架</h2><p>MapReduce 编程框架分为三个部分，请在 Eclipse 中的 <code>Relation</code> 下分别创建如下三个类：</p>
+<p><code>MyMapper</code>、<code>MyReduce</code>、<code>MyRunner</code></p>
+<p>接着在类中编写代码。</p>
+<h2 id="4-4-Map过程"><a href="#4-4-Map过程" class="headerlink" title="4.4 Map过程"></a>4.4 Map过程</h2><p>在<code>src</code>上，单击右键<code>-&gt;New-&gt;Class-&gt;Name</code>处填<code>MyMapper-&gt;Finish</code>，<code>MyMapper</code>的完整代码与解析如下：</p>
+<pre><code class="java">import java.io.IOException;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.mapreduce.Mapper;
+
+
+public class MyMapper extends Mapper&lt;LongWritable, Text, Text, Text&gt; &#123;
+
+    public void map(LongWritable key, Text value, Context context)
+        throws IOException, InterruptedException &#123;
+
+        String child = value.toString().split(&quot; &quot;)[0];
+        String parent = value.toString().split(&quot; &quot;)[1];
+
+        context.write(new Text(child), new Text(&quot;-&quot; + parent));
+        context.write(new Text(parent), new Text(&quot;+&quot; + child));
+    &#125;
+&#125;
+</code></pre>
+<h2 id="4-5-Reduce过程"><a href="#4-5-Reduce过程" class="headerlink" title="4.5 Reduce过程"></a>4.5 Reduce过程</h2><p>在<code>src</code>上，单击右键<code>-&gt;New-&gt;Class-&gt;Name</code>处填<code>MyReducer-&gt;Finish</code>，<code>MyReducer</code>的完整代码与解析如下：</p>
+<pre><code class="java">import java.io.IOException;
+import java.util.ArrayList;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+
+public class MyReducer extends Reducer&lt;Text, Text, Text, Text&gt; &#123;
+
+    
+    public void reduce(Text key, Iterable&lt;Text&gt; values, Context context)
+            throws IOException, InterruptedException &#123;
+
+        ArrayList&lt;Text&gt; grandparent = new ArrayList&lt;Text&gt;();
+        ArrayList&lt;Text&gt; grandchild = new ArrayList&lt;Text&gt;();
+        
+
+        for (Text t : values) &#123;
+            String s = t.toString();
+            if (s.startsWith(&quot;-&quot;)) &#123;
+                grandparent.add(new Text(s.substring(1)));
+            &#125; else &#123;
+                grandchild.add(new Text(s.substring(1)));
+            &#125;
+        &#125;
+
+        for (int i = 0; i &lt; grandchild.size(); i++) &#123;
+            for (int j = 0; j &lt; grandparent.size(); j++) &#123;
+                context.write(new Text(grandchild.get(i) + &quot; &quot;), grandparent.get(j));
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="4-6-执行MapReduce任务"><a href="#4-6-执行MapReduce任务" class="headerlink" title="4.6 执行MapReduce任务"></a>4.6 执行MapReduce任务</h2><p>在<code>src</code>上，单击右键<code>-&gt;New-&gt;Class-&gt;Name</code>处填<code>MyRunner-&gt;Finish</code>，<code>MyRunner</code>的完整代码与解析如下：</p>
+<pre><code class="java">import java.io.IOException;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+
+public class MyRunner &#123;
+    public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException &#123;
+
+        Configuration conf = new Configuration();
+
+        Job job = Job.getInstance(conf);
+        
+
+        job.setJarByClass(MyRunner.class);
+        
+
+        job.setMapperClass(MyMapper.class);
+        job.setReducerClass(MyReducer.class);
+        
+
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(Text.class);
+        
+        
+
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(Text.class);
+        
+
+        FileInputFormat.setInputPaths(job, new Path(args[0]));
+        
+
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+
+        
+        job.waitForCompletion(true);
+    &#125; 
+&#125;
+</code></pre>
+<h2 id="4-7-实验结果"><a href="#4-7-实验结果" class="headerlink" title="4.7 实验结果"></a>4.7 实验结果</h2><p>在<code>Relation</code>目录下新建<code>target</code>目录，导出<code>Relation</code>项目的jar包，jar包命名为<code>Relation.jar</code>.</p>
+<p>在<strong>master节点</strong>输入hadoop jar命令提交作业到hadoop集群运行：</p>
+<pre><code class="bash">cd /course/hadoop/mr_pro/Relation/target
+hadoop jar Relation.jar mapreduce/relation/input  mapreduce/relation/output
+</code></pre>
+<p>使用如下命令查看计算结果：</p>
+<pre><code class="bash">hadoop fs -ls mapreduce/relation/output
+hadoop fs -cat mapreduce/relation/output/part-r-00000
+</code></pre>
+<p><img src="/CFSN2qKgP/1637400123505.png"></p>
+<h1 id="5-索引倒排"><a href="#5-索引倒排" class="headerlink" title="5 索引倒排"></a>5 索引倒排</h1><h2 id="5-1-新建项目"><a href="#5-1-新建项目" class="headerlink" title="5.1 新建项目"></a>5.1 新建项目</h2><p>在本实验工作目录下创建文件夹<code>Inverted</code>。</p>
+<p>在eclipse中依次点击：<code>File-&gt;New-&gt;Project-&gt;Map/Reduce Project-&gt;Next</code>。</p>
+<p>在项目名称（Project Name）处填入<code>Inverted</code>，将工程位置设置为上述的文件夹，点击<code>Finish</code>。</p>
+<h2 id="5-2-准备-input-dat"><a href="#5-2-准备-input-dat" class="headerlink" title="5.2 准备 input.dat"></a>5.2 准备 input.dat</h2><p>在<code>Inverted</code>项目下分别创建<code>data</code>目录和<code>target</code>目录，从终端进入<code>data</code>目录，使用如下命令生成3个文本文件：<code>1.txt</code>,<code>2.txt</code>,<code>3.txt</code></p>
+<pre><code class="bash">mkdir ~/course/hadoop/mr_pro/Inverted/data/
+mkdir ~/course/hadoop/mr_pro/Inverted/target/
+cd ~/course/hadoop/mr_pro/Inverted/data/
+echo &quot;MapReduce is simple&quot; &gt; 1.txt
+echo &quot;MapReduce is powerful and simple&quot; &gt; 2.txt
+echo &quot;Hello MapReduce bye MapReduce&quot; &gt; 3.txt
+ls
+</code></pre>
+<p>在eclipse的<code>Inverted</code>项目目录上,即可在eclipse上显示新生成的三个文本文件。</p>
+<p><strong>在master节点上执行如下命令</strong>，在HDFS上创建目录，并将3个文件上传至HDFS上：</p>
+<pre><code class="bash">cd /course/hadoop/mr_pro/Inverted/data/
+hadoop fs -mkdir -p mapreduce/inverted/input
+hadoop fs -put *.txt mapreduce/inverted/input
+hadoop fs -ls mapreduce/inverted/input
+</code></pre>
+<p><img src="/CFSN2qKgP/1637400153991.png"></p>
+<h2 id="5-3-添加-MapReduce-编程框架"><a href="#5-3-添加-MapReduce-编程框架" class="headerlink" title="5.3 添加 MapReduce 编程框架"></a>5.3 添加 MapReduce 编程框架</h2><p>MapReduce 编程框架分为三个部分，请在 Eclipse 中的 <code>Inverted</code> 下分别创建如下四个类：</p>
+<p><code>MyMapper</code>、<code>MyCombiner</code>、<code>MyReducer</code>、<code>MyRunner</code></p>
+<p>接着在类中编写代码。</p>
+<h2 id="5-4-Map过程"><a href="#5-4-Map过程" class="headerlink" title="5.4 Map过程"></a>5.4 Map过程</h2><p>在<code>src</code>上，单击右键<code>-&gt;New-&gt;Class-&gt;Name</code>处填<code>MyMapper-&gt;Finish</code>，<code>MyMapper</code>的完整代码与解析如下：</p>
+<pre><code class="java">import java.io.*;
+import java.util.StringTokenizer;
+import org.apache.hadoop.io.*;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.lib.input.FileSplit;
+
+public class MyMapper extends Mapper&lt;Object,Text,Text,Text&gt;&#123;
+    
+
+    private Text keyInfo = new Text();
+    private Text valueInfo = new Text();
+    private FileSplit split;
+    
+
+    public void map(Object key,Text value,Context context) 
+            throws IOException,InterruptedException&#123;
+
+        split = (FileSplit)context.getInputSplit();
+
+        StringTokenizer itr = new StringTokenizer(value.toString());
+        while(itr.hasMoreTokens())&#123;
+
+            keyInfo.set(itr.nextToken()+&quot; &quot;+split.getPath().getName().toString());
+
+            valueInfo.set(&quot;1&quot;); 
+            context.write(keyInfo,valueInfo);
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="5-5-Combine过程"><a href="#5-5-Combine过程" class="headerlink" title="5.5 Combine过程"></a>5.5 Combine过程</h2><p>在<code>src</code>上，单击右键<code>-&gt;New-&gt;Class-&gt;Name</code>处填<code>MyCombine-&gt;Finish</code>，<code>MyCombine</code>的完整代码与解析如下：</p>
+<pre><code class="java">import java.io.*;
+import org.apache.hadoop.io.*;
+import org.apache.hadoop.mapreduce.Reducer;
+
+public class MyCombiner extends Reducer&lt;Text,Text,Text,Text&gt;&#123;
+    
+
+    private Text info = new Text();
+    
+    public void reduce(Text key,Iterable&lt;Text&gt;values,Context context) 
+            throws IOException, InterruptedException&#123;
+
+        int sum = 0;
+        for(Text value:values)&#123;
+            sum += Integer.parseInt(value.toString());
+        &#125;
+
+        String record = key.toString();
+        String[] str = record.split(&quot; &quot;);
+
+        key.set(str[0]);
+        info.set(str[1]+&quot;:&quot;+sum);    
+        context.write(key,info);
+    &#125;
+&#125;
+</code></pre>
+<h2 id="5-6-Reduce过程"><a href="#5-6-Reduce过程" class="headerlink" title="5.6 Reduce过程"></a>5.6 Reduce过程</h2><p>在<code>src</code>上，单击右键<code>-&gt;New-&gt;Class-&gt;Name</code>处填<code>MyReducer-&gt;Finish</code>，<code>MyReducer</code>的完整代码与解析如下：</p>
+<pre><code class="java">import java.io.IOException;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+
+public class MyReducer extends Reducer&lt;Text,Text,Text,Text&gt;&#123;
+    private Text result = new Text();
+    public void reduce(Text key,Iterable&lt;Text&gt;values,Context context) throws 
+
+IOException, InterruptedException&#123;
+        String value =new String();
+        for(Text value1:values)&#123;
+            value += value1.toString()+&quot; ; &quot;;
+        &#125;
+        result.set(value);
+        context.write(key,result);
+    &#125;
+&#125;
+</code></pre>
+<h2 id="5-7-执行MapReduce过程"><a href="#5-7-执行MapReduce过程" class="headerlink" title="5.7 执行MapReduce过程"></a>5.7 执行MapReduce过程</h2><p>在<code>src</code>上，单击右键<code>-&gt;New-&gt;Class-&gt;Name</code>处填<code>MyRunner-&gt;Finish</code>，<code>MyRunner</code>的完整代码与解析如下：</p>
+<pre><code class="java">import java.io.IOException;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+
+public class MyRunner &#123;
+    public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException &#123;
+
+        Configuration conf = new Configuration();
+
+        Job job = Job.getInstance(conf);
+
+        job.setJarByClass(MyRunner.class);
+        
+
+        job.setMapperClass(MyMapper.class);
+        job.setReducerClass(MyReducer.class);
+        job.setCombinerClass(MyCombiner.class);
+        
+
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(Text.class);
+        
+        
+
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(Text.class);
+        
+
+        FileInputFormat.setInputPaths(job, new Path(args[0]));
+        
+
+        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        
+ 
+        job.waitForCompletion(true);
+    &#125; 
+&#125;
+</code></pre>
+<h2 id="5-8-实验结果"><a href="#5-8-实验结果" class="headerlink" title="5.8 实验结果"></a>5.8 实验结果</h2><p>将项目导出为 <code>Inverted.jar</code> ，导出路径为当前项目的<code>target</code>目录下，</p>
+<p><strong>在master节点上</strong>切换到 jar 包所在目录，输入以下命令到集群运行：</p>
+<pre><code class="bash">cd /course/hadoop/mr_pro/Inverted/target
+hadoop jar Inverted.jar mapreduce/inverted/input mapreduce/inverted/output
+</code></pre>
+<p>使用以下命令查看计算结果：</p>
+<pre><code class="bash">hadoop fs -ls mapreduce/inverted/output
+hadoop fs -cat mapreduce/inverted/output/part-r-00000
+</code></pre>
+<p><img src="/CFSN2qKgP/1637400204177.png"></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/EAswvY27K/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          《疯狂Java讲义（第5版）》 - 踩坑与填坑
+        
+      </div>
+    </a>
+  
+  
+    <a href="/mjSBmRV2T/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">机器学习 - 朴素贝叶斯分类器函数内容总结(sklearn)</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=Hadoop实验4：MapReduce编程 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/CFSN2qKgP/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Hadoop实验4：MapReduce编程 - 囧囧JOJO - 博客&u=https://jiongjiongjojo.gitee.io/CFSN2qKgP/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Hadoop实验4：MapReduce编程 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/CFSN2qKgP/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

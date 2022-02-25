@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>Linux系统安装IDEA保姆级教程 | 囧囧JOJO - 博客</title>
+
+    <meta name="description" content="&lt;h1 id=&#34;〇、目录&#34;&gt;&lt;a href=&#34;#〇、目录&#34; class=&#34;headerlink&#34; title=&#34;〇、目录&#34;&gt;&lt;/a&gt;〇、目录&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%E3%80%87-%E7%9B%AE%E5%BD%95&#34;&gt;〇、目录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E4%B8%80-%E5%89%8D%E8%A8%80&#34;&gt;一、前言&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E4%BA%8C-%E4%B8%8B%E8%BD%BDlinux%E7%89%88idea&#34;&gt;二、下载Linux版IDEA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E4%B8%89-%E8%A7%A3%E5%8E%8B%E5%AE%89%E8%A3%85idea&#34;&gt;三、解压安装IDEA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E5%9B%9B-%E9%85%8D%E7%BD%AEidea%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F&#34;&gt;四、配置IDEA环境变量&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E4%BA%94%E3%80%81%E6%B7%BB%E5%8A%A0%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F&#34;&gt;五、添加桌面快捷方式&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#51-%E8%BD%AF%E8%BF%9E%E6%8E%A5%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F&#34;&gt;5.1 软连接创建桌面快捷方式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#52-%E4%B8%BAidea%E5%88%9B%E5%BB%BAlinux%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F&#34;&gt;5.2 为IDEA创建Linux桌面快捷方式&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#%E5%85%AD-%E7%BB%99idea%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E6%8F%92%E4%BB%B6&#34;&gt;六、给IDEA安装中文插件&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl02tinnl001urg9mc1cr745a" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Linux系统安装IDEA保姆级教程
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2022-02-23T04:20:46.000Z" itemprop="datePublished">2022-02-23</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="〇、目录"><a href="#〇、目录" class="headerlink" title="〇、目录"></a>〇、目录</h1><ul>
+<li><a href="#%E3%80%87-%E7%9B%AE%E5%BD%95">〇、目录</a></li>
+<li><a href="#%E4%B8%80-%E5%89%8D%E8%A8%80">一、前言</a></li>
+<li><a href="#%E4%BA%8C-%E4%B8%8B%E8%BD%BDlinux%E7%89%88idea">二、下载Linux版IDEA</a></li>
+<li><a href="#%E4%B8%89-%E8%A7%A3%E5%8E%8B%E5%AE%89%E8%A3%85idea">三、解压安装IDEA</a></li>
+<li><a href="#%E5%9B%9B-%E9%85%8D%E7%BD%AEidea%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">四、配置IDEA环境变量</a></li>
+<li><a href="#%E4%BA%94%E3%80%81%E6%B7%BB%E5%8A%A0%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F">五、添加桌面快捷方式</a><ul>
+<li><a href="#51-%E8%BD%AF%E8%BF%9E%E6%8E%A5%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F">5.1 软连接创建桌面快捷方式</a></li>
+<li><a href="#52-%E4%B8%BAidea%E5%88%9B%E5%BB%BAlinux%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F">5.2 为IDEA创建Linux桌面快捷方式</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%AD-%E7%BB%99idea%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E6%8F%92%E4%BB%B6">六、给IDEA安装中文插件</a></li>
+</ul>
+<span id="more"></span>
+
+<h1 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h1><p>本教程指导在Linux环境下安装IDEA，配置IDEA目录的环境变量，同时创建桌面快捷方式（如果有桌面），给IDEA安装中文汉化插件。跟着教程走，可以说真的有手就行了，对于不同Linux发行版，操作步骤大致相同。</p>
+<h1 id="二、下载Linux版IDEA"><a href="#二、下载Linux版IDEA" class="headerlink" title="二、下载Linux版IDEA"></a>二、下载Linux版IDEA</h1><p>使用浏览器打开IDEA官网的链接：<a target="_blank" rel="noopener" href="https://www.jetbrains.com/idea/">https://www.jetbrains.com/idea/</a></p>
+<p><img src="/rtbmdk9d8/1645590057782.png"></p>
+<p>选择的页面中央的<code>Download</code>按钮，即可跳转到下载页面，这里我们一社区版（免费版）为例：</p>
+<p>选择页面的Linux的tab，然后在下面选择Community下方的Download，这个时候，浏览器就会开始下载Linux版本的IDEA。</p>
+<p><img src="/rtbmdk9d8/1645590078005.png"></p>
+<p>如果你的Linux系统是无窗口的，可以在自己的其他有图形界面的系统中完成以上步骤，在最后弹出的下载文件中，复制其的下载链接（假设下载链接为<code>https://Download.com/download.tar.gz</code>），然后在Linux系统下使用以下命令可将文件下载至无图形界面的Linux系统中（有图形界面的可以直接下载）：</p>
+<p><b><font color='red'>！！！注意替换掉对应的链接！！！</font></b></p>
+<pre><code class="shell">wget https://Download.com/download.tar.gz
+</code></pre>
+<p><del>感谢董老师对shell代码的指正！</del></p>
+<p>如图所示，文件已经下载到当前终端的工作目录里面了。</p>
+<p><img src="/rtbmdk9d8/1645590090948.png"></p>
+<h1 id="三、解压安装IDEA"><a href="#三、解压安装IDEA" class="headerlink" title="三、解压安装IDEA"></a>三、解压安装IDEA</h1><p>这里我们假设下载下来的文件名为<code>idea.tar.gz</code></p>
+<p>使用如下命令，可以IDEA解压并安装（注意使用su权限）：</p>
+<p><b><font color='red'>！！！注意替换掉对应的文件名！！！</font></b></p>
+<pre><code class="shell">mkdir -p /opt/idea &amp;&amp; tar -zxvf ./idea.tar.gz -C /opt/idea
+</code></pre>
+<p>输入后就可以看到大量的解压信息，表示解压成功了：</p>
+<p><img src="/rtbmdk9d8/1645590109171.png"></p>
+<p>到这里，Linux环境下的IDEA已经安装完成了，我们只需要进入解压目录中的bin文件夹，输入如下指令，即可启动IDEA</p>
+<pre><code class="shell">./idea.sh
+</code></pre>
+<h1 id="四、配置IDEA环境变量"><a href="#四、配置IDEA环境变量" class="headerlink" title="四、配置IDEA环境变量"></a>四、配置IDEA环境变量</h1><p>配置IDEA环境变量的目的是无论终端在哪个工作目录，都可以通过<code>./idea.sh</code>指令启动IDEA，不用进入到IDEA的环境目录了。</p>
+<p>我们先假设我们解压后的目录为<code>idea-IC-213.6777.52</code>（这个文件名与你下载的IDEA版本有关系，可能跟我的不一致，自行替换为自己的目录），查看这个解压目录名称的指令为：</p>
+<pre><code class="shell">ls /opt/idea
+</code></pre>
+<p><img src="/rtbmdk9d8/1645590125478.png"></p>
+<p>这里就可以看到自己解压出来的文件夹，我们记录下这个文件名，然后将其添加至环境变量中：</p>
+<p>我们通过vim指令对环境变量文件进行编辑：</p>
+<pre><code class="shell">vim ~/.bashrc
+</code></pre>
+<p>然后将如下的内容添加至<code>~/.bashrc</code>文件的最后一行（<b><font color='red'>！！！注意替换掉对应的目录名！！！</font></b>）。</p>
+<pre><code class="tex">export IDEA_HOME=/usr/local/src/idea/idea-IC-213.6777.52
+export PATH=:$PATH:$&#123;IDEA_HOME&#125;/bin
+</code></pre>
+<p>然后通过<code>:wq</code>进行保存即可。</p>
+<p>接着我们让系统重新加载我们修改好的环境变量：</p>
+<pre><code class="shell">source ~/.bashrc
+</code></pre>
+<p>之后我们就可以在任意目录下输入<code>idea.sh</code>启动IDEA图形化界面了。</p>
+<h1 id="五、添加桌面快捷方式"><a href="#五、添加桌面快捷方式" class="headerlink" title="五、添加桌面快捷方式"></a>五、添加桌面快捷方式</h1><p>添加桌面快捷方式主要针对于图形化界面，如果你没有图形化界面，就无须这步配置。</p>
+<p>这里提供了两种方法，一种使用软连接的方法，另一种直接创建桌面快捷方式文件。</p>
+<h2 id="5-1-软连接创建桌面快捷方式"><a href="#5-1-软连接创建桌面快捷方式" class="headerlink" title="5.1 软连接创建桌面快捷方式"></a>5.1 软连接创建桌面快捷方式</h2><p>注意替换掉指令中的<code>idea-IC-213.6777.52</code>为你自己暗转改的目录：</p>
+<pre><code class="shell">ln -s /opt/idea/idea-IC-213.6777.52/bin/idea.sh ~/Desktop/IDEA
+</code></pre>
+<p>完成这一步，桌面就出现了一个软连接的快捷方式，但是此方法有一个弊端，不能显示IDEA的logo，寻找起来不方便。当然，有缺点就一定有优点，优点是一行指令就可以完整配置，非常方便。</p>
+<p><img src="/rtbmdk9d8/1645590145562.png"></p>
+<h2 id="5-2-为IDEA创建Linux桌面快捷方式"><a href="#5-2-为IDEA创建Linux桌面快捷方式" class="headerlink" title="5.2 为IDEA创建Linux桌面快捷方式"></a>5.2 为IDEA创建Linux桌面快捷方式</h2><p>图形化界面是不能直接创建Linux桌面快捷方式的，我们可以通过手动创建文件的方式来创建快捷方式。</p>
+<p>首先在桌面创建一个空文本文件，文件名根据自己喜好设置，我这里设置IDEA，然后编辑这个空文件，填入如下内容（注意修改对应的信息，比如Icon内的路径，Exec内的路径等）：</p>
+<pre><code class="tex">[Desktop Entry]
+
+Type=Application
+
+Version=213.6777.52
+
+Name=IDEA
+
+Comment=Run IDEA
+
+Icon=/opt/idea/idea-IC-213.6777.52/bin/idea.png
+
+Exec=/opt/idea/idea-IC-213.6777.52/bin/idea.sh
+
+Terminal=false
+Path=
+StartupNotify=false
+</code></pre>
+<p>保存后，再次对这个文件重命名，修改为<code>IDEA.desktop</code></p>
+<p>，然后就可以看到桌面中显示了对应的快捷方式了。</p>
+<p><img src="/rtbmdk9d8/1645590160880.png"></p>
+<p>但是因为是手动创建的快捷方式，打开的时候会有警告：</p>
+<p><img src="/rtbmdk9d8/1645590174527.png"></p>
+<p>我们可以点击<code>Mark Executable</code>，这样以后启动就不会再弹出警告了。</p>
+<h1 id="六、给IDEA安装中文插件"><a href="#六、给IDEA安装中文插件" class="headerlink" title="六、给IDEA安装中文插件"></a>六、给IDEA安装中文插件</h1><p>我们首先启动IDEA，认真阅读使用协议后，选择同意，并点击<code>Continue</code></p>
+<p><img src="/rtbmdk9d8/1645590184787.png"></p>
+<p>接下来IDEA询问我们是否愿意分享自己使用软件过程中的数据，我们可以根据自己的情况选择。</p>
+<p><img src="/rtbmdk9d8/1645590198882.png"></p>
+<p>选择完毕后，就进入了IDEA的欢迎界面了，我们点击左侧的<code>Plugins</code></p>
+<p><img src="/rtbmdk9d8/1645590209014.png"></p>
+<p>在顶部的搜索框里面，输入<code>Chinese</code>，就可以找到中文的汉化插件。</p>
+<p><img src="/rtbmdk9d8/1645590223245.png"></p>
+<p>我们点击<code>Install</code>，就会开始下载安装插件，安装完成后，我们点击<code>Restart IDE</code>，重启后，就可以显示中文的IDEA界面了。</p>
+<p><img src="/rtbmdk9d8/1645590234682.png"></p>
+<p><img src="/rtbmdk9d8/1645590246132.png"></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+  
+    <a href="/aMhN6pCDy/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=Linux系统安装IDEA保姆级教程 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/rtbmdk9d8/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Linux系统安装IDEA保姆级教程 - 囧囧JOJO - 博客&u=https://jiongjiongjojo.gitee.io/rtbmdk9d8/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Linux系统安装IDEA保姆级教程 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/rtbmdk9d8/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

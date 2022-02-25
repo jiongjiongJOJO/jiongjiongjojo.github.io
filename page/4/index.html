@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>囧囧JOJO - 博客</title>
+
+    <meta name="description" content="囧囧JOJO - 博客">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = false
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="index">
+  
+    
+      <article
+id="post-i9siMGdb4"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/i9siMGdb4/">Hadoop实验2：HDFS操作</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="实验2：HDFS操作"><a href="#实验2：HDFS操作" class="headerlink" title="实验2：HDFS操作"></a>实验2：HDFS操作</h1><h2 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h2><ul>
+<li><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></li>
+<li><a href="#1-%E5%90%AF%E5%8A%A8docker%E5%92%8Chadoop%E6%9C%8D%E5%8A%A1">1 启动Docker和Hadoop服务</a></li>
+<li><a href="#2-hdfs-%E5%AE%8C%E6%95%B4%E5%91%BD%E4%BB%A4%E6%A6%82%E8%A7%88">2 HDFS 完整命令概览</a></li>
+<li><a href="#3-%E6%9F%A5%E7%9C%8B-%E5%88%9B%E5%BB%BA%E4%B8%8E%E5%88%A0%E9%99%A4%E7%9B%AE%E5%BD%95">3 查看、创建与删除目录</a><ul>
+<li><a href="#31-%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%BD%95">3.1 查看目录</a></li>
+<li><a href="#32-%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95">3.2 创建目录</a></li>
+<li><a href="#33-%E5%88%A0%E9%99%A4%E7%9B%AE%E5%BD%95">3.3 删除目录</a></li>
+</ul>
+</li>
+<li><a href="#4-%E6%96%87%E4%BB%B6%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">4 文件的基本操作</a><ul>
+<li><a href="#41-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">4.1 文件上传</a></li>
+<li><a href="#42-%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD">4.2 文件下载</a></li>
+<li><a href="#43-%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9">4.3 查看文件内容</a></li>
+<li><a href="#44-%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F">4.4 查看文件大小</a></li>
+<li><a href="#45-%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6">4.5 复制文件</a></li>
+<li><a href="#46-%E9%87%8D%E5%91%BD%E5%90%8D%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6">4.6 重命名&#x2F;移动文件</a></li>
+<li><a href="#47-%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90%E4%BF%AE%E6%94%B9">4.7 文件权限修改</a></li>
+<li><a href="#48-%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6">4.8 删除文件</a></li>
+</ul>
+</li>
+<li><a href="#5-%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF">5 查看文件系统信息</a><ul>
+<li><a href="#51-%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF">5.1 查看文件系统信息</a></li>
+</ul>
+</li>
+</ul>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-11-06T10:02:22.000Z" itemprop="datePublished">2021-11-06</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-G4PL-GBlD"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/G4PL-GBlD/">Hadoop实验1：搭建Hadoop集群</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h2><ul>
+<li><p><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></p>
+</li>
+<li><p><a href="#1-%E5%90%AF%E5%8A%A8docker%E5%AE%B9%E5%99%A8">1 启动Docker容器</a></p>
+<ul>
+<li><p><a href="#11-%E5%8A%A0%E8%BD%BD%E9%95%9C%E5%83%8F">1.1 加载镜像</a></p>
+</li>
+<li><p><a href="#12-%E5%90%AF%E5%8A%A8%E5%AE%9E%E9%AA%8C%E5%AE%B9%E5%99%A8">1.2 启动实验容器</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#2-%E9%85%8D%E7%BD%AEhadoop%E7%8E%AF%E5%A2%83">2 配置Hadoop环境</a></p>
+<ul>
+<li><p><a href="#21-%E9%85%8D%E7%BD%AEjava%E7%8E%AF%E5%A2%83">2.1 配置JAVA环境</a></p>
+<ul>
+<li><a href="#211-%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8">2.1.1 进入容器</a></li>
+<li><a href="#212-%E5%AE%B9%E5%99%A8%E5%86%85%E9%85%8D%E7%BD%AEjava%E7%8E%AF%E5%A2%83">2.1.2 容器内配置Java环境</a></li>
+</ul>
+</li>
+<li><p><a href="#22-%E9%85%8D%E7%BD%AE%E5%88%86%E5%B8%83%E5%BC%8F%E6%A8%A1%E5%BC%8F">2.2 配置分布式模式</a></p>
+</li>
+<li><p><a href="#23-%E9%85%8D%E7%BD%AEhosts%E6%96%87%E4%BB%B6">2.3 配置hosts文件</a></p>
+</li>
+<li><p><a href="#24-%E9%85%8D%E7%BD%AEssh%E6%97%A0%E5%AF%86%E7%A0%81%E7%99%BB%E9%99%86">2.4 配置SSH无密码登陆</a></p>
+</li>
+<li><p><a href="#25-%E5%AE%89%E8%A3%85hadoop%E5%B9%B6%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">2.5 安装Hadoop并配置环境变量</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="#3-%E9%85%8D%E7%BD%AE%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83">3 配置集群环境</a></p>
+<ul>
+<li><a href="#31-%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6slaves">3.1 修改文件slaves</a></li>
+<li><a href="#32-%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6core-sitexml">3.2 修改文件core-site.xml</a></li>
+<li><a href="#33-%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6hdfs-sitexml">3.3 修改文件hdfs-site.xml</a></li>
+<li><a href="#34-%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6mapred-sitexml">3.4 修改文件mapred-site.xml</a></li>
+<li><a href="#35-%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6yarn-sitexml">3.5 修改文件yarn-site.xml</a></li>
+</ul>
+</li>
+<li><p><a href="#4-%E9%85%8D%E7%BD%AEslave%E8%8A%82%E7%82%B9">4 配置slave节点</a></p>
+</li>
+<li><p><a href="#5-%E5%90%AF%E5%8A%A8hadoop%E9%9B%86%E7%BE%A4">5 启动Hadoop集群</a></p>
+</li>
+</ul>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-10-25T02:47:09.000Z" itemprop="datePublished">2021-10-25</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-dxdhlMjMt"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/dxdhlMjMt/">WSL2环境下安装Docker保姆级教程</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h2 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h2><ul>
+<li><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></li>
+<li><a href="#1-%E7%8E%AF%E5%A2%83%E6%A3%80%E6%B5%8B">1 环境检测</a><ul>
+<li><a href="#11-%E6%9F%A5%E8%AF%A2%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC%E5%8F%B7">1.1 查询系统版本号</a></li>
+<li><a href="#12-%E6%98%AF%E5%90%A6%E7%AC%A6%E5%90%88%E8%A6%81%E6%B1%82">1.2 是否符合要求</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%AE%89%E8%A3%85wsl2">2 安装WSL2</a><ul>
+<li><a href="#21-%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF%E7%AA%97%E5%8F%A3">2.1 打开终端窗口：</a></li>
+<li><a href="#22-%E8%BE%93%E5%85%A5%E5%AE%89%E8%A3%85%E6%8C%87%E4%BB%A4">2.2 输入安装指令</a></li>
+<li><a href="#23-%E8%AE%BE%E7%BD%AE%E5%AD%90%E7%B3%BB%E7%BB%9F">2.3 设置子系统</a></li>
+</ul>
+</li>
+<li><a href="#3-%E5%AE%89%E8%A3%85dokcer%E5%88%B0wsl2">3 安装Dokcer到WSL2</a><ul>
+<li><a href="#31-%E8%AE%BE%E7%BD%AE%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7root%E5%AF%86%E7%A0%81">3.1 设置超级用户(root)密码</a></li>
+<li><a href="#32-%E5%AE%89%E8%A3%85dokcer">3.2 安装Dokcer</a></li>
+</ul>
+</li>
+<li><a href="#4-%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8">4 如何启动？</a><ul>
+<li><a href="#41-%E5%90%AF%E5%8A%A8%E7%BB%88%E7%AB%AF">4.1 启动终端</a></li>
+<li><a href="#42-%E5%90%AF%E5%8A%A8docker">4.2 启动Docker</a></li>
+</ul>
+</li>
+<li><a href="#5-%E8%AE%BE%E7%BD%AEdocker%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E5%8F%AF%E9%80%89">5 设置Docker镜像加速（可选）</a></li>
+<li><a href="#6-%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8docker%E6%9C%8D%E5%8A%A1%E5%8F%AF%E9%80%89">6 设置开机自动启动Docker服务（可选）</a></li>
+<li><a href="#7-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">7 参考资料</a></li>
+</ul>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-09-26T16:32:12.000Z" itemprop="datePublished">2021-09-27</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-vDsoHY-if"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/vDsoHY-if/">Docker实验三:Docker 镜像</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h1><ul>
+<li><p><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></p>
+</li>
+<li><p><a href="#1-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9">1 实验内容</a></p>
+</li>
+<li><p><a href="#2-%E5%AE%9E%E9%AA%8C%E8%A6%81%E7%82%B9">2 实验要点</a></p>
+</li>
+<li><p><a href="#3-%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83">3 实验环境</a></p>
+</li>
+<li><p><a href="#4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">4 注意事项</a></p>
+</li>
+<li><p><a href="#5-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9">5 实验内容</a>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-09-23T17:10:33.000Z" itemprop="datePublished">2021-09-24</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-8tB-3dU7K"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/8tB-3dU7K/">Docker实验二:Docker容器</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h1><ul>
+<li><p><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></p>
+</li>
+<li><p><a href="#1-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9">1 实验内容</a></p>
+</li>
+<li><p><a href="#2-%E5%AE%9E%E9%AA%8C%E8%A6%81%E7%82%B9">2 实验要点</a></p>
+</li>
+<li><p><a href="#3-%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83">3 实验环境</a></p>
+</li>
+<li><p><a href="#4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">4 注意事项</a></p>
+</li>
+<li><p><a href="#5-%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4">5 实验步骤</a>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-09-23T13:07:04.000Z" itemprop="datePublished">2021-09-23</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-7WMI1WMGw"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/7WMI1WMGw/">HTML + CSS + JavaScript 学习笔记</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <ul>
+<li>css中id使用<code>#</code>定义，class使用<code>.</code>定义<pre><code class="css">//id的定义
+#id-demo &#123;
+color: orange;
+&#125;
+</code></pre>
+<pre><code class="css">//class的定义
+.class-demo &#123;
+color: orange;
+&#125;
+</code></pre>
+</li>
+</ul>
+
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-09-14T15:21:28.000Z" itemprop="datePublished">2021-09-14</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-docker-helloworld"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/docker-helloworld/">Docker实验一:Docker入门</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="0-目录"><a href="#0-目录" class="headerlink" title="0.目录"></a>0.目录</h1><ul>
+<li><p><a href="#0%E7%9B%AE%E5%BD%95">0.目录</a></p>
+</li>
+<li><p><a href="#1%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9">1.实验内容</a></p>
+</li>
+<li><p><a href="#2%E5%AE%9E%E9%AA%8C%E8%A6%81%E7%82%B9">2.实验要点</a></p>
+</li>
+<li><p><a href="#3%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83">3.实验环境</a></p>
+</li>
+<li><p><a href="#4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">4.注意事项</a></p>
+</li>
+<li><p><a href="#5%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4">5.实验步骤</a></p>
+<ul>
+<li><a href="#51-helloworld">5.1 HelloWorld</a></li>
+<li><a href="#52-%E8%BF%90%E8%A1%8C%E4%BA%A4%E4%BA%92%E5%BC%8F%E5%AE%B9%E5%99%A8">5.2 运行交互式容器</a></li>
+<li><a href="#53-%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8%E5%90%8E%E5%8F%B0%E6%A8%A1%E5%BC%8F">5.3 启动容器（后台模式）</a></li>
+<li><a href="#54-%E5%81%9C%E6%AD%A2%E5%AE%B9%E5%99%A8">5.4 停止容器</a></li>
+</ul>
+</li>
+</ul>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-09-14T12:56:24.000Z" itemprop="datePublished">2021-09-14</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-whNkJt2eL"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/whNkJt2eL/">安徽科技学院自动疫情填报 V2.1(完全自动)</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>安徽科技学院自动完成学生健康情况填报、每日健康监测。</p>
+<p>此源码为V2版本，V1版本也是我写的，因为专业性比较强，上手麻烦，所以写了这个V2的版本。</p>
+<p>V2的版本只需要之前手动填报过信息，就会获取之前的信息进行自动提交。</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-09-07T08:12:47.000Z" itemprop="datePublished">2021-09-07</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-yI09C6B-d"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/yI09C6B-d/">安徽科技学院疫情填报和体温填报每日自动执行</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>安徽科技学院自动完成学生健康情况填报、每日健康监测。</p>
+<p>开源不易，如果本项目对你有帮助，那么就请给个star吧。😄</p>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2021-05-11T13:23:49.000Z" itemprop="datePublished">2021-05-11</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-rk2WiK-tX"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/rk2WiK-tX/">利用Python爬取一加云服务的所有照片（原图）</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <h1 id="一、使用工具"><a href="#一、使用工具" class="headerlink" title="一、使用工具"></a>一、使用工具</h1><p>1.Python3.8（理论上Python3都可使用）<br>2.Python3的两个模块（json和requests）<br><font color=#C4C4C4>注：如果你的Python提示没有json模块或者没有requests，请打开windows的cmd，输入以下代码，回车，等待安装，安装完成就可以用了（缺什么安装什么，两行代码自己选择）。</font></p>
+<pre><code class="cmd">python -m pip install json
+python -m pip install requests
+</code></pre>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2020-03-17T10:40:59.000Z" itemprop="datePublished">2020-03-17</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+
+  
+    <nav class="pagination">
+        <a class="extend prev" rel="prev" href="/page/3/">Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    </nav>
+  
+</div>
+
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

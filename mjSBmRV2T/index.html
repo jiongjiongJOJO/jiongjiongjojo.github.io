@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>机器学习 - 朴素贝叶斯分类器函数内容总结(sklearn) | 囧囧JOJO - 博客</title>
+
+    <meta name="description" content="&lt;h1 id=&#34;0-目录&#34;&gt;&lt;a href=&#34;#0-目录&#34; class=&#34;headerlink&#34; title=&#34;0 目录&#34;&gt;&lt;/a&gt;0 目录&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#0-%E7%9B%AE%E5%BD%95&#34;&gt;0 目录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#1-%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E5%99%A8%E5%86%85%E5%AE%B9%E6%80%BB%E7%BB%93&#34;&gt;1 贝叶斯分类器内容总结&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#11-%E5%90%84%E7%A7%8D%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB&#34;&gt;1.1 各种概率分布有什么区别？&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#12-%E5%90%84%E7%A7%8D%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E7%9A%84%E5%8F%82%E6%95%B0%E6%80%8E%E4%B9%88%E8%AE%BE%E7%BD%AE&#34;&gt;1.2 各种概率分布的参数怎么设置？&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#13-cross_val_score%E4%BD%9C%E7%94%A8&#34;&gt;1.3 cross_val_score作用。&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#2-%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90%E5%90%84%E7%A7%8D%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E4%B8%8B%E9%B8%A2%E5%B0%BE%E8%8A%B1%E5%88%86%E7%B1%BB%E6%AD%A3%E7%A1%AE%E7%8E%87%E5%AF%B9%E6%AF%94%E5%B9%B6%E5%9C%A8%E4%B8%80%E4%B8%AA%E6%9F%B1%E5%BD%A2%E5%9B%BE%E4%B8%8A%E6%98%BE%E7%A4%BA&#34;&gt;2 对比分析各种概率分布下鸢尾花分类正确率对比，并在一个柱形图上显示。&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#3-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0&#34;&gt;3 代码实现&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl02tinnh001frg9mg214h7bm" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      机器学习 - 朴素贝叶斯分类器函数内容总结(sklearn)
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-11-17T00:57:56.000Z" itemprop="datePublished">2021-11-17</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h1><ul>
+<li><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></li>
+<li><a href="#1-%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E5%99%A8%E5%86%85%E5%AE%B9%E6%80%BB%E7%BB%93">1 贝叶斯分类器内容总结</a><ul>
+<li><a href="#11-%E5%90%84%E7%A7%8D%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">1.1 各种概率分布有什么区别？</a></li>
+<li><a href="#12-%E5%90%84%E7%A7%8D%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E7%9A%84%E5%8F%82%E6%95%B0%E6%80%8E%E4%B9%88%E8%AE%BE%E7%BD%AE">1.2 各种概率分布的参数怎么设置？</a></li>
+<li><a href="#13-cross_val_score%E4%BD%9C%E7%94%A8">1.3 cross_val_score作用。</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90%E5%90%84%E7%A7%8D%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83%E4%B8%8B%E9%B8%A2%E5%B0%BE%E8%8A%B1%E5%88%86%E7%B1%BB%E6%AD%A3%E7%A1%AE%E7%8E%87%E5%AF%B9%E6%AF%94%E5%B9%B6%E5%9C%A8%E4%B8%80%E4%B8%AA%E6%9F%B1%E5%BD%A2%E5%9B%BE%E4%B8%8A%E6%98%BE%E7%A4%BA">2 对比分析各种概率分布下鸢尾花分类正确率对比，并在一个柱形图上显示。</a></li>
+<li><a href="#3-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0">3 代码实现</a></li>
+</ul>
+<span id="more"></span>
+
+<h1 id="1-贝叶斯分类器内容总结"><a href="#1-贝叶斯分类器内容总结" class="headerlink" title="1 贝叶斯分类器内容总结"></a>1 贝叶斯分类器内容总结</h1><h2 id="1-1-各种概率分布有什么区别？"><a href="#1-1-各种概率分布有什么区别？" class="headerlink" title="1.1 各种概率分布有什么区别？"></a>1.1 各种概率分布有什么区别？</h2><table>
+<thead>
+<tr>
+<th>概率分布函数</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MultinomialNB（多项式分布）</td>
+<td>适用于具有离散特征的分类（例如，用于文本分类的字数统计）。</td>
+</tr>
+<tr>
+<td>GaussianNB（高斯分布）</td>
+<td>假设特征的可能性(即概率)为高斯分布</td>
+</tr>
+<tr>
+<td>BernoulliNB（伯努利分布）</td>
+<td>像MultinomialNB一样，此分类器适用于离散数据。区别在于，虽然MultinomialNB可以处理出现次数，但BernoulliNB是为二进制&#x2F;布尔功能而设计的。</td>
+</tr>
+<tr>
+<td>ComplementNB（互补朴素贝叶斯）</td>
+<td>ComplementNB的参数估计比MultinomialNB的参数估计更稳定。此外，ComplementNB在文本分类任务上的表现通常优于MultinomialNB（通常相当大）。</td>
+</tr>
+<tr>
+<td>BayesianRidge（贝叶斯回归）</td>
+<td>BayesianRidge可以用于再预估阶段的参数正则化。正则化参数的选择不是通过人为的选择，而是通过手动调节数据值来实现。</td>
+</tr>
+</tbody></table>
+<h2 id="1-2-各种概率分布的参数怎么设置？"><a href="#1-2-各种概率分布的参数怎么设置？" class="headerlink" title="1.2 各种概率分布的参数怎么设置？"></a>1.2 各种概率分布的参数怎么设置？</h2><p><font color="gray">吐槽！！！！<br />Markdown这么多年了，竟然还不支持单元格合并，当然，可以使用HTML来解决这个问题，但我不想在我的Markdown里面插入过多的HTML元素，所以，丑就丑了，第一列我就不合并了！</font></p>
+<table>
+<thead>
+<tr>
+<th>概率分布函数</th>
+<th>参数名</th>
+<th>参数类型及默认值</th>
+<th>参数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MultinomialNB（多项式分布）</td>
+<td>alpha</td>
+<td><strong>Float类型，默认值为：1.0。</strong></td>
+<td>贝叶斯估计所添加的参数，alpha&#x3D;1.0时，为拉普拉斯平滑。</td>
+</tr>
+<tr>
+<td></td>
+<td>fit_prior</td>
+<td><strong>Bool类型，默认值为：True。</strong></td>
+<td>表示是否要学习先验概率，如果为False，则所有样本输出时使用统一的类别先验概率（1 &#x2F; 类别数）。如果为True时，则可以利用第三个参数class_piror输入先验概率，或者不输入第三个参数，可以从训练集中自己计算先验概率，此时，第k个类别的先验概率&#x3D;第k个类别样本数 &#x2F; 总的样本数</td>
+</tr>
+<tr>
+<td></td>
+<td>class_prior</td>
+<td><strong>List类型，默认值为None。</strong></td>
+<td>该类的先验概率。如果指定了先验，则不会根据数据进行调整。</td>
+</tr>
+<tr>
+<td>GaussianNB（高斯分布）</td>
+<td>priors</td>
+<td><strong>List类型，默认值为None。</strong></td>
+<td>该类的先验概率。如果指定，则先验数据不会根据数据进行调整。</td>
+</tr>
+<tr>
+<td></td>
+<td>var_smoothing</td>
+<td><strong>Float类型，默认值为：1e-9。</strong></td>
+<td>所有特征的最大方差部分，已添加到方差中以提高计算稳定性。</td>
+</tr>
+<tr>
+<td>BernoulliNB（伯努利分布）</td>
+<td>alpha</td>
+<td><strong>Float类型，默认值为：1.0。</strong></td>
+<td>贝叶斯估计所添加的参数，alpha&#x3D;1.0时，为拉普拉斯平滑。</td>
+</tr>
+<tr>
+<td></td>
+<td>binarize</td>
+<td><strong>Float 或 None类型，默认值为：0.0。</strong></td>
+<td>用于将样本特征二值化（映射为布尔值）的阈值。如果为None，则假定输入已经由二进制向量组成。</td>
+</tr>
+<tr>
+<td></td>
+<td>fit_prior</td>
+<td><strong>Bool类型，默认值为：True。</strong></td>
+<td>表示是否要学习先验概率，如果为False，则所有样本输出时使用统一的类别先验概率（1 &#x2F; 类别数）。如果为True时，则可以利用第三个参数class_piror输入先验概率，或者不输入第三个参数，可以从训练集中自己计算先验概率。</td>
+</tr>
+<tr>
+<td></td>
+<td>class_prior</td>
+<td><strong>List类型，默认值为None。</strong></td>
+<td>该类的先验概率。如果指定，则先验数据不会根据数据进行调整。</td>
+</tr>
+<tr>
+<td>ComplementNB（互补朴素贝叶斯）</td>
+<td>alpha</td>
+<td><strong>Float类型，默认值为：1.0。</strong></td>
+<td>贝叶斯估计所添加的参数，alpha&#x3D;1.0时，为拉普拉斯平滑。</td>
+</tr>
+<tr>
+<td></td>
+<td>fit_prior</td>
+<td><strong>Bool类型，默认值为：True。</strong></td>
+<td>表示是否要学习先验概率，如果为False，则所有样本输出时使用统一的类别先验概率（1 &#x2F; 类别数）。如果为True时，则可以利用第三个参数class_piror输入先验概率，或者不输入第三个参数，可以从训练集中自己计算先验概率。</td>
+</tr>
+<tr>
+<td></td>
+<td>class_prior</td>
+<td><strong>List类型，默认值为None。</strong></td>
+<td>该类的先验概率。如果指定，则先验数据不会根据数据进行调整。</td>
+</tr>
+<tr>
+<td></td>
+<td>norm</td>
+<td><strong>Bool类型，默认值为：False。</strong></td>
+<td>是否执行权重的第二次标准化。</td>
+</tr>
+<tr>
+<td>BayesianRidge（贝叶斯回归）</td>
+<td>n_iter</td>
+<td><strong>Int类型，默认值为300。</strong></td>
+<td>最大迭代次数。应大于或等于1。</td>
+</tr>
+<tr>
+<td></td>
+<td>tol</td>
+<td><strong>Float类型，默认值为：1e-3。</strong></td>
+<td>如果w已收敛，则停止算法。</td>
+</tr>
+<tr>
+<td></td>
+<td>alpha_1</td>
+<td><strong>Float类型，默认值为：1e-6。</strong></td>
+<td>超参数：在alpha参数之前的Gamma分布的形状参数。</td>
+</tr>
+<tr>
+<td></td>
+<td>alpha_2</td>
+<td><strong>Float类型，默认值为：1e-6。</strong></td>
+<td>超参数：反比例参数（速率参数）Gamma分布在alpha参数之前。</td>
+</tr>
+<tr>
+<td></td>
+<td>lambda_1</td>
+<td><strong>Float类型，默认值为：1e-6。</strong></td>
+<td>超参数：在lambda参数之前的Gamma分布的形状参数。</td>
+</tr>
+<tr>
+<td></td>
+<td>lambda_2</td>
+<td><strong>Float类型，默认值为：1e-6。</strong></td>
+<td>超参数：在lambda参数之前的Gamma分布的逆比例参数（速率参数）。</td>
+</tr>
+<tr>
+<td></td>
+<td>alpha_init</td>
+<td><strong>Float类型，默认值为：None。</strong></td>
+<td>alpha的初始值（噪声的精度）。</td>
+</tr>
+<tr>
+<td></td>
+<td>lambda_init</td>
+<td><strong>Float类型，默认值为：None。</strong></td>
+<td>lambda的初始值（权重的精度）。如果未设置，则lambda_init为1。</td>
+</tr>
+<tr>
+<td></td>
+<td>compute_score</td>
+<td><strong>Bool类型，默认False。</strong></td>
+<td>如果为真，则在每次优化迭代时计算对数边际似然。</td>
+</tr>
+<tr>
+<td></td>
+<td>fit_intercept</td>
+<td><strong>Bool类型，默认为True。</strong></td>
+<td>是否计算此模型的截距。截距不作为概率参数，因此没有相关的方差。如果设置为False，则计算中将不使用截距（即数据应居中）。</td>
+</tr>
+<tr>
+<td></td>
+<td>normalize</td>
+<td><strong>Bool类型，默认值为：False。</strong></td>
+<td>当fit_intercept设置为False时，忽略此参数。如果为真，则回归前，通过减去平均值并除以l2范数，对回归数X进行归一化。</td>
+</tr>
+<tr>
+<td></td>
+<td>copy_X</td>
+<td><strong>Bool类型，默认值为True。</strong></td>
+<td>如果为True，将复制X；否则，可能会覆盖它。</td>
+</tr>
+<tr>
+<td></td>
+<td>verbose</td>
+<td><strong>Bool类型，默认值为False。</strong></td>
+<td>拟合模型时的详细模式。</td>
+</tr>
+</tbody></table>
+<h2 id="1-3-cross-val-score作用。"><a href="#1-3-cross-val-score作用。" class="headerlink" title="1.3 cross_val_score作用。"></a>1.3 cross_val_score作用。</h2><p>交叉验证的方法可以帮助我们进行调参，最终得到一组最佳的模型参数使得测试数据的准确率和泛化能力最佳。</p>
+<p>如图所示，给出了5个概率分布函数，经过cross_val_score的图像。</p>
+<p><img src="/mjSBmRV2T/1637111126237.jpg"></p>
+<h1 id="2-对比分析各种概率分布下鸢尾花分类正确率对比，并在一个柱形图上显示。"><a href="#2-对比分析各种概率分布下鸢尾花分类正确率对比，并在一个柱形图上显示。" class="headerlink" title="2 对比分析各种概率分布下鸢尾花分类正确率对比，并在一个柱形图上显示。"></a>2 对比分析各种概率分布下鸢尾花分类正确率对比，并在一个柱形图上显示。</h1><p><img src="/mjSBmRV2T/1637111136001.jpg"></p>
+<p>Out：</p>
+<p>多项式分布:0.9823008849557522</p>
+<p>高斯分布:0.9646017699115044</p>
+<p>伯努利分布:0.6548672566371682</p>
+<p>互补朴素贝叶斯分布:0.831858407079646</p>
+<p>贝叶斯回归0.6991150442477876</p>
+<h1 id="3-代码实现"><a href="#3-代码实现" class="headerlink" title="3 代码实现"></a>3 代码实现</h1><pre><code class="python">from matplotlib import pyplot as plt
+from sklearn import datasets
+from sklearn.model_selection import train_test_split,cross_val_score
+from sklearn.naive_bayes import MultinomialNB,GaussianNB,BernoulliNB,ComplementNB
+from sklearn.linear_model import BayesianRidge
+import numpy as np
+from sklearn.metrics import accuracy_score
+
+y = []
+
+iris = datasets.load_iris()
+iris_x = iris.data
+iris_y = iris.target
+# print(iris_x)
+iris_x = iris_x[:,:]
+
+# print(iris_y)
+x_train,x_test,y_train,y_test = train_test_split(iris_x,iris_y,test_size=0.75,random_state=1)
+
+
+
+&quot;&quot;&quot;
+多项式分布
+alpha (float, default=1.0):贝叶斯估计所添加的参数，alpha=1.0时，为拉普拉斯平滑
+fit_prior(bool, default=True):表示是否要学习先验概率，如果为False，则所有样本输出时使用统一的类别先验概率（1 / 类别数）。如果为True时，则可以利用第三个参数class_piror输入先验概率，或者不输入第三个参数，可以从训练集中自己计算先验概率，此时，第k个类别的先验概率=第k个类别样本数 / 总的样本数
+class_prior(array-like of shape (n_classes,), default=None):该类的先验概率。如果指定了先验，则不会根据数据进行调整。
+&quot;&quot;&quot;
+print(&quot;多项式分布:&quot;,end=&quot;&quot;)
+mnb = MultinomialNB(alpha=0.01,fit_prior=False)
+mnb.fit(x_train,y_train)
+y_mnb = mnb.predict(x_test)
+y.append(accuracy_score(y_mnb,y_test))
+print(y[-1])
+
+&quot;&quot;&quot;
+高斯分布
+priors(array-like of shape (n_classes,)) : 该类的先验概率。如果指定，则先验数据不会根据数据进行调整
+var_smoothing(float, default=1e-9) : 所有特征的最大方差部分，已添加到方差中以提高计算稳定性。
+&quot;&quot;&quot;
+print(&quot;高斯分布:&quot;,end=&quot;&quot;)
+# print(y_train)
+# priors =
+gnb = GaussianNB(var_smoothing=1e-10)
+gnb.fit(x_train,y_train)
+y_gnb = gnb.predict(x_test)
+y.append(accuracy_score(y_gnb,y_test))
+print(y[-1])
+
+&quot;&quot;&quot;
+伯努利分布
+alpha(float, default=1.0) : 贝叶斯估计所添加的参数，alpha=1.0时，为拉普拉斯平滑
+binarize(float or None, default=0.0) : 用于将样本特征二值化（映射为布尔值）的阈值。如果为None，则假定输入已经由二进制向量组成
+fit_prior(bool, default=True) : 表示是否要学习先验概率，如果为False，则所有样本输出时使用统一的类别先验概率（1 / 类别数）。如果为True时，则可以利用第三个参数class_piror输入先验概率，或者不输入第三个参数，可以从训练集中自己计算先验概率，
+class_prior(array-like of shape (n_classes,), default=None) : 该类的先验概率。如果指定了先验，则不会根据数据进行调整。
+&quot;&quot;&quot;
+print(&quot;伯努利分布:&quot;,end=&quot;&quot;)
+bnb = BernoulliNB(alpha=0.99,binarize=5.8,fit_prior=False)
+bnb.fit(x_train,y_train)
+y_bnb = bnb.predict(x_test)
+y.append(accuracy_score(y_bnb,y_test))
+print(y[-1])
+
+
+&quot;&quot;&quot;
+互补朴素贝叶斯
+alpha：加性(拉普拉斯/Lidstone)平滑参数(无平滑为0)。
+fit_prior：是否学习类先验概率。若为假，则使用统一先验。
+class_prior ：类的先验概率。如果指定，则不根据数据调整先验。
+norm ：是否执行权重的第二次标准化。
+&quot;&quot;&quot;
+print(&quot;互补朴素贝叶斯分布:&quot;,end=&quot;&quot;)
+cnb = ComplementNB(alpha=20,norm=False)
+cnb.fit(x_train,y_train)
+y_cnb = cnb.predict(x_test)
+y.append(accuracy_score(y_cnb,y_test))
+print(y[-1])
+
+&quot;&quot;&quot;
+
+&quot;&quot;&quot;
+print(&quot;贝叶斯回归&quot;,end=&quot;&quot;)
+br = BayesianRidge()
+
+br.fit(x_train,y_train)
+y_br = br.predict(x_test)
+y_br = y_br.astype(np.int16)
+y.append(accuracy_score(y_br,y_test))
+print(y[-1])
+
+&quot;&quot;&quot;
+cross_val_score
+estimator：数据对象
+X：数据
+y：预测数据
+soring：调用的方法
+cv：交叉验证生成器或可迭代的次数
+n_jobs：同时工作的cpu个数（-1代表全部）
+verbose：详细程度
+fit_params：传递给估计器的拟合方法的参数
+pre_dispatch：控制并行执行期间调度的作业数量。减少这个数量对于避免在CPU发送更多作业时CPU内存消耗的扩大是有用的。
+&quot;&quot;&quot;
+
+mnb_scores = []
+gnb_scores = []
+bnb_scores = []
+cnb_scores = []
+br_scores = []
+r = range(1,31)
+for k in r:
+    # 多项式分布
+    mnb = MultinomialNB(alpha=k, fit_prior=False)
+    scores = cross_val_score(mnb, x_train, y_train)
+    mnb_scores.append(scores.mean())
+
+    # 高斯分布
+    gnb = GaussianNB(var_smoothing=0.1/k)
+    scores = cross_val_score(gnb, x_train, y_train)
+    gnb_scores.append(scores.mean())
+
+    # 伯努利分布
+    bnb = BernoulliNB(alpha=1, binarize=k, fit_prior=False)
+    scores = cross_val_score(bnb,x_train,y_train)
+    bnb_scores.append(scores.mean())
+
+    # 互补朴素贝叶斯分布
+    cnb = ComplementNB(alpha=k, norm=False)
+    scores = cross_val_score(cnb,x_train,y_train)
+    cnb_scores.append(scores.mean())
+
+    # 贝叶斯回归
+    br = BayesianRidge(alpha_init=k)
+    scores = cross_val_score(br, x_train, y_train)
+    br_scores.append(scores.mean())
+
+
+#解决中文显示问题
+plt.rcParams[&#39;font.sans-serif&#39;]=[&#39;SimHei&#39;]
+plt.rcParams[&#39;axes.unicode_minus&#39;] = False
+
+plt.plot(r, mnb_scores, label=&#39;mnb_scores&#39;)
+plt.plot(r,gnb_scores,label=&#39;gnb_scores&#39;)
+plt.plot(r, bnb_scores,label=&#39;bnb_scores&#39;)
+plt.plot(r, cnb_scores,label=&#39;cnb_scores&#39;)
+plt.plot(r, br_scores,label=&#39;br_scores&#39;)
+plt.legend()
+plt.xlabel(&quot;循环次数&quot;)
+plt.ylabel(&quot;Scores&quot;)
+
+plt.show()
+
+x = [&quot;多项式分布&quot;, &quot;高斯分布&quot;, &quot;伯努利分布&quot;, &quot;互补朴素贝叶斯分布&quot;,&quot;贝叶斯回归&quot;]
+
+
+
+
+plt.bar(x,y,0.5)
+
+plt.xlabel(&quot;朴素贝叶斯分布函数&quot;)
+plt.xticks(fontsize=9)
+plt.yticks(fontsize=9)
+plt.ylabel(&quot;正确率&quot;)
+plt.title(&quot;朴素贝叶斯分布函数 - 正确率&quot;)
+
+plt.show()
+</code></pre>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/CFSN2qKgP/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Hadoop实验4：MapReduce编程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/RED5wDzc/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Hadoop实验3：HDFS编程</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=机器学习 - 朴素贝叶斯分类器函数内容总结(sklearn) - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/mjSBmRV2T/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=机器学习 - 朴素贝叶斯分类器函数内容总结(sklearn) - 囧囧JOJO - 博客&u=https://jiongjiongjojo.gitee.io/mjSBmRV2T/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=机器学习 - 朴素贝叶斯分类器函数内容总结(sklearn) - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/mjSBmRV2T/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

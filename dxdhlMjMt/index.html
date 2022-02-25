@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>WSL2环境下安装Docker保姆级教程 | 囧囧JOJO - 博客</title>
+
+    <meta name="description" content="&lt;h2 id=&#34;0-目录&#34;&gt;&lt;a href=&#34;#0-目录&#34; class=&#34;headerlink&#34; title=&#34;0 目录&#34;&gt;&lt;/a&gt;0 目录&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#0-%E7%9B%AE%E5%BD%95&#34;&gt;0 目录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#1-%E7%8E%AF%E5%A2%83%E6%A3%80%E6%B5%8B&#34;&gt;1 环境检测&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#11-%E6%9F%A5%E8%AF%A2%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC%E5%8F%B7&#34;&gt;1.1 查询系统版本号&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#12-%E6%98%AF%E5%90%A6%E7%AC%A6%E5%90%88%E8%A6%81%E6%B1%82&#34;&gt;1.2 是否符合要求&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#2-%E5%AE%89%E8%A3%85wsl2&#34;&gt;2 安装WSL2&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#21-%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF%E7%AA%97%E5%8F%A3&#34;&gt;2.1 打开终端窗口：&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#22-%E8%BE%93%E5%85%A5%E5%AE%89%E8%A3%85%E6%8C%87%E4%BB%A4&#34;&gt;2.2 输入安装指令&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#23-%E8%AE%BE%E7%BD%AE%E5%AD%90%E7%B3%BB%E7%BB%9F&#34;&gt;2.3 设置子系统&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#3-%E5%AE%89%E8%A3%85dokcer%E5%88%B0wsl2&#34;&gt;3 安装Dokcer到WSL2&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#31-%E8%AE%BE%E7%BD%AE%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7root%E5%AF%86%E7%A0%81&#34;&gt;3.1 设置超级用户(root)密码&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#32-%E5%AE%89%E8%A3%85dokcer&#34;&gt;3.2 安装Dokcer&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#4-%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8&#34;&gt;4 如何启动？&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#41-%E5%90%AF%E5%8A%A8%E7%BB%88%E7%AB%AF&#34;&gt;4.1 启动终端&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#42-%E5%90%AF%E5%8A%A8docker&#34;&gt;4.2 启动Docker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#5-%E8%AE%BE%E7%BD%AEdocker%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E5%8F%AF%E9%80%89&#34;&gt;5 设置Docker镜像加速（可选）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#6-%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8docker%E6%9C%8D%E5%8A%A1%E5%8F%AF%E9%80%89&#34;&gt;6 设置开机自动启动Docker服务（可选）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#7-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99&#34;&gt;7 参考资料&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl02tinng001drg9mc30q2kwu" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      WSL2环境下安装Docker保姆级教程
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-09-26T16:32:12.000Z" itemprop="datePublished">2021-09-27</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h2 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h2><ul>
+<li><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></li>
+<li><a href="#1-%E7%8E%AF%E5%A2%83%E6%A3%80%E6%B5%8B">1 环境检测</a><ul>
+<li><a href="#11-%E6%9F%A5%E8%AF%A2%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC%E5%8F%B7">1.1 查询系统版本号</a></li>
+<li><a href="#12-%E6%98%AF%E5%90%A6%E7%AC%A6%E5%90%88%E8%A6%81%E6%B1%82">1.2 是否符合要求</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%AE%89%E8%A3%85wsl2">2 安装WSL2</a><ul>
+<li><a href="#21-%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF%E7%AA%97%E5%8F%A3">2.1 打开终端窗口：</a></li>
+<li><a href="#22-%E8%BE%93%E5%85%A5%E5%AE%89%E8%A3%85%E6%8C%87%E4%BB%A4">2.2 输入安装指令</a></li>
+<li><a href="#23-%E8%AE%BE%E7%BD%AE%E5%AD%90%E7%B3%BB%E7%BB%9F">2.3 设置子系统</a></li>
+</ul>
+</li>
+<li><a href="#3-%E5%AE%89%E8%A3%85dokcer%E5%88%B0wsl2">3 安装Dokcer到WSL2</a><ul>
+<li><a href="#31-%E8%AE%BE%E7%BD%AE%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7root%E5%AF%86%E7%A0%81">3.1 设置超级用户(root)密码</a></li>
+<li><a href="#32-%E5%AE%89%E8%A3%85dokcer">3.2 安装Dokcer</a></li>
+</ul>
+</li>
+<li><a href="#4-%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8">4 如何启动？</a><ul>
+<li><a href="#41-%E5%90%AF%E5%8A%A8%E7%BB%88%E7%AB%AF">4.1 启动终端</a></li>
+<li><a href="#42-%E5%90%AF%E5%8A%A8docker">4.2 启动Docker</a></li>
+</ul>
+</li>
+<li><a href="#5-%E8%AE%BE%E7%BD%AEdocker%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E5%8F%AF%E9%80%89">5 设置Docker镜像加速（可选）</a></li>
+<li><a href="#6-%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E5%90%AF%E5%8A%A8docker%E6%9C%8D%E5%8A%A1%E5%8F%AF%E9%80%89">6 设置开机自动启动Docker服务（可选）</a></li>
+<li><a href="#7-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">7 参考资料</a></li>
+</ul>
+<span id="more"></span>
+
+<h2 id="1-环境检测"><a href="#1-环境检测" class="headerlink" title="1 环境检测"></a>1 环境检测</h2><p>要在WSL2环境下安装Docker，需要先安装WSL2，而WSL2有系统环境的要求，需要监测自己的系统版本是否符合环境要求。</p>
+<p>根据<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/wsl/install#prerequisites">官方的要求</a>：<code>You must be running Windows 10 version 2004 and higher (Build 19041 and higher) or Windows 11.</code>，您的系统必须是Windows<br>10的2004或2004以上的版本才可以，或者使用Windows 11。</p>
+<h3 id="1-1-查询系统版本号"><a href="#1-1-查询系统版本号" class="headerlink" title="1.1 查询系统版本号"></a>1.1 查询系统版本号</h3><p>键盘点击<code>Win图标键 + R</code><br>，接着输入<code>winver</code>，会自动打开一个窗口，在窗口中可以看到自己系统的版本号。<br><img src="/dxdhlMjMt/1632674292432.png" alt="image-20210926221939973"></p>
+<p>例如上图所示：Windows11 版本 21H2（OS 内部版本 22000.194）</p>
+<p>表示我的系统为Windows11，版本号为：21H2，内部版本号为：22000.194</p>
+<h3 id="1-2-是否符合要求"><a href="#1-2-是否符合要求" class="headerlink" title="1.2 是否符合要求"></a>1.2 是否符合要求</h3><p><code>You must be running Windows 10 version 2004 and higher (Build 19041 and higher) or Windows 11.</code></p>
+<p>官方要求为Windows10 的 版本号 2004 或<br>2004以上，也就是内部版本号大于等于19041的系统。或者Windows<br>11的所有版本系统。</p>
+<p>如果你符合这个要求，可以继续往下看，本篇教程适合你使用。</p>
+<p>如果你不符合这个要求，可以尝试升级系统后继续往下看，或者点击窗口上方小叉叉关闭本篇教程。</p>
+<h2 id="2-安装WSL2"><a href="#2-安装WSL2" class="headerlink" title="2 安装WSL2"></a>2 安装WSL2</h2><p>在写教程的时候发现Windows安装WSL2的方法与我之前的不太一样，更简单了一些。当然也可以使用之前的方法安装。</p>
+<p>官方教程：</p>
+<p>新方法：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/wsl/install#prerequisites">https://docs.microsoft.com/zh-cn/windows/wsl/install#prerequisites</a></p>
+<p> 旧方法：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/wsl/install-manual">https://docs.microsoft.com/zh-cn/windows/wsl/install-manual</a></p>
+<p>博主的理解（新方法）：</p>
+<p>因为官方教程暂时还没出中文版本，我就把我如何安装的大致说一下，仅供参考。</p>
+<h3 id="2-1-打开终端窗口："><a href="#2-1-打开终端窗口：" class="headerlink" title="2.1 打开终端窗口："></a>2.1 打开终端窗口：</h3><p> 右键点击<code>Windows图标键</code>，选择<code>命令提示符(管理员)</code>（Windows 11<br>版本是<code>Windows 终端（管理员）</code>）。<br><img src="/dxdhlMjMt/1632674324001.png" alt="image-20210926222002121"><br>注意：一定要选择<font color=red>管理员</font>，不然无法安装。</p>
+<h3 id="2-2-输入安装指令"><a href="#2-2-输入安装指令" class="headerlink" title="2.2 输入安装指令"></a>2.2 输入安装指令</h3><p>新方法只需要在上一步打开的终端里面输入如下指令即可：</p>
+<pre><code class="powershell">wsl --install
+</code></pre>
+<p><img src="/dxdhlMjMt/1632674342914.png" alt="image-20210926224259671"><br>这个指令会自动安装WSL2，并且下载最新版的Ubuntu作为子系统。</p>
+<p>等待安装完后<font color=red>重启电脑</font>，之后就会自动启动Ubuntu子系统。到这里就安装完成了WSL2。</p>
+<h3 id="2-3-设置子系统"><a href="#2-3-设置子系统" class="headerlink" title="2.3 设置子系统"></a>2.3 设置子系统</h3><p>重启后会自动弹出Ubuntu的窗口，此时会配置Ubuntu，按照提示输入信息即可。<br><img src="/dxdhlMjMt/1632674374814.png" alt="image-20210926232955141"><br>首先输入用户名，<br><img src="/dxdhlMjMt/1632674393441.png" alt="image-20210926233050742"><br>接着设置一个子系统的密码（输入过程不显示内容），密码需要输入两遍。<br><img src="/dxdhlMjMt/1632674407313.png" alt="image-20210926233201079"><br><img src="/dxdhlMjMt/1632674419627.png" alt="image-20210926233255149"><br>出现如上图所示的绿色字符，即表示子系统配置并启动成功。</p>
+<h2 id="3-安装Dokcer到WSL2"><a href="#3-安装Dokcer到WSL2" class="headerlink" title="3 安装Dokcer到WSL2"></a>3 安装Dokcer到WSL2</h2><h3 id="3-1-设置超级用户-root-密码"><a href="#3-1-设置超级用户-root-密码" class="headerlink" title="3.1 设置超级用户(root)密码"></a>3.1 设置超级用户(root)密码</h3><p>密码可以与前面设置的一样，也可以不一样。</p>
+<p>终端输入：</p>
+<pre><code class="bash">sudo passwd root
+</code></pre>
+<p><img src="/dxdhlMjMt/1632674435424.png" alt="image-20210926234442001"><br>记住这个密码，以后会经常用到。</p>
+<h3 id="3-2-安装Dokcer"><a href="#3-2-安装Dokcer" class="headerlink" title="3.2 安装Dokcer"></a>3.2 安装Dokcer</h3><p>首先进入超级用户模式，命令行输入如下指令：</p>
+<pre><code class="bash">su
+</code></pre>
+<p>输入超级用户(root)密码后可以进入。</p>
+<p>进入后，输入如下指令到Ubuntu窗口：</p>
+<pre><code class="bash">apt-get update
+</code></pre>
+<p>中途可能会有询问，一路输入<code>Y</code>即可。</p>
+<p>接着输入：</p>
+<pre><code class="bash">curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+</code></pre>
+<p>安装时间比较长，请耐心等待，中途遇到报错请无视。<br><img src="/dxdhlMjMt/1632674463209.png" alt="image-20210926235303573"><br>看见如上图所示，表示已经安装完毕。</p>
+<h2 id="4-如何启动？"><a href="#4-如何启动？" class="headerlink" title="4 如何启动？"></a>4 如何启动？</h2><h3 id="4-1-启动终端"><a href="#4-1-启动终端" class="headerlink" title="4.1 启动终端"></a>4.1 启动终端</h3><ul>
+<li><p>方法一</p>
+<p>打开<code>开始菜单</code>，输入<code>Terminal</code>，运行。<br><img src="/dxdhlMjMt/1632674476614.png" alt="image-20210926235742659"></p>
+</li>
+</ul>
+<p> 在标签栏新建一个Ubuntu命令窗口：<br>  <img src="/dxdhlMjMt/1632674506536.png" alt="image-20210926235848832"><br>  <img src="/dxdhlMjMt/1632674529601.png" alt="image-20210927000209342"></p>
+<p>  <em>如果你搜索不到<code>terminal</code>或者terminal里没有Ubuntu标签，可以往下看方法二。</em></p>
+<ul>
+<li><p>方法二</p>
+<p>打开<code>开始菜单</code>，输入<code>Ubuntu</code>，运行。<br><img src="/dxdhlMjMt/1632674550596.png" alt="image-20210927000135808"><br><img src="/dxdhlMjMt/1632674585670.png" alt="image-20210927000156127"></p>
+</li>
+</ul>
+<h3 id="4-2-启动Docker"><a href="#4-2-启动Docker" class="headerlink" title="4.2 启动Docker"></a>4.2 启动Docker</h3><p>因为WSL2环境不能自动启动服务，所以每次打开终端后要手动启动。</p>
+<p>首先进入超级用户（root）：</p>
+<pre><code class="bash">su
+</code></pre>
+<p>输入超级用户（root）的密码，回车即可。</p>
+<p>接着输入如下指令，启动Dokcer：</p>
+<pre><code class="bash">service docker start
+</code></pre>
+<p><img src="/dxdhlMjMt/1632674606407.png" alt="image-20210927000604749"><br>看见<code>[ OK ]</code>字样，表示Docker服务已启动。接下来就可以正常使用Docker了。</p>
+<p>后面提供了一些可选的教程，不是必须的，但是建议继续操作。</p>
+<h2 id="5-设置Docker镜像加速（可选）"><a href="#5-设置Docker镜像加速（可选）" class="headerlink" title="5 设置Docker镜像加速（可选）"></a>5 设置Docker镜像加速（可选）</h2><p>首先进入超级用户（root）模式，并输入超级用户（root）密码：</p>
+<pre><code class="bash">su
+</code></pre>
+<p>接着编辑镜像文件(不存在这个文件的话，会自动创建)：</p>
+<pre><code class="bash">cat &gt;&gt; /etc/docker/daemon.json&lt;&lt;EOF&#123;&quot;registry-mirrors&quot;:[&quot;https://reg-mirror.qiniu.com/&quot;,&quot;https://docker.mirrors.ustc.edu.cn/&quot;,&quot;https://hub-mirror.c.163.com/&quot;]&#125;EOF
+</code></pre>
+<p>接着重启Dokcer：</p>
+<pre><code class="bash">service docker restart
+</code></pre>
+<p>后面就会使用镜像加速拉取文件了。</p>
+<h2 id="6-设置开机自动启动Docker服务（可选）"><a href="#6-设置开机自动启动Docker服务（可选）" class="headerlink" title="6 设置开机自动启动Docker服务（可选）"></a>6 设置开机自动启动Docker服务（可选）</h2><p>首先进入超级用户（root）模式，并输入超级用户（root）密码：</p>
+<pre><code class="bash">su
+</code></pre>
+<p>接着创建并编辑文件：<code>/etc/init.wsl</code></p>
+<pre><code class="bash">cat &gt;&gt; /etc/init.wsl&lt;&lt;EOF#! /bin/sh/etc/init.d/docker $1EOF
+</code></pre>
+<p>添加自动启动脚本：</p>
+<p>点击键盘 <code>Win徽标键 + R</code>，输入：<code>shell:startup</code></p>
+<p>在打开的文件夹里创建一个名为<code>Docker.vbs</code>的文件，文件内容如下：</p>
+<pre><code class="vbscript">Set ws = CreateObject(&quot;Wscript.Shell&quot;)ws.run &quot;wsl -d debian -u root /etc/init.wsl start&quot;, vbhide
+</code></pre>
+<p>这样，在你下一次启动Windows的时候，就可以自动自动Docker服务。</p>
+<h2 id="7-参考资料"><a href="#7-参考资料" class="headerlink" title="7 参考资料"></a>7 参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/47733615">WSL 服务自动启动的正确方法</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/wsl/install">微软官方：WSL2安装教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/docker/ubuntu-docker-install.html">runoob教程的一键安装命令和镜像加速</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yunfeifei/p/13158845.html">WSL2下启动Docker指令</a></li>
+</ul>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/G4PL-GBlD/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Hadoop实验1：搭建Hadoop集群
+        
+      </div>
+    </a>
+  
+  
+    <a href="/vDsoHY-if/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Docker实验三:Docker 镜像</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=WSL2环境下安装Docker保姆级教程 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/dxdhlMjMt/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=WSL2环境下安装Docker保姆级教程 - 囧囧JOJO - 博客&u=https://jiongjiongjojo.gitee.io/dxdhlMjMt/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=WSL2环境下安装Docker保姆级教程 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/dxdhlMjMt/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

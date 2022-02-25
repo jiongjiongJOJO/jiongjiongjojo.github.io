@@ -124,7 +124,7 @@
   
     
       <article
-id="post-yI09C6B-d"
+id="post-rtbmdk9d8"
 class="article article-type-post"
 >
 
@@ -135,99 +135,23 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/yI09C6B-d/">安徽科技学院疫情填报和体温填报每日自动执行</a>
+        <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>安徽科技学院自动完成学生健康情况填报、每日健康监测。</p>
-<p>开源不易，如果本项目对你有帮助，那么就请给个star吧。😄</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
-<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
-<li><a href="#%E7%9B%AE%E5%BD%95">目录</a></li>
-<li><a href="#%E5%8A%9F%E8%83%BD">功能</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F">使用方式</a><ul>
-<li><a href="#github-actions%E6%8E%A8%E8%8D%90">Github Actions（推荐）</a><ul>
-<li><a href="#1fork%E6%9C%AC%E9%A1%B9%E7%9B%AE">1.fork本项目</a></li>
-<li><a href="#2%E5%87%86%E5%A4%87%E9%9C%80%E8%A6%81%E7%9A%84%E5%8F%82%E6%95%B0">2.准备需要的参数</a></li>
-<li><a href="#3%E5%B0%86%E5%8F%82%E6%95%B0%E5%A1%AB%E5%88%B0secrets">3.将参数填到Secrets</a></li>
-<li><a href="#4%E5%BC%80%E5%90%AFactions">4.开启Actions</a></li>
-<li><a href="#5%E8%BF%9B%E8%A1%8C%E4%B8%80%E6%AC%A1push%E6%93%8D%E4%BD%9C">5.进行一次push操作</a></li>
+        <h1 id="〇、目录"><a href="#〇、目录" class="headerlink" title="〇、目录"></a>〇、目录</h1><ul>
+<li><a href="#%E3%80%87-%E7%9B%AE%E5%BD%95">〇、目录</a></li>
+<li><a href="#%E4%B8%80-%E5%89%8D%E8%A8%80">一、前言</a></li>
+<li><a href="#%E4%BA%8C-%E4%B8%8B%E8%BD%BDlinux%E7%89%88idea">二、下载Linux版IDEA</a></li>
+<li><a href="#%E4%B8%89-%E8%A7%A3%E5%8E%8B%E5%AE%89%E8%A3%85idea">三、解压安装IDEA</a></li>
+<li><a href="#%E5%9B%9B-%E9%85%8D%E7%BD%AEidea%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">四、配置IDEA环境变量</a></li>
+<li><a href="#%E4%BA%94%E3%80%81%E6%B7%BB%E5%8A%A0%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F">五、添加桌面快捷方式</a><ul>
+<li><a href="#51-%E8%BD%AF%E8%BF%9E%E6%8E%A5%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F">5.1 软连接创建桌面快捷方式</a></li>
+<li><a href="#52-%E4%B8%BAidea%E5%88%9B%E5%BB%BAlinux%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F">5.2 为IDEA创建Linux桌面快捷方式</a></li>
 </ul>
 </li>
+<li><a href="#%E5%85%AD-%E7%BB%99idea%E5%AE%89%E8%A3%85%E4%B8%AD%E6%96%87%E6%8F%92%E4%BB%B6">六、给IDEA安装中文插件</a></li>
 </ul>
-</li>
-<li><a href="#%E9%80%9A%E7%9F%A5%E6%8E%A8%E9%80%81%E6%96%B9%E5%BC%8F">通知推送方式</a></li>
-<li><a href="#%E7%94%B3%E6%98%8E">申明</a></li>
-<li><a href="#%E5%8F%82%E8%80%83%E9%A1%B9%E7%9B%AE">参考项目</a></li>
-</ul>
-<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><ul>
-<li><input checked="" disabled="" type="checkbox"> 自动填报三次随机体温（36.0~36.9）</li>
-<li><input checked="" disabled="" type="checkbox"> 自动填报学生健康情况</li>
-</ul>
-<h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><h2 id="Github-Actions"><a href="#Github-Actions" class="headerlink" title="Github Actions"></a>Github Actions</h2><h3 id="1-fork本项目"><a href="#1-fork本项目" class="headerlink" title="1.fork本项目"></a>1.fork本项目</h3><p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/jiongjiongJOJO/AHSTU_SPCP">jiongjiongJOJO&#x2F;AHSTU_SPCP</a><br>点击右上角Fork按钮，将项目fork到自己的仓库。</p>
-<h3 id="2-准备需要的参数"><a href="#2-准备需要的参数" class="headerlink" title="2.准备需要的参数"></a>2.准备需要的参数</h3><p>学号、密码、<code>Data</code>。</p>
-<p>其中<code>Data</code>的获取:</p>
-<ul>
-<li>第一步：打开“学生健康情况填报”，填写正确的健康信息</li>
-</ul>
-<p><img src="/yI09C6B-d/1.jpg"></p>
-<ul>
-<li>第二步：打开浏览器的开发者工具（在学生健康情况填报页面按下键盘的F12按钮），并选择标签页的Network（网络）标签</li>
-</ul>
-<p><img src="/yI09C6B-d/2.jpg"></p>
-<ul>
-<li>第三步：回到页面，提交“学生健康情况填报”信息，接着打开 开发者工具</li>
-</ul>
-<p><img src="/yI09C6B-d/3.jpg"></p>
-<ul>
-<li>第四步：在开发者工具页面找到“Index”字样，右键点击后选择Copy - Copy as cURL(bash)</li>
-</ul>
-<p><img src="/yI09C6B-d/4.jpg"></p>
-<ul>
-<li>第五步：打开<a target="_blank" rel="noopener" href="https://curl.trillworks.com/">Convert cURL command syntax</a>,粘贴刚刚复制的内容</li>
-</ul>
-<p><img src="/yI09C6B-d/5.jpg"></p>
-<ul>
-<li>第六步：在右侧找到如下格式的信息，并将内容复制（包括前后两个大括号“{}”）</li>
-</ul>
-<blockquote>
-<p>data &#x3D; {<br>xxx:xxx,<br>xxx:xxx,<br>xxx:xxx<br>}</p>
-</blockquote>
-<p><img src="/yI09C6B-d/6.jpg"></p>
-<h3 id="3-将参数填到Secrets"><a href="#3-将参数填到Secrets" class="headerlink" title="3.将参数填到Secrets"></a>3.将参数填到Secrets</h3><p>在<code>Secrets</code>中的<code>Name</code>和<code>Value</code>格式如下：</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>DATA</td>
-<td>上一步中复制的内容</td>
-</tr>
-<tr>
-<td>USERID</td>
-<td>学号</td>
-</tr>
-<tr>
-<td>PASSWORD</td>
-<td>密码</td>
-</tr>
-<tr>
-<td>SEND</td>
-<td>push推送的token（选填）</td>
-</tr>
-</tbody></table>
-<p><img src="/yI09C6B-d/7.jpg"><br><img src="/yI09C6B-d/8.jpg"></p>
-<h3 id="4-开启Actions"><a href="#4-开启Actions" class="headerlink" title="4.开启Actions"></a>4.开启Actions</h3><p>默认<code>Actions</code>处于禁止状态，在<code>Actions</code>选项中开启<code>Actions</code>功能，把那个绿色的长按钮点一下。如果看到左侧工作流上有黄色<code>!</code>号，还需继续开启。</p>
-<p><img src="/yI09C6B-d/9.jpg"></p>
-<h3 id="5-进行一次push操作"><a href="#5-进行一次push操作" class="headerlink" title="5.进行一次push操作"></a>5.进行一次push操作</h3><p><code>push</code>操作会触发工作流运行。</p>
-<p>删除掉<code>README.md</code>中的😄即可。完成后，每天将自动完成每日任务。</p>
-<h1 id="通知推送方式"><a href="#通知推送方式" class="headerlink" title="通知推送方式"></a>通知推送方式</h1><h2 id="pushplus机器人"><a href="#pushplus机器人" class="headerlink" title="pushplus机器人"></a>pushplus机器人</h2><p>类似于钉钉机器人，只需要一个<code>token</code>，参考<a target="_blank" rel="noopener" href="http://pushplus.hxtrip.com/doc/guide/api.html#%E4%B8%80%E3%80%81%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3">获取pushplus的token</a>。</p>
-<h1 id="申明"><a href="#申明" class="headerlink" title="申明"></a>申明</h1><p>本项目仅用于学习。</p>
-<h1 id="参考项目"><a href="#参考项目" class="headerlink" title="参考项目"></a>参考项目</h1><p><a target="_blank" rel="noopener" href="https://github.com/srcrs/UnicomTask">srcrs&#x2F;UnicomTask</a>，参考了该项目的README.md文档</p>
-
         
     </div>
     </div>
@@ -242,12 +166,12 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2021-05-11T13:23:49.000Z" itemprop="datePublished">2021-05-11</time>
+  <time datetime="2022-02-23T04:20:46.000Z" itemprop="datePublished">2022-02-23</time>
 </div>
     
     
         <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li></ul>
         </div>
     
     </div>
@@ -259,7 +183,7 @@ class="article article-type-post"
   
     
       <article
-id="post-rk2WiK-tX"
+id="post-aMhN6pCDy"
 class="article article-type-post"
 >
 
@@ -270,27 +194,16 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/rk2WiK-tX/">利用Python爬取一加云服务的所有照片（原图）</a>
+        <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        <h1 id="一、使用工具"><a href="#一、使用工具" class="headerlink" title="一、使用工具"></a>一、使用工具</h1><p>1.Python3.8（理论上Python3都可使用）<br>2.Python3的两个模块（json和requests）<br><font color=#C4C4C4>注：如果你的Python提示没有json模块或者没有requests，请打开windows的cmd，输入以下代码，回车，等待安装，安装完成就可以用了（缺什么安装什么，两行代码自己选择）。</font></p>
-<pre><code class="cmd">python -m pip install json
-python -m pip install requests
-</code></pre>
-<hr>
-<h1 id="二、cookies和headers提取"><a href="#二、cookies和headers提取" class="headerlink" title="二、cookies和headers提取"></a>二、cookies和headers提取</h1><p>首先打开Chrome内核的浏览器，火狐也行，其余的没测试<br>进入链接<a target="_blank" rel="noopener" href="https://cloud.h2os.com/">https://cloud.h2os.com/</a> ，登录自己的一加账号，来到如下界面</p>
-<p><img src="/./rk2WiK-tX/%E4%BA%91%E6%9C%8D%E5%8A%A1%E9%A6%96%E9%A1%B5.png" alt="云服务首页"></p>
-<p>在此页面，点击键盘上的F12，选择<strong>Network</strong>（部分浏览器写的是<strong>网络</strong>，一样的道理）<br><img src="/./rk2WiK-tX/F12%E8%B0%83%E8%AF%95%E7%AA%97%E5%8F%A3.png" alt="F12调试窗口"></p>
-<p>弹出如图所示的窗口（也可能是再浏览页面的右侧或下侧，不影响）后，点击浏览器中的<strong>相册</strong>（如图所示）<br><img src="/./rk2WiK-tX/%E7%82%B9%E5%87%BB%E7%9B%B8%E5%86%8C.png" alt="点击相册"><br>点击完后，在弹出的调试窗口可看到相关的数据，找到<strong>listNormalPhotos</strong><br><img src="/./rk2WiK-tX/listNormalPhotos.png" alt="listNormalPhotos"><br>右键listNormalPhotos找到<strong>Copy</strong>→<strong>Copy as cUrl(bash)</strong><br>![Copy as cUrl(bash)](.&#x2F;rk2WiK-tX&#x2F;Copy as cUrl(bash).png)<br>接着打开网页<a target="_blank" rel="noopener" href="https://curl.trillworks.com/">https://curl.trillworks.com/</a>，讲已经复制的内容粘贴进网页的左侧输入框里，接着选择下方的Python<br><img src="/./rk2WiK-tX/%E8%8E%B7%E5%8F%96cookies%E5%92%8Cheaders%E4%BB%A3%E7%A0%81.png" alt="获取cookies和headers代码"><br>选择完后，右侧的输入框会显示代码，复制截图中框选的代码即可即可（即cookies &#x3D; {xxxx} headers &#x3D; {xxxx}  这两部分)<br><font color=#ff0000>*注：cookies内包含个人的信息，请不要轻易泄露！！！</font></p>
-<p><font color=#C4C4C4>*注：这里为了截图方便，刻意把输入框调整的比较大，正常是跟左边一样的</font></p>
-<p><img src="/./rk2WiK-tX/cookies%E5%92%8Cheards.png" alt="cookies和heards"><br>接着将复制的代码粘贴进Python编辑器中<br><img src="/rk2WiK-tX/2020031718260528.png" alt="粘贴代码"><br>粘贴完成后，找到代码：</p>
-<pre><code class="Python">photonum = 1234    #照片数量
-</code></pre>
-<p>把1234改成自己账户中的数量，我的是770，我就改为<strong>photonum &#x3D; 770</strong><br><img src="/./rk2WiK-tX/%E7%85%A7%E7%89%87%E6%95%B0%E9%87%8F.png" alt="照片数量"><br><font color=#C4C4C4>注：cookies有一定的时效性，如果出现cookies失效的情况，请重新去网页登录并获取cookies</font ></p>
-<hr>
-<h1 id="三、Python源代码下载"><a href="#三、Python源代码下载" class="headerlink" title="三、Python源代码下载"></a>三、Python源代码下载</h1><p><a target="_blank" rel="noopener" href="https://download.csdn.net/download/JOJO_jiongjiong/12253532">https://download.csdn.net/download/JOJO_jiongjiong&#x2F;12253532</a></p>
-
+        <ul>
+<li><a href="#%E4%B8%80-%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A6%82%E8%A6%81">一、学习知识点概要</a></li>
+<li><a href="#%E4%BA%8C-%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9">二、学习内容</a></li>
+<li><a href="#%E4%B8%89-%E5%AD%A6%E4%B9%A0%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E7%AD%94">三、学习问题与解答</a></li>
+<li><a href="#%E5%9B%9B-%E5%AD%A6%E4%B9%A0%E6%80%9D%E8%80%83%E4%B8%8E%E6%80%BB%E7%BB%93">四、学习思考与总结</a></li>
+</ul>
         
     </div>
     </div>
@@ -305,12 +218,402 @@ python -m pip install requests
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2020-03-17T10:40:59.000Z" itemprop="datePublished">2020-03-17</time>
+  <time datetime="2022-02-07T12:30:42.000Z" itemprop="datePublished">2022-02-07</time>
 </div>
     
     
         <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-wjIToohDP"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <ul>
+<li><a href="#%E4%B8%80-%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A6%82%E8%A6%81">一、学习知识点概要</a></li>
+<li><a href="#%E4%BA%8C-%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9">二、学习内容</a></li>
+<li><a href="#%E4%B8%89-%E5%AD%A6%E4%B9%A0%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E7%AD%94">三、学习问题与解答</a></li>
+<li><a href="#%E5%9B%9B-%E5%AD%A6%E4%B9%A0%E6%80%9D%E8%80%83%E4%B8%8E%E6%80%BB%E7%BB%93">四、学习思考与总结</a></li>
+</ul>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2022-02-07T03:52:03.000Z" itemprop="datePublished">2022-02-07</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-4oorP7ZZn"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <ul>
+<li><a href="#%E4%B8%80%E3%80%81%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A6%82%E8%A6%81">一、学习知识点概要</a><ul>
+<li><a href="#11-%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BB%8B%E7%BB%8D">1.1 逻辑回归模型的介绍</a></li>
+<li><a href="#12-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B">1.2 代码实现流程</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C-%E5%AD%A6%E4%B9%A0%E5%86%85%E5%AE%B9">二、学习内容</a></li>
+<li><a href="#%E4%B8%89-%E5%AD%A6%E4%B9%A0%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E7%AD%94">三、学习问题与解答</a></li>
+<li><a href="#%E5%9B%9B-%E5%AD%A6%E4%B9%A0%E6%80%9D%E8%80%83%E4%B8%8E%E6%80%BB%E7%BB%93">四、学习思考与总结</a></li>
+</ul>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2022-01-28T12:43:27.000Z" itemprop="datePublished">2022-01-28</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-osN4d6gl7"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <hr>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2022-01-20T04:46:13.000Z" itemprop="datePublished">2022-01-20</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-uUjE-H1MS"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/uUjE-H1MS/">《天池龙珠 - SQL训练营》05.SQL进阶：SQL高级处理-窗口函数等</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <hr>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2022-01-17T03:12:53.000Z" itemprop="datePublished">2022-01-17</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-h9L2UoP-q"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/h9L2UoP-q/">《天池龙珠 - SQL训练营》04.SQL进阶： 集合运算-表的加减法和join等</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <hr>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2022-01-17T01:31:35.000Z" itemprop="datePublished">2022-01-17</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-3XLyyMXaV"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/3XLyyMXaV/">《天池龙珠 - SQL训练营》03.SQL进阶：复杂查询方法-视图、子查询、函数等</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <hr>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2022-01-14T09:33:37.000Z" itemprop="datePublished">2022-01-14</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-nV21kgS-A"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/nV21kgS-A/">《天池龙珠 - SQL训练营》02.SQL基础：查询与排序-select、运算符、聚合分组查询等</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <hr>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2022-01-14T03:39:54.000Z" itemprop="datePublished">2022-01-14</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li></ul>
+        </div>
+    
+    </div>
+</footer>
+
+</article>
+
+    
+  
+    
+      <article
+id="post-VDztdrSqb"
+class="article article-type-post"
+>
+
+
+
+<div class="article-inner">
+    
+
+    <div class="article-body">
+    <header class="article-title">
+        <a href="/VDztdrSqb/">《天池龙珠 - SQL训练营》01.SQL基础：初识数据库与SQL-安装与基本介绍等</a>
+    </header>
+    <div class="article-entry post-inner-html">
+        
+        <hr>
+        
+    </div>
+    </div>
+
+    <div class="article-badge">
+        
+        
+    </div>
+
+</div>
+
+<footer class="article-footer">
+    <div class="article-more-info">
+    <div class="article-date">
+  <time datetime="2022-01-14T01:28:15.000Z" itemprop="datePublished">2022-01-14</time>
+</div>
+    
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li></ul>
         </div>
     
     </div>
@@ -321,6 +624,10 @@ python -m pip install requests
     
   
 
+  
+    <nav class="pagination">
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next</a>
+    </nav>
   
 </div>
 
@@ -338,7 +645,7 @@ python -m pip install requests
   <div class="widget-wrap widget-tags">
     <div class="widget-title"><span>Tags</span></div>
     <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
     </div>
   </div>
 
@@ -351,11 +658,23 @@ python -m pip install requests
       <ul>
         
           <li>
-            <a href="/yI09C6B-d/">安徽科技学院疫情填报和体温填报每日自动执行</a>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
           </li>
         
           <li>
-            <a href="/rk2WiK-tX/">利用Python爬取一加云服务的所有照片（原图）</a>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
           </li>
         
       </ul>
@@ -367,7 +686,7 @@ python -m pip install requests
   <div class="widget-wrap widget-archive">
     <div class="widget-title"><span>Archive</span></div>
     <div class="widget-inner">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
     </div>
   </div>
 

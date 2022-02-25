@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>Docker实验二:Docker容器 | 囧囧JOJO - 博客</title>
+
+    <meta name="description" content="&lt;h1 id=&#34;0-目录&#34;&gt;&lt;a href=&#34;#0-目录&#34; class=&#34;headerlink&#34; title=&#34;0 目录&#34;&gt;&lt;/a&gt;0 目录&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#0-%E7%9B%AE%E5%BD%95&#34;&gt;0 目录&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#1-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9&#34;&gt;1 实验内容&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#2-%E5%AE%9E%E9%AA%8C%E8%A6%81%E7%82%B9&#34;&gt;2 实验要点&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#3-%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83&#34;&gt;3 实验环境&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9&#34;&gt;4 注意事项&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#5-%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4&#34;&gt;5 实验步骤&lt;/a&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl02tinn2000erg9m8ovqcudh" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Docker实验二:Docker容器
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-09-23T13:07:04.000Z" itemprop="datePublished">2021-09-23</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h1><ul>
+<li><p><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></p>
+</li>
+<li><p><a href="#1-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9">1 实验内容</a></p>
+</li>
+<li><p><a href="#2-%E5%AE%9E%E9%AA%8C%E8%A6%81%E7%82%B9">2 实验要点</a></p>
+</li>
+<li><p><a href="#3-%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83">3 实验环境</a></p>
+</li>
+<li><p><a href="#4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">4 注意事项</a></p>
+</li>
+<li><p><a href="#5-%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4">5 实验步骤</a><span id="more"></span></p>
+<ul>
+<li><a href="#51-docker-%E5%AE%A2%E6%88%B7%E7%AB%AF">5.1 Docker 客户端</a></li>
+<li><a href="#52-%E5%AE%B9%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8">5.2 容器的使用</a><ul>
+<li><a href="#521-%E8%8E%B7%E5%8F%96%E9%95%9C%E5%83%8F">5.2.1 获取镜像</a></li>
+<li><a href="#522-%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8">5.2.2 启动容器</a></li>
+<li><a href="#523-%E5%90%AF%E5%8A%A8%E5%B7%B2%E5%81%9C%E6%AD%A2%E8%BF%90%E8%A1%8C%E7%9A%84%E5%AE%B9%E5%99%A8">5.2.3 启动已停止运行的容器</a></li>
+<li><a href="#524-%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C">5.2.4 后台运行</a></li>
+<li><a href="#525-%E5%81%9C%E6%AD%A2%E5%92%8C%E9%87%8D%E5%90%AF%E4%B8%80%E4%B8%AA%E5%AE%B9%E5%99%A8">5.2.5 停止和重启一个容器</a></li>
+<li><a href="#526-%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8">5.2.6 进入容器</a></li>
+<li><a href="#527-%E5%AF%BC%E5%87%BA%E5%92%8C%E5%AF%BC%E5%85%A5%E5%AE%B9%E5%99%A8">5.2.7 导出和导入容器</a></li>
+<li><a href="#528-%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8">5.2.8 删除容器</a></li>
+</ul>
+</li>
+<li><a href="#53-%E8%BF%90%E8%A1%8Cweb%E5%BA%94%E7%94%A8">5.3 运行Web应用</a><ul>
+<li><a href="#531-%E5%AE%9E%E6%88%98%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87">5.3.1 实战环境准备</a></li>
+<li><a href="#532-%E6%9F%A5%E7%9C%8Bweb%E5%BA%94%E7%94%A8%E5%AE%B9%E5%99%A8">5.3.2 查看WEB应用容器</a></li>
+<li><a href="#533-%E7%BD%91%E7%BB%9C%E7%AB%AF%E5%8F%A3%E7%9A%84%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F">5.3.3 网络端口的快捷方式</a></li>
+<li><a href="#534-%E6%9F%A5%E7%9C%8Bweb%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%97%A5%E5%BF%97">5.3.4 查看WEB应用程序日志</a></li>
+<li><a href="#535-%E6%9F%A5%E7%9C%8Bweb%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%AE%B9%E5%99%A8%E7%9A%84%E8%BF%9B%E7%A8%8B">5.3.5 查看WEB应用程序容器的进程</a></li>
+<li><a href="#536-%E6%A3%80%E6%9F%A5web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F">5.3.6 检查WEB应用程序</a></li>
+<li><a href="#537-%E5%81%9C%E6%AD%A2web%E5%BA%94%E7%94%A8%E5%AE%B9%E5%99%A8">5.3.7 停止WEB应用容器</a></li>
+<li><a href="#538-%E9%87%8D%E5%90%AFweb%E5%BA%94%E7%94%A8%E5%AE%B9%E5%99%A8">5.3.8 重启WEB应用容器</a></li>
+<li><a href="#539-%E7%A7%BB%E5%87%BAweb%E5%BA%94%E7%94%A8%E5%AE%B9%E5%99%A8">5.3.9 移出WEB应用容器</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-实验内容"><a href="#1-实验内容" class="headerlink" title="1 实验内容"></a>1 实验内容</h1><ul>
+<li>学习<code>Docker</code>容器的常用命令。</li>
+</ul>
+<h1 id="2-实验要点"><a href="#2-实验要点" class="headerlink" title="2 实验要点"></a>2 实验要点</h1><ul>
+<li>掌握<code>Docker</code>容器的常用命令。</li>
+</ul>
+<h1 id="3-实验环境"><a href="#3-实验环境" class="headerlink" title="3 实验环境"></a>3 实验环境</h1><ul>
+<li>Windows 7 Docker环境</li>
+</ul>
+<h1 id="4-注意事项"><a href="#4-注意事项" class="headerlink" title="4 注意事项"></a>4 注意事项</h1><p>Docker官方对<code>docker pull</code>指令进行了限制，同一个IP每6小时最多使用100次，如果pull上限后，可以尝试下载相应的<code>images</code>，然后使用<code>docker load</code>命令直接加载相应的镜像。</p>
+<p>例如：</p>
+<pre><code class="bash">docker load &lt; images/ubuntu_latest.tar.gz
+</code></pre>
+<h1 id="5-实验步骤"><a href="#5-实验步骤" class="headerlink" title="5 实验步骤"></a>5 实验步骤</h1><h2 id="5-1-Docker-客户端"><a href="#5-1-Docker-客户端" class="headerlink" title="5.1 Docker 客户端"></a>5.1 Docker 客户端</h2><p>docker 客户端非常简单 ,可以直接输入 <code>docker</code> 命令或<code>docker --help</code>来查看到 Docker 客户端的所有命令选项。<br><img src="/8tB-3dU7K/1632417809834.png" alt="image-20210916163711500"></p>
+<p>可通过命令<code>docker command --help</code>深入了解某个Docker命令使用方法。</p>
+<p>例如要查看<code>docker run</code>的具体使用方法：<br><img src="/8tB-3dU7K/1632417873577.png" alt="image-20210916164154451"></p>
+<h2 id="5-2-容器的使用"><a href="#5-2-容器的使用" class="headerlink" title="5.2 容器的使用"></a>5.2 容器的使用</h2><h3 id="5-2-1-获取镜像"><a href="#5-2-1-获取镜像" class="headerlink" title="5.2.1 获取镜像"></a>5.2.1 获取镜像</h3><p>如果本地没有ubuntu镜像，可使用<code>docker pull ubuntu</code>下载：<br><img src="/8tB-3dU7K/1632417911120.png" alt="image-20210916170616264"></p>
+<h3 id="5-2-2-启动容器"><a href="#5-2-2-启动容器" class="headerlink" title="5.2.2 启动容器"></a>5.2.2 启动容器</h3><p>以下命令使用 ubuntu 镜像启动一个容器，参数表示以命令行模式进入该容器：</p>
+<pre><code class="bash">docker run -it ubuntu /bin/bash
+</code></pre>
+<p><img src="/8tB-3dU7K/1632417964682.png" alt="image-20210916170903084"></p>
+<p>参数说明：</p>
+<ul>
+<li>-i: 交互式操作。</li>
+<li>-t: 终端。</li>
+<li>ubuntu: ubuntu 镜像。</li>
+<li>&#x2F;bin&#x2F;bash：放在镜像名后的是命令，这里需要使用交互式方式Shell访问容器，因此用的是 &#x2F;bin&#x2F;bash。</li>
+</ul>
+<p>要退出终端，直接输入 <code>exit</code>或使用快捷键<code>Ctrl + D</code>:<br><img src="/8tB-3dU7K/1632418017854.png" alt="image-20210916170949813"></p>
+<h3 id="5-2-3-启动已停止运行的容器"><a href="#5-2-3-启动已停止运行的容器" class="headerlink" title="5.2.3 启动已停止运行的容器"></a>5.2.3 启动已停止运行的容器</h3><p>查看所有的容器命令如下：</p>
+<pre><code class="bash">docker ps -a
+</code></pre>
+<p><img src="/8tB-3dU7K/1632418054574.png" alt="image-20210916171238672"></p>
+<p><strong>注意</strong>：<code>docker ps</code>命令只显示当前正在运行的容器，-a选项表示显示所有容器，包括停止运行的容器。</p>
+<p>从 Status 一列中可以看出容器 c0030ca3df6b已处于停止运行状态。</p>
+<p>使用 docker start 启动一个已停止的容器：</p>
+<pre><code class="bash">docker start c0030ca3df6b
+</code></pre>
+<p><img src="/8tB-3dU7K/1632418091626.png" alt="image-20210916171450273"></p>
+<p>可以看出，容器 c0030ca3df6b已顺利启动。</p>
+<h3 id="5-2-4-后台运行"><a href="#5-2-4-后台运行" class="headerlink" title="5.2.4 后台运行"></a>5.2.4 后台运行</h3><p>在大部分的场景下，docker 的服务是在后台运行的，可以通过 -d 指定容器的运行模式。</p>
+<pre><code class="bash">docker run -itd --name ubuntu_test ubuntu /bin/bash
+</code></pre>
+<p><img src="/8tB-3dU7K/1632418130470.png" alt="image-20210916171657871"></p>
+<p><strong>注意</strong>：加了 -d 参数默认不会进入容器，可通过 <code>docker exec</code>命令进入容器（后续详细介绍）。</p>
+<h3 id="5-2-5-停止和重启一个容器"><a href="#5-2-5-停止和重启一个容器" class="headerlink" title="5.2.5 停止和重启一个容器"></a>5.2.5 停止和重启一个容器</h3><p>停止容器的命令为：<code>docker stop &lt;容器 ID&gt;</code></p>
+<p>重启容器的命令为：<code>docker restart &lt;容器 ID&gt;</code></p>
+<p>示例如下：</p>
+<pre><code>docker stop c0030ca3df6b
+docker restart c0030ca3df6b
+</code></pre>
+<p><img src="/8tB-3dU7K/1632418168152.png" alt="image-20210916172204941"><br>除了<code>docker start</code>外，停止的容器也可以通过命令<code>docker restart &lt;容器 ID&gt;</code>重启。</p>
+<h3 id="5-2-6-进入容器"><a href="#5-2-6-进入容器" class="headerlink" title="5.2.6 进入容器"></a>5.2.6 进入容器</h3><p>在使用 -d 参数时，容器启动后会在后台运行。此时想要进入容器，可通过以下命令进入：</p>
+<pre><code class="bash">docker attach
+docker exec
+</code></pre>
+<p>推荐使用 <code>docker exec</code> 命令，因为使用该命令退出容器终端后，不会导致容器停止运行。</p>
+<ul>
+<li><h4 id="attach-命令"><a href="#attach-命令" class="headerlink" title="attach 命令"></a>attach 命令</h4><p>下面演示了 <code>docker attach</code> 命令的使用。</p>
+<pre><code class="bash">docker attach 8708d8e65f03
+</code></pre>
+</li>
+</ul>
+<p><img src="/8tB-3dU7K/1632418227808.png" alt="image-20210916172719825"><br>  可以看出，使用 <code>docker attach </code>命令进入容器后，如果从该容器退出，会导致容器停止运行。</p>
+<ul>
+<li><h4 id="exec-命令"><a href="#exec-命令" class="headerlink" title="exec 命令"></a>exec 命令</h4><p>下面演示了 <code>docker exec</code> 命令的使用。</p>
+<pre><code class="bash">docker exec -it 8708d8e65f03 /bin/bash
+</code></pre>
+<p><img src="/8tB-3dU7K/1632418260466.png" alt="image-20210916172859119"><br>可以看出，使用<code>docker exec</code>命令进入容器后，从容器退出不会导致容器停止运行。因此，推荐使用<code>docker exec</code>命令。</p>
+<p>请使用<code>docker exec --help</code>命令查看<code>docker exec</code>命令的更多参数说明。</p>
+</li>
+</ul>
+<h3 id="5-2-7-导出和导入容器"><a href="#5-2-7-导出和导入容器" class="headerlink" title="5.2.7 导出和导入容器"></a>5.2.7 导出和导入容器</h3><ul>
+<li><p>导出容器</p>
+<p>如果要导出本地某个容器，可以使用 docker export 命令。</p>
+<pre><code class="bash">docker export 8708d8e65f03 -o ubuntu_test.tar
+ls -l ubuntu_test.tar 
+</code></pre>
+<p><img src="/8tB-3dU7K/1632418309626.png" alt="image-20210916173241017"></p>
+<p>导出容器 8708d8e65f03快照到本地文件 ubuntu_test.tar ，从上图中可以看出生成了文件 ubuntu_test.tar 。</p>
+</li>
+<li><p>导入容器</p>
+<p>可以使用 docker import 从容器快照文件中再导入为镜像，以下命令将快照文件 ubuntu_test.tar 导入为镜像 cg&#x2F;my_ubuntu:v1:</p>
+<pre><code>docker import ubuntu_test.tar cg/my_ubuntu:v1.0
+</code></pre>
+<p><img src="/8tB-3dU7K/1632418345553.png" alt="image-20210916173434471"><br>此外，也可以通过指定 URL 或者某个目录来导入，例如：</p>
+<pre><code>docker import http://example.com/exampleimage.tar example/imagerepo
+</code></pre>
+</li>
+</ul>
+<h3 id="5-2-8-删除容器"><a href="#5-2-8-删除容器" class="headerlink" title="5.2.8 删除容器"></a>5.2.8 删除容器</h3><p>删除容器使用 docker rm 命令：</p>
+<pre><code class="bash">docker rm 8708d8e65f03
+</code></pre>
+<p><img src="/8tB-3dU7K/1632418395819.png" alt="image-20210916173654416"><br>可见通过 docker rm 删除容器8708d8e65f03后，在容器列表中已经移除了该容器。</p>
+<p>通过 <code>docker container prune</code> 命令可将处于终止状态的容器全部删除。</p>
+<p>以下操作演示了该命令的使用，首先使用 ubuntu 镜像创建三个容器，并将其终止，<br><img src="/8tB-3dU7K/1632418432059.png" alt="image-20210916173849382"><br>然后使用<code>docker container prune</code>删除停止的容器，操作如下：<br><img src="/8tB-3dU7K/1632418667798.png" alt="image-20210916173944836"></p>
+<pre><code class="bash">docker ps -a
+docker container prune
+docker ps -a
+</code></pre>
+<p>首先使用 <code>docker ps -a</code> 查看所有容器状态，可以看到ubuntu_test1、ubuntu_test2、ubuntu_test3这三个容器都已经处于终止状态。</p>
+<p><code>docker container prune</code> 命令执行后，再使用 <code>docker ps -a</code> 查看，可以发现ubuntu_test1、ubuntu_test2、ubuntu_test3这三个容器都已删除。</p>
+<p><strong>注意</strong>：实验环境中还存在一个已经停止运行的hello-world容器，该容器也被 <code>docker container prune</code> 命令删除。这个hello-world容器是运行其他实验时遗留的容器，如果你的环境中不存在该容器也不用担心。</p>
+<h2 id="5-3-运行Web应用"><a href="#5-3-运行Web应用" class="headerlink" title="5.3 运行Web应用"></a>5.3 运行Web应用</h2><p>前面运行的容器并没有特别的用处。</p>
+<p>接下来尝试使用 docker 构建一个 web 应用程序。</p>
+<h3 id="5-3-1-实战环境准备"><a href="#5-3-1-实战环境准备" class="headerlink" title="5.3.1 实战环境准备"></a>5.3.1 实战环境准备</h3><p>本次实战中，将在 docker 容器中基于 Python Flask 运行一个简单的web应用。</p>
+<p>本实验项目的目录为： <code>D:\Users\JOJO\Desktop\Docker实验报告\webapp</code>，所需运行的程序的目录为<code>D:\Users\JOJO\Desktop\Docker实验报告\webapp\webapp</code>。因此，首先将工作目录切换为该目录，</p>
+<pre><code class="bash">cd /d/users/JOJO/Desktop/Docker实验报告/webapp/webapp/
+pwd
+ls
+</code></pre>
+<p><img src="/8tB-3dU7K/1632418726252.png" alt="image-20210923200434548"></p>
+<p>使用 <code>docker pull</code> 命令下载webapp镜像，webapp镜像中封装了Python Flask环境，</p>
+<pre><code class="bash">docker pull training/webapp
+</code></pre>
+<p><img src="/8tB-3dU7K/1632418758132.png" alt="image-20210923194709773"><br>本应用的逻辑实现位于app.py文件中，本应用的目的是在浏览器的页面上输出：Hello World，app.py的代码内容如下：<br><img src="/8tB-3dU7K/1632418789969.png" alt="image-20210923200558597"><br>使用webapp容器运行应用，<br><img src="/8tB-3dU7K/1632418822563.png" alt="image-20210923200858559"><br>参数说明:</p>
+<ul>
+<li>-d：让容器在后台运行。</li>
+<li>-P：将容器内部使用的网络端口映射到宿主机上。</li>
+</ul>
+<h3 id="5-3-2-查看WEB应用容器"><a href="#5-3-2-查看WEB应用容器" class="headerlink" title="5.3.2 查看WEB应用容器"></a>5.3.2 查看WEB应用容器</h3><p>使用 docker ps 来查看正在运行的容器：</p>
+<pre><code class="bash">docker ps 
+</code></pre>
+<p><img src="/8tB-3dU7K/1632418859744.png" alt="image-20210923201106465"><br>可以看出，这里多了端口信息，</p>
+<pre><code class="bash">PORTS
+0.0.0.0:32768-&gt;5000/tcp
+</code></pre>
+<p>Docker 开放了 5000 端口（默认 Python Flask 端口）映射到主机端口 32768 上。</p>
+<p>这时可以通过浏览器访问WEB应用，在地址栏输入：localhost:32768，可以看到如下图所示的页面，</p>
+<p><font color=gray>也可以在docker环境的终端内输入<code>curl localhost:32768</code>获取网页源码</font><br><img src="/8tB-3dU7K/1632418909323.png" alt="image-20210923202922142"><br>在页面上显示了 Hello world!</p>
+<p>也可以通过 -p 参数指定所要映射的端口，</p>
+<pre><code>docker run -d -p 5000:5000 training/webapp python app.py
+</code></pre>
+<p><img src="/8tB-3dU7K/1632418936435.png" alt="image-20210923203105353"><br><code>docker ps</code>查看正在运行的容器<br><img src="/8tB-3dU7K/1632418960754.png" alt="image-20210923203230145"><br>可以看到，容器内部的 5000 端口映射到本地主机的 5000 端口上。</p>
+<p>在浏览器中，使用5000端口访问服务：<br><img src="/8tB-3dU7K/1632418984715.png" alt="image-20210923203315200"></p>
+<h3 id="5-3-3-网络端口的快捷方式"><a href="#5-3-3-网络端口的快捷方式" class="headerlink" title="5.3.3 网络端口的快捷方式"></a>5.3.3 网络端口的快捷方式</h3><p>通过 docker ps 命令可以查看到容器的端口映射，docker 还提供了另一个快捷方式 docker port，使用 docker port 可以查看指定 （ID 或者名字）容器的某个确定端口映射到宿主机的端口号。</p>
+<p>上面创建的 web 应用容器 ID 为 e0c8a4a24e7e 名字为 musing_meninsky。</p>
+<p>可以使用 <code>docker port e0c8a4a24e7e  </code>或 <code>docker port musing_meninsky </code>来查看容器端口的映射情况。<br><img src="/8tB-3dU7K/1632419016345.png" alt="image-20210923203615779"></p>
+<h3 id="5-3-4-查看WEB应用程序日志"><a href="#5-3-4-查看WEB应用程序日志" class="headerlink" title="5.3.4 查看WEB应用程序日志"></a>5.3.4 查看WEB应用程序日志</h3><p><code>docker logs [ID或者名字] </code>可以查看容器内部的标准输出。</p>
+<pre><code class="bash">docker logs e0c8a4a24e7e
+docker logs musing_meninsky
+</code></pre>
+<p><img src="/8tB-3dU7K/1632419042014.png" alt="image-20210923203744019"><br>可以使用 -f 选项，这样 docker logs 会像 tail -f 一样来输出容器内部的标准输出。</p>
+<pre><code>docker logs -f e0c8a4a24e7e
+docker logs -f musing_meninsky
+</code></pre>
+<p><img src="/8tB-3dU7K/1632419077331.png" alt="image-20210923203919240"><br>按CTRL+C可退出该命令。</p>
+<p>从上面，可以看到应用程序使用的是 5000 端口并且能够查看到应用程序的访问日志。</p>
+<h3 id="5-3-5-查看WEB应用程序容器的进程"><a href="#5-3-5-查看WEB应用程序容器的进程" class="headerlink" title="5.3.5 查看WEB应用程序容器的进程"></a>5.3.5 查看WEB应用程序容器的进程</h3><p>使用 <code>docker top</code> 查看容器内部运行的进程</p>
+<pre><code class="bash">docker top e0c8a4a24e7e
+</code></pre>
+<p><img src="/8tB-3dU7K/1632419101438.png" alt="image-20210923204019771"></p>
+<h3 id="5-3-6-检查WEB应用程序"><a href="#5-3-6-检查WEB应用程序" class="headerlink" title="5.3.6 检查WEB应用程序"></a>5.3.6 检查WEB应用程序</h3><p>使用 docker inspect 查看 Docker 的底层信息，该命令会返回一个记录了 Docker 容器配置和状态信息的JSON 文件。<br><img src="/8tB-3dU7K/1632419127105.png" alt="image-20210923204139638"></p>
+<pre><code class="bash">JOJO@DESKTOP-LG5R18D MINGW64 /d/users/JOJO/Desktop/Docker实验报告/webapp/webapp
+$ docker inspect e0c8a4a24e7e
+[
+    &#123;
+        &quot;Id&quot;: &quot;e0c8a4a24e7e6b65c1c440520e49505dbe6df7fc70ada0a599e7f94280a569e9&quot;,
+        &quot;Created&quot;: &quot;2021-09-23T12:30:47.84475838Z&quot;,
+        &quot;Path&quot;: &quot;python&quot;,
+        &quot;Args&quot;: [
+            &quot;app.py&quot;
+        ],
+        &quot;State&quot;: &#123;
+            &quot;Status&quot;: &quot;running&quot;,
+            &quot;Running&quot;: true,
+            &quot;Paused&quot;: false,
+            &quot;Restarting&quot;: false,
+            &quot;OOMKilled&quot;: false,
+            &quot;Dead&quot;: false,
+            &quot;Pid&quot;: 11388,
+            &quot;ExitCode&quot;: 0,
+            &quot;Error&quot;: &quot;&quot;,
+            &quot;StartedAt&quot;: &quot;2021-09-23T12:30:48.014015659Z&quot;,
+            &quot;FinishedAt&quot;: &quot;0001-01-01T00:00:00Z&quot;
+        &#125;,
+        &quot;Image&quot;: &quot;sha256:6fae60ef344644649a39240b94d73b8ba9c67f898ede85cf8e947a887b3e6557&quot;,
+        &quot;ResolvConfPath&quot;: &quot;/mnt/sda1/var/lib/docker/containers/e0c8a4a24e7e6b65c1c440520e49505dbe6df7fc70ada0a599e7f94280a569e9/resolv.conf&quot;,
+        &quot;HostnamePath&quot;: &quot;/mnt/sda1/var/lib/docker/containers/e0c8a4a24e7e6b65c1c440520e49505dbe6df7fc70ada0a599e7f94280a569e9/hostname&quot;,
+        &quot;HostsPath&quot;: &quot;/mnt/sda1/var/lib/docker/containers/e0c8a4a24e7e6b65c1c440520e49505dbe6df7fc70ada0a599e7f94280a569e9/hosts&quot;,
+        &quot;LogPath&quot;: &quot;/mnt/sda1/var/lib/docker/containers/e0c8a4a24e7e6b65c1c440520e49505dbe6df7fc70ada0a599e7f94280a569e9/e0c8a4a24e7e6b65c1c440520e49505dbe6df7fc70ada0a599e7f94280a569e9-json.log&quot;,
+        &quot;Name&quot;: &quot;/musing_meninsky&quot;,
+        &quot;RestartCount&quot;: 0,
+        &quot;Driver&quot;: &quot;overlay2&quot;,
+        &quot;Platform&quot;: &quot;linux&quot;,
+        &quot;MountLabel&quot;: &quot;&quot;,
+        &quot;ProcessLabel&quot;: &quot;&quot;,
+        &quot;AppArmorProfile&quot;: &quot;&quot;,
+        &quot;ExecIDs&quot;: null,
+        &quot;HostConfig&quot;: &#123;
+            &quot;Binds&quot;: null,
+            &quot;ContainerIDFile&quot;: &quot;&quot;,
+            &quot;LogConfig&quot;: &#123;
+                &quot;Type&quot;: &quot;json-file&quot;,
+                &quot;Config&quot;: &#123;&#125;
+            &#125;,
+            &quot;NetworkMode&quot;: &quot;default&quot;,
+            &quot;PortBindings&quot;: &#123;
+                &quot;5000/tcp&quot;: [
+                    &#123;
+                        &quot;HostIp&quot;: &quot;&quot;,
+                        &quot;HostPort&quot;: &quot;5000&quot;
+                    &#125;
+                ]
+            &#125;,
+            &quot;RestartPolicy&quot;: &#123;
+                &quot;Name&quot;: &quot;no&quot;,
+                &quot;MaximumRetryCount&quot;: 0
+            &#125;,
+            &quot;AutoRemove&quot;: false,
+            &quot;VolumeDriver&quot;: &quot;&quot;,
+            &quot;VolumesFrom&quot;: null,
+            &quot;CapAdd&quot;: null,
+            &quot;CapDrop&quot;: null,
+            &quot;Capabilities&quot;: null,
+            &quot;Dns&quot;: [],
+            &quot;DnsOptions&quot;: [],
+            &quot;DnsSearch&quot;: [],
+            &quot;ExtraHosts&quot;: null,
+            &quot;GroupAdd&quot;: null,
+            &quot;IpcMode&quot;: &quot;shareable&quot;,
+            &quot;Cgroup&quot;: &quot;&quot;,
+            &quot;Links&quot;: null,
+            &quot;OomScoreAdj&quot;: 0,
+            &quot;PidMode&quot;: &quot;&quot;,
+            &quot;Privileged&quot;: false,
+            &quot;PublishAllPorts&quot;: false,
+            &quot;ReadonlyRootfs&quot;: false,
+            &quot;SecurityOpt&quot;: null,
+            &quot;UTSMode&quot;: &quot;&quot;,
+            &quot;UsernsMode&quot;: &quot;&quot;,
+            &quot;ShmSize&quot;: 67108864,
+            &quot;Runtime&quot;: &quot;runc&quot;,
+            &quot;ConsoleSize&quot;: [
+                23,
+                96
+            ],
+            &quot;Isolation&quot;: &quot;&quot;,
+            &quot;CpuShares&quot;: 0,
+            &quot;Memory&quot;: 0,
+            &quot;NanoCpus&quot;: 0,
+            &quot;CgroupParent&quot;: &quot;&quot;,
+            &quot;BlkioWeight&quot;: 0,
+            &quot;BlkioWeightDevice&quot;: [],
+            &quot;BlkioDeviceReadBps&quot;: null,
+            &quot;BlkioDeviceWriteBps&quot;: null,
+            &quot;BlkioDeviceReadIOps&quot;: null,
+            &quot;BlkioDeviceWriteIOps&quot;: null,
+            &quot;CpuPeriod&quot;: 0,
+            &quot;CpuQuota&quot;: 0,
+            &quot;CpuRealtimePeriod&quot;: 0,
+            &quot;CpuRealtimeRuntime&quot;: 0,
+            &quot;CpusetCpus&quot;: &quot;&quot;,
+            &quot;CpusetMems&quot;: &quot;&quot;,
+            &quot;Devices&quot;: [],
+            &quot;DeviceCgroupRules&quot;: null,
+            &quot;DeviceRequests&quot;: null,
+            &quot;KernelMemory&quot;: 0,
+            &quot;KernelMemoryTCP&quot;: 0,
+            &quot;MemoryReservation&quot;: 0,
+            &quot;MemorySwap&quot;: 0,
+            &quot;MemorySwappiness&quot;: null,
+            &quot;OomKillDisable&quot;: false,
+            &quot;PidsLimit&quot;: null,
+            &quot;Ulimits&quot;: null,
+            &quot;CpuCount&quot;: 0,
+            &quot;CpuPercent&quot;: 0,
+            &quot;IOMaximumIOps&quot;: 0,
+            &quot;IOMaximumBandwidth&quot;: 0,
+            &quot;MaskedPaths&quot;: [
+                &quot;/proc/asound&quot;,
+                &quot;/proc/acpi&quot;,
+                &quot;/proc/kcore&quot;,
+                &quot;/proc/keys&quot;,
+                &quot;/proc/latency_stats&quot;,
+                &quot;/proc/timer_list&quot;,
+                &quot;/proc/timer_stats&quot;,
+                &quot;/proc/sched_debug&quot;,
+                &quot;/proc/scsi&quot;,
+                &quot;/sys/firmware&quot;
+            ],
+            &quot;ReadonlyPaths&quot;: [
+                &quot;/proc/bus&quot;,
+                &quot;/proc/fs&quot;,
+                &quot;/proc/irq&quot;,
+                &quot;/proc/sys&quot;,
+                &quot;/proc/sysrq-trigger&quot;
+            ]
+        &#125;,
+        &quot;GraphDriver&quot;: &#123;
+            &quot;Data&quot;: &#123;
+                &quot;LowerDir&quot;: &quot;/mnt/sda1/var/lib/docker/overlay2/972dfe028e55bd1376246a20a9482bc770110f1bfd5b8973a5c827140d86802c-init/diff:/mnt/sda1/var/lib/docker/overlay2/b255bb29042700e8d435dbb1f22d38da1e1abb5c47511689101d1f68f0fbd53d/diff:/mnt/sda1/var/lib/docker/overlay2/0df1f40ab5098ca51f98059e1cfad94b929c2d4cbded7f608ffc69572696622b/diff:/mnt/sda1/var/lib/docker/overlay2/e64a810f17657ae460453a6fcdd83d8774df17c1448ad9c66b7dc73df727ebde/diff:/mnt/sda1/var/lib/docker/overlay2/b3a8dd02542a23d08b30d185713f878ee32ec1916529affc0a5143e6d8cbaf1d/diff:/mnt/sda1/var/lib/docker/overlay2/795f0a493cb34a8272c81ba76dcbb0ae363ca7bea37c12503b7e630790eb38b9/diff:/mnt/sda1/var/lib/docker/overlay2/c9b5c8cc15c32e2dade7c934473ec334be4f026c2e263cade46872fcfc1fedcb/diff:/mnt/sda1/var/lib/docker/overlay2/90f62154c24acbb8c522025b703135de9b1a5d0545c22a3264846b42319287b8/diff:/mnt/sda1/var/lib/docker/overlay2/283683f52c3b31af68a0b04d24e8f82717471e7b33121df5046b9d8b72b0c5e6/diff:/mnt/sda1/var/lib/docker/overlay2/95f5c4414e13e6d7748649f1f208d16dad067f22e519a378e2028efb4d6d34b4/diff:/mnt/sda1/var/lib/docker/overlay2/2323ad95c0fe0a348196de058751db41b7ad901f47f709dc099631f50b33cdf1/diff:/mnt/sda1/var/lib/docker/overlay2/7de49640d3651d0f4c336dbd4d133e3612e6ad405223bd8c82f7b80eceb04e87/diff:/mnt/sda1/var/lib/docker/overlay2/1a55a67dc9f63fbb00e3943be30a42724437c9982377f65df821f67b3c6f8f93/diff:/mnt/sda1/var/lib/docker/overlay2/4ffcb6d0da325d8dddd818d76e1155e891d1a0577cfe13fd987eab089643a856/diff&quot;,
+                &quot;MergedDir&quot;: &quot;/mnt/sda1/var/lib/docker/overlay2/972dfe028e55bd1376246a20a9482bc770110f1bfd5b8973a5c827140d86802c/merged&quot;,
+                &quot;UpperDir&quot;: &quot;/mnt/sda1/var/lib/docker/overlay2/972dfe028e55bd1376246a20a9482bc770110f1bfd5b8973a5c827140d86802c/diff&quot;,
+                &quot;WorkDir&quot;: &quot;/mnt/sda1/var/lib/docker/overlay2/972dfe028e55bd1376246a20a9482bc770110f1bfd5b8973a5c827140d86802c/work&quot;
+            &#125;,
+            &quot;Name&quot;: &quot;overlay2&quot;
+        &#125;,
+        &quot;Mounts&quot;: [],
+        &quot;Config&quot;: &#123;
+            &quot;Hostname&quot;: &quot;e0c8a4a24e7e&quot;,
+            &quot;Domainname&quot;: &quot;&quot;,
+            &quot;User&quot;: &quot;&quot;,
+            &quot;AttachStdin&quot;: false,
+            &quot;AttachStdout&quot;: false,
+            &quot;AttachStderr&quot;: false,
+            &quot;ExposedPorts&quot;: &#123;
+                &quot;5000/tcp&quot;: &#123;&#125;
+            &#125;,
+            &quot;Tty&quot;: false,
+            &quot;OpenStdin&quot;: false,
+            &quot;StdinOnce&quot;: false,
+            &quot;Env&quot;: [
+                &quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;
+            ],
+            &quot;Cmd&quot;: [
+                &quot;python&quot;,
+                &quot;app.py&quot;
+            ],
+            &quot;Image&quot;: &quot;training/webapp&quot;,
+            &quot;Volumes&quot;: null,
+            &quot;WorkingDir&quot;: &quot;/opt/webapp&quot;,
+            &quot;Entrypoint&quot;: null,
+            &quot;OnBuild&quot;: null,
+            &quot;Labels&quot;: &#123;&#125;
+        &#125;,
+        &quot;NetworkSettings&quot;: &#123;
+            &quot;Bridge&quot;: &quot;&quot;,
+            &quot;SandboxID&quot;: &quot;d6d5a236e2a3ec3a2e2008fb2d1b2d1f35118700d52e3f95a1b7cc5c4d92960b&quot;,
+            &quot;HairpinMode&quot;: false,
+            &quot;LinkLocalIPv6Address&quot;: &quot;&quot;,
+            &quot;LinkLocalIPv6PrefixLen&quot;: 0,
+            &quot;Ports&quot;: &#123;
+                &quot;5000/tcp&quot;: [
+                    &#123;
+                        &quot;HostIp&quot;: &quot;0.0.0.0&quot;,
+                        &quot;HostPort&quot;: &quot;5000&quot;
+                    &#125;
+                ]
+            &#125;,
+            &quot;SandboxKey&quot;: &quot;/var/run/docker/netns/d6d5a236e2a3&quot;,
+            &quot;SecondaryIPAddresses&quot;: null,
+            &quot;SecondaryIPv6Addresses&quot;: null,
+            &quot;EndpointID&quot;: &quot;ae4b5cd5a75d8da238d11b88170502cfe470c8e94c7e43fd579d511fda5f7bc7&quot;,
+            &quot;Gateway&quot;: &quot;172.17.0.1&quot;,
+            &quot;GlobalIPv6Address&quot;: &quot;&quot;,
+            &quot;GlobalIPv6PrefixLen&quot;: 0,
+            &quot;IPAddress&quot;: &quot;172.17.0.3&quot;,
+            &quot;IPPrefixLen&quot;: 16,
+            &quot;IPv6Gateway&quot;: &quot;&quot;,
+            &quot;MacAddress&quot;: &quot;02:42:ac:11:00:03&quot;,
+            &quot;Networks&quot;: &#123;
+                &quot;bridge&quot;: &#123;
+                    &quot;IPAMConfig&quot;: null,
+                    &quot;Links&quot;: null,
+                    &quot;Aliases&quot;: null,
+                    &quot;NetworkID&quot;: &quot;cb9d9c850475238f06e71782b77510ae854f27c26da12f562622fb6a0d1f61d0&quot;,
+                    &quot;EndpointID&quot;: &quot;ae4b5cd5a75d8da238d11b88170502cfe470c8e94c7e43fd579d511fda5f7bc7&quot;,
+                    &quot;Gateway&quot;: &quot;172.17.0.1&quot;,
+                    &quot;IPAddress&quot;: &quot;172.17.0.3&quot;,
+                    &quot;IPPrefixLen&quot;: 16,
+                    &quot;IPv6Gateway&quot;: &quot;&quot;,
+                    &quot;GlobalIPv6Address&quot;: &quot;&quot;,
+                    &quot;GlobalIPv6PrefixLen&quot;: 0,
+                    &quot;MacAddress&quot;: &quot;02:42:ac:11:00:03&quot;,
+                    &quot;DriverOpts&quot;: null
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+]
+</code></pre>
+<h3 id="5-3-7-停止WEB应用容器"><a href="#5-3-7-停止WEB应用容器" class="headerlink" title="5.3.7 停止WEB应用容器"></a>5.3.7 停止WEB应用容器</h3><p>使用docker stop停止应用，</p>
+<pre><code class="bash">docker stop e0c8a4a24e7e
+docker ps
+</code></pre>
+<p><img src="/8tB-3dU7K/1632419189871.png" alt="image-20210923204429354"><br>可以看到该容器已停止。</p>
+<p>再次使用浏览器访问，<br><img src="/8tB-3dU7K/1632419227914.png" alt="image-20210923204509187"><br>可以发现服务已经停止运行。</p>
+<h3 id="5-3-8-重启WEB应用容器"><a href="#5-3-8-重启WEB应用容器" class="headerlink" title="5.3.8 重启WEB应用容器"></a>5.3.8 重启WEB应用容器</h3><p>可通过<code>docker start &lt;容器ID&gt; </code>或者 <code>docker restart &lt;容器ID&gt;</code>启动停止运行的容器，已经停止的容器，可以使用命令 <code>docker start </code>来启动。<br><img src="/8tB-3dU7K/1632419253003.png" alt="image-20210923204908965"><br>容器启动后，再次使用浏览器访问Web服务：<br><img src="/8tB-3dU7K/1632419278181.png" alt="image-20210923205022493"><br>可见，服务已经可以正常访问。</p>
+<p>可以使用命令 <code>docker ps -l</code> 查询最后一次创建的容器：<br><img src="/8tB-3dU7K/1632419296149.png" alt="image-20210923205054851"></p>
+<h3 id="5-3-9-移出WEB应用容器"><a href="#5-3-9-移出WEB应用容器" class="headerlink" title="5.3.9 移出WEB应用容器"></a>5.3.9 移出WEB应用容器</h3><p>可使用 docker rm 命令删除容器，例如对于容器e0c8a4a24e7e，</p>
+<pre><code class="bash">docker rm e0c8a4a24e7e
+docker stop e0c8a4a24e7e
+docker rm e0c8a4a24e7e
+</code></pre>
+<p><img src="/8tB-3dU7K/1632419314274.png" alt="image-20210923205243079"><br>删除容器时，容器必须是停止状态，否则会报错。</p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/vDsoHY-if/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Docker实验三:Docker 镜像
+        
+      </div>
+    </a>
+  
+  
+    <a href="/7WMI1WMGw/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">HTML + CSS + JavaScript 学习笔记</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=Docker实验二:Docker容器 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/8tB-3dU7K/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Docker实验二:Docker容器 - 囧囧JOJO - 博客&u=https://jiongjiongjojo.gitee.io/8tB-3dU7K/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Docker实验二:Docker容器 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/8tB-3dU7K/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>数据结构实验四：队列 | 囧囧JOJO - 博客</title>
+
+    <meta name="description" content="&lt;h1 id=&#34;队列的基本操作&#34;&gt;&lt;a href=&#34;#队列的基本操作&#34; class=&#34;headerlink&#34; title=&#34;队列的基本操作&#34;&gt;&lt;/a&gt;队列的基本操作&lt;/h1&gt;&lt;h2 id=&#34;0-目录&#34;&gt;&lt;a href=&#34;#0-目录&#34; class=&#34;headerlink&#34; title=&#34;0 目录&#34;&gt;&lt;/a&gt;0 目录&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#0-%E7%9B%AE%E5%BD%95&#34;&gt;0 目录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#1-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84&#34;&gt;1 实验目的&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#2-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9&#34;&gt;2 实验内容&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#3-%E8%BD%AF%E4%BB%B6%E7%A8%8B%E5%BA%8F&#34;&gt;3 软件程序&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#31-%E9%A1%BA%E5%BA%8F%E9%98%9F&#34;&gt;3.1 顺序队&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#32-%E9%93%BE%E9%98%9F&#34;&gt;3.2 链队&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#4-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C&#34;&gt;4 实验结果&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl02tinn5000lrg9mcxyee9kd" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      数据结构实验四：队列
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-12-09T16:01:21.000Z" itemprop="datePublished">2021-12-10</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="队列的基本操作"><a href="#队列的基本操作" class="headerlink" title="队列的基本操作"></a>队列的基本操作</h1><h2 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h2><ul>
+<li><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></li>
+<li><a href="#1-%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84">1 实验目的</a></li>
+<li><a href="#2-%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9">2 实验内容</a></li>
+<li><a href="#3-%E8%BD%AF%E4%BB%B6%E7%A8%8B%E5%BA%8F">3 软件程序</a><ul>
+<li><a href="#31-%E9%A1%BA%E5%BA%8F%E9%98%9F">3.1 顺序队</a></li>
+<li><a href="#32-%E9%93%BE%E9%98%9F">3.2 链队</a></li>
+</ul>
+</li>
+<li><a href="#4-%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C">4 实验结果</a></li>
+</ul>
+<span id="more"></span>
+
+<h2 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1 实验目的"></a>1 实验目的</h2><ol>
+<li>掌握队列的顺序及链式存储结构</li>
+<li>验证顺序队、链队及其他们的基本操作实现</li>
+<li>验证队列的操作特性</li>
+</ol>
+<h2 id="2-实验内容"><a href="#2-实验内容" class="headerlink" title="2 实验内容"></a>2 实验内容</h2><ol>
+<li>建立一个空队</li>
+<li>对已经建立的队列进行进队、出队等基本操作。</li>
+</ol>
+<h2 id="3-软件程序"><a href="#3-软件程序" class="headerlink" title="3 软件程序"></a>3 软件程序</h2><h3 id="3-1-顺序队"><a href="#3-1-顺序队" class="headerlink" title="3.1 顺序队"></a>3.1 顺序队</h3><p>sqqueue.cpp：</p>
+<pre><code class="c++">#include&lt;stdio.h&gt;  
+#include&lt;malloc.h&gt;  
+
+#define MaxSize 1000
+  
+  
+typedef char ElemType;  
+typedef struct Quene&#123;               //定义顺序队   
+    int front;                      //队头指针   
+    char data[MaxSize];             //存放队中元素   
+    int rear;                       //队尾指针   
+&#125;SqQueue;                           //struct Queue 的别名  
+  
+void InitQueue(SqQueue * &amp;q)//初始化队列  
+&#123;  
+    q=(SqQueue *)malloc(sizeof(SqQueue));   //分配一个空间   
+    q-&gt;front=q-&gt;rear=-1;                  //置 -1   
+&#125;  
+void DestroyQueue(SqQueue * &amp;q)//销毁队列  
+&#123;  
+    free(q);                                //释放内存   
+&#125;  
+bool QueueEmpty(SqQueue * &amp;q)//判断队列是否为空  
+&#123;  
+    if(q-&gt;front==q-&gt;rear)&#123;                    //首指针和尾指针相等，说明为空   
+        return true;                        //返回真   
+    &#125;  
+    else&#123;  
+        return false;                       //返回假   
+    &#125;  
+&#125;  
+bool enQueue(SqQueue * &amp;q,char c)//进队  
+&#123;  
+    if(q-&gt;rear==MaxSize-1)&#123;                  //判断队列是否满了   
+        return false;                       //返回假   
+    &#125;  
+    q-&gt;rear++;                               //头指针加 1   
+    q-&gt;data[q-&gt;rear]=c;                       //传值   
+    return true;                            //返回真   
+&#125;  
+bool deQueue(SqQueue * &amp;q,char &amp;ch)//出队  
+&#123;  
+    if(q-&gt;front==q-&gt;rear)&#123;                    //判断是否空了   
+        return false;                       //返回假   
+    &#125;  
+    q-&gt;front++;                              //尾指针加 1   
+    ch=q-&gt;data[q-&gt;front];                 //取值   
+    return true;                            //返回真   
+&#125;  
+</code></pre>
+<p>main.cpp：</p>
+<pre><code class="c++">#include&lt;stdio.h&gt;  
+#include&lt;malloc.h&gt;  
+#include &quot;sqqueue.cpp&quot;  
+  
+  
+int main()  
+&#123;  
+    ElemType e;  
+    SqQueue *q;  
+    printf(&quot;环形队列基本运算如下:\n&quot;);  
+    printf(&quot;  (1)初始化队列q\n&quot;);  
+    InitQueue(q);  
+    printf(&quot;  (2)依次进队列元素a,b,c\n&quot;);  
+    if (!enQueue(q,&#39;a&#39;)) printf(&quot;\t提示:队满,不能进队\n&quot;);  
+    if (!enQueue(q,&#39;b&#39;)) printf(&quot;\t提示:队满,不能进队\n&quot;);  
+    if (!enQueue(q,&#39;c&#39;)) printf(&quot;\t提示:队满,不能进队\n&quot;);  
+    printf(&quot;  (3)队列为%s\n&quot;,(QueueEmpty(q)?&quot;空&quot;:&quot;非空&quot;));  
+    if (deQueue(q,e)==0)   
+        printf(&quot;队空,不能出队\n&quot;);  
+    else  
+        printf(&quot;  (4)出队一个元素%c\n&quot;,e);  
+    printf(&quot;  (5)依次进队列元素d,e,f\n&quot;);  
+    if (!enQueue(q,&#39;d&#39;)) printf(&quot;\t提示:队满,不能进队\n&quot;);  
+    if (!enQueue(q,&#39;e&#39;)) printf(&quot;\t提示:队满,不能进队\n&quot;);  
+    if (!enQueue(q,&#39;f&#39;)) printf(&quot;\t提示:队满,不能进队\n&quot;);  
+    printf(&quot;  (6)出队列序列:&quot;);  
+    while (!QueueEmpty(q))  
+    &#123;   deQueue(q,e);  
+        printf(&quot;%c &quot;,e);  
+    &#125;  
+    printf(&quot;\n&quot;);  
+    printf(&quot;  (7)释放队列\n&quot;);  
+    DestroyQueue(q);  
+    return 1;  
+&#125;  
+</code></pre>
+<h3 id="3-2-链队"><a href="#3-2-链队" class="headerlink" title="3.2 链队"></a>3.2 链队</h3><p>liqueue.cpp：</p>
+<pre><code class="c++">#include &quot;stdafx.h&quot;  
+#include&lt;stdio.h&gt;  
+#include&lt;malloc.h&gt;  
+  
+typedef char ElemType;  
+typedef struct qnode  
+&#123;  
+    ElemType data;  
+    struct qnode *next;  
+&#125;DataNode;  
+typedef struct  
+&#123;  
+    DataNode *front;  
+    DataNode *rear;  
+&#125;LinkQuNode;  
+void InitQueue(LinkQuNode *&amp;q)//初始化队列   
+&#123;  
+    q=(LinkQuNode *)malloc(sizeof(LinkQuNode));  
+    q-&gt;front=q-&gt;rear=NULL;  
+&#125;  
+void DestroyQueue(LinkQuNode *&amp;q)//销毁队列   
+&#123;  
+    DataNode *p=q-&gt;front,*r;  
+    if(p!=NULL)  
+    &#123;  
+        r=p-&gt;next;  
+        while(r!=NULL)  
+        &#123;  
+            free(p);  
+            p=r;  
+            r=p-&gt;next;  
+        &#125;  
+    &#125;  
+    else  
+        free(p);  
+    free(q);  
+&#125;  
+bool QueueEmpty(LinkQuNode *q)//判断队列是否为空   
+&#123;  
+    return(q-&gt;rear==NULL);  
+&#125;  
+void enQueue(LinkQuNode *&amp;q,ElemType e)//元素进队   
+&#123;  
+    DataNode *p;  
+    p=(DataNode *)malloc(sizeof(DataNode));  
+    p-&gt;data=e;  
+    p-&gt;next=NULL;  
+    if(q-&gt;front==NULL)  
+        q-&gt;front=q-&gt;rear=p;  
+    else  
+        q-&gt;rear-&gt;next=p;  
+        q-&gt;rear=p;  
+&#125;  
+int deQueue(LinkQuNode *&amp;q,ElemType &amp;e)//元素出队   
+&#123;  
+    DataNode *t;  
+    if(q-&gt;rear==NULL)  
+        return 0;  
+    t=q-&gt;front;  
+    if(q-&gt;rear==q-&gt;front)  
+        q-&gt;front=q-&gt;rear=NULL;  
+    else  
+        q-&gt;front=q-&gt;front-&gt;next;   
+    e=t-&gt;data;  
+    free(t);  
+    return 1;  
+&#125;  
+</code></pre>
+<p>main.cpp：</p>
+<pre><code class="c++">#include &quot;stdafx.h&quot;  
+#include&lt;stdio.h&gt;  
+#include&lt;malloc.h&gt;  
+#include &quot;liqueue.cpp&quot;  
+  
+  
+  
+  
+  
+int main()  
+&#123;  
+    ElemType e;  
+    LinkQuNode *q;  
+    printf(&quot;链队的基本运算如下:\n&quot;);  
+    printf(&quot;  (1)初始化链队q\n&quot;);  
+    InitQueue(q);  
+    printf(&quot;  (2)依次进链队元素a,b,c\n&quot;);  
+    enQueue(q,&#39;a&#39;);  
+    enQueue(q,&#39;b&#39;);  
+    enQueue(q,&#39;c&#39;);  
+    printf(&quot;  (3)链队为%s\n&quot;,(QueueEmpty(q)?&quot;空&quot;:&quot;非空&quot;));  
+    if (deQueue(q,e)==0)   
+        printf(&quot;\t提示:队空,不能出队\n&quot;);  
+    else  
+        printf(&quot;  (4)出队一个元素%c\n&quot;,e);  
+    printf(&quot;  (5)依次进链队元素d,e,f\n&quot;);  
+    enQueue(q,&#39;d&#39;);  
+    enQueue(q,&#39;e&#39;);  
+    enQueue(q,&#39;f&#39;);  
+    printf(&quot;  (6)出链队序列:&quot;);  
+    while (!QueueEmpty(q))  
+    &#123;   deQueue(q,e);  
+        printf(&quot;%c &quot;,e);  
+    &#125;  
+    printf(&quot;\n&quot;);  
+    printf(&quot;  (7)释放链队\n&quot;);  
+    DestroyQueue(q);  
+    return 1;  
+&#125; 
+</code></pre>
+<h2 id="4-实验结果"><a href="#4-实验结果" class="headerlink" title="4 实验结果"></a>4 实验结果</h2><p><img src="/M1rd3yMcP/1639065724293.png"></p>
+<p><img src="/M1rd3yMcP/1639065728637.png"></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/myVeTcHRy/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          数据结构实验五：二叉树的基本操作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Z5U0iLqjg/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">数据结构实验三：顺序栈和链栈</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=数据结构实验四：队列 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/M1rd3yMcP/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=数据结构实验四：队列 - 囧囧JOJO - 博客&u=https://jiongjiongjojo.gitee.io/M1rd3yMcP/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=数据结构实验四：队列 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/M1rd3yMcP/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

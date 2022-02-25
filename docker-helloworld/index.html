@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>Docker实验一:Docker入门 | 囧囧JOJO - 博客</title>
+
+    <meta name="description" content="&lt;h1 id=&#34;0-目录&#34;&gt;&lt;a href=&#34;#0-目录&#34; class=&#34;headerlink&#34; title=&#34;0.目录&#34;&gt;&lt;/a&gt;0.目录&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#0%E7%9B%AE%E5%BD%95&#34;&gt;0.目录&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#1%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9&#34;&gt;1.实验内容&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#2%E5%AE%9E%E9%AA%8C%E8%A6%81%E7%82%B9&#34;&gt;2.实验要点&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#3%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83&#34;&gt;3.实验环境&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9&#34;&gt;4.注意事项&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#5%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4&#34;&gt;5.实验步骤&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#51-helloworld&#34;&gt;5.1 HelloWorld&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#52-%E8%BF%90%E8%A1%8C%E4%BA%A4%E4%BA%92%E5%BC%8F%E5%AE%B9%E5%99%A8&#34;&gt;5.2 运行交互式容器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#53-%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8%E5%90%8E%E5%8F%B0%E6%A8%A1%E5%BC%8F&#34;&gt;5.3 启动容器（后台模式）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#54-%E5%81%9C%E6%AD%A2%E5%AE%B9%E5%99%A8&#34;&gt;5.4 停止容器&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl02tinnf0018rg9m9rgaant8" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Docker实验一:Docker入门
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-09-14T12:56:24.000Z" itemprop="datePublished">2021-09-14</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="0-目录"><a href="#0-目录" class="headerlink" title="0.目录"></a>0.目录</h1><ul>
+<li><p><a href="#0%E7%9B%AE%E5%BD%95">0.目录</a></p>
+</li>
+<li><p><a href="#1%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9">1.实验内容</a></p>
+</li>
+<li><p><a href="#2%E5%AE%9E%E9%AA%8C%E8%A6%81%E7%82%B9">2.实验要点</a></p>
+</li>
+<li><p><a href="#3%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83">3.实验环境</a></p>
+</li>
+<li><p><a href="#4%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">4.注意事项</a></p>
+</li>
+<li><p><a href="#5%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4">5.实验步骤</a></p>
+<ul>
+<li><a href="#51-helloworld">5.1 HelloWorld</a></li>
+<li><a href="#52-%E8%BF%90%E8%A1%8C%E4%BA%A4%E4%BA%92%E5%BC%8F%E5%AE%B9%E5%99%A8">5.2 运行交互式容器</a></li>
+<li><a href="#53-%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8%E5%90%8E%E5%8F%B0%E6%A8%A1%E5%BC%8F">5.3 启动容器（后台模式）</a></li>
+<li><a href="#54-%E5%81%9C%E6%AD%A2%E5%AE%B9%E5%99%A8">5.4 停止容器</a></li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="1-实验内容"><a href="#1-实验内容" class="headerlink" title="1.实验内容"></a>1.实验内容</h1><p>学习<code>Docker</code>的入门级命令。</p>
+<h1 id="2-实验要点"><a href="#2-实验要点" class="headerlink" title="2.实验要点"></a>2.实验要点</h1><p>掌握<code>Docker</code>的入门级命令</p>
+<h1 id="3-实验环境"><a href="#3-实验环境" class="headerlink" title="3.实验环境"></a>3.实验环境</h1><ul>
+<li>Windows11</li>
+</ul>
+<h1 id="4-注意事项"><a href="#4-注意事项" class="headerlink" title="4.注意事项"></a>4.注意事项</h1><p>如果<code>docker pull</code>由于网络原因无法使用，可使用<code>docker load</code>命令直接从桌面的<code>images</code>目录中加载相应的镜像。</p>
+<p>例如对于命令：</p>
+<pre><code class="bash">docker pull ubuntu:latest
+</code></pre>
+<p>若实验环境无法访问互联网或访问dockerhub服务不稳定，可使用如下命令代替：</p>
+<pre><code class="bash">docker load &lt; images/ubuntu_latest.tar.gz
+</code></pre>
+<p>上述命令假设了当前的工作目录为桌面（<code>/headless/Desktop</code>）。</p>
+<p>如果当前工作目录不是桌面（可使用<code>pwd</code>命令查看），可使用如下命令代替：</p>
+<pre><code class="bash">docker load &lt; /headless/Desktop/images/ubuntu_latest.tar.gz
+</code></pre>
+<h1 id="5-实验步骤"><a href="#5-实验步骤" class="headerlink" title="5.实验步骤"></a>5.实验步骤</h1><h3 id="5-1-HelloWorld"><a href="#5-1-HelloWorld" class="headerlink" title="5.1 HelloWorld"></a>5.1 HelloWorld</h3><p>首先使用docker pull从镜像仓库Docker Hub下载hello-world镜像。</p>
+<pre><code class="bash">docker pull hello-world:latest
+</code></pre>
+<p><img src="/docker-helloworld/1631624951060.png" alt="image-20210914195230031"></p>
+<p>使用 docker run在容器内运行应用程序，输出Hello world</p>
+<p><img src="/docker-helloworld/1631624970360.png" alt="image-20210914195549162"></p>
+<p>接下来，使用Ubuntu:16.04镜像生成容器，并输出hello world，首先下载ubuntu:16.04镜像</p>
+<pre><code class="bash">docker pull ubuntu:16.04
+</code></pre>
+<p><img src="/docker-helloworld/1631625004768.png" alt="image-20210914195907176"></p>
+<p>接着，运行<code>docker run</code>命令使用Ubuntu容器输出hello world，命令如下：</p>
+<pre><code class="bash">docker run ubuntu:16.04 /bin/echo &quot;hello world&quot;
+</code></pre>
+<p><img src="/docker-helloworld/1631625017180.png" alt="image-20210914195946594"></p>
+<h3 id="5-2-运行交互式容器"><a href="#5-2-运行交互式容器" class="headerlink" title="5.2 运行交互式容器"></a>5.2 运行交互式容器</h3><p>通过docker的两个参数<code>-i -t</code>，让docker运行的容器实现”对话”的能力：</p>
+<p><img src="/docker-helloworld/1631625029055.png" alt="image-20210914200042232"></p>
+<p>各个参数解析：</p>
+<ul>
+<li>-t: 在新容器内指定一个伪终端或终端。</li>
+<li>-i: 允许你对容器内的标准输入 (STDIN) 进行交互。</li>
+</ul>
+<p>注意上图中的root@0529c96c034f:&#x2F;#，此时我们已进入一个 ubuntu 16.04 系统的容器</p>
+<p>在容器中使用命令 <code>cat /proc/version </code>查看当前系统的版本信息</p>
+<pre><code class="bash">cat /proc/version
+</code></pre>
+<p><img src="/docker-helloworld/1631625041216.png" alt="image-20210914200223477"></p>
+<p>在容器中使用命令<code>ls</code>查看当前目录下的文件列表</p>
+<p><img src="/docker-helloworld/1631625054254.png" alt="image-20210914200243864"></p>
+<p>通过<code>exit</code>命令或者使用<code>CTRL+D</code>退出容器。</p>
+<p><img src="/docker-helloworld/1631625072220.png" alt="image-20210914200300831"></p>
+<p>注意第三行中 PS C:\Users\JOJO&gt; 表明已退出当前的容器，返回到当前的主机中。</p>
+<h3 id="5-3-启动容器（后台模式）"><a href="#5-3-启动容器（后台模式）" class="headerlink" title="5.3 启动容器（后台模式）"></a>5.3 启动容器（后台模式）</h3><p>使用以下命令创建一个以进程方式运行的容器</p>
+<pre><code class="bash">docker run -d ubuntu:16.04 /bin/bash -c &quot;while true;do echo hello world; sleep 1; done&quot;
+</code></pre>
+<p><img src="/docker-helloworld/1631625084626.png" alt="image-20210914200402686"></p>
+<p>在输出中，没有看到期望的 “hello world”，而是一串长字符：</p>
+<pre><code class="bash">470cf4dc561cacc67f00a6f5d35d202858b90cb347bda516a875169c2580e9ff
+</code></pre>
+<p>这个长字符串叫做容器ID，对每个容器来说都是唯一的。可以通过容器ID操作、查看对应的容器。<br>首先，我们需要确认容器有在运行，可以通过<code>docker ps</code>来查看：</p>
+<p><img src="/docker-helloworld/1631625097622.png" alt="image-20210914200450281"></p>
+<p>输出详情介绍：</p>
+<ul>
+<li>CONTAINER ID：容器 ID。</li>
+<li>IMAGE：使用的镜像。</li>
+<li>COMMAND：启动容器时运行的命令。</li>
+<li>CREATED：容器的创建时间。</li>
+<li>STATUS：容器状态，共包含7种状态。<ul>
+<li>created：已创建</li>
+<li>restarting：重启中</li>
+<li>running：运行中</li>
+<li>removing：迁移中</li>
+<li>paused：暂停</li>
+<li>exited：停止</li>
+<li>dead：死亡</li>
+</ul>
+</li>
+<li>PORTS：容器的端口信息和使用的连接类型（tcp\udp）。</li>
+<li>NAMES：自动分配的容器名称。</li>
+</ul>
+<p>在宿主主机内使用<code>docker logs</code>命令，查看容器内的标准输出：</p>
+<pre><code class="bash">docker logs 470cf4dc561c
+</code></pre>
+<p><img src="/docker-helloworld/1631625111042.png" alt="image-20210914200646285"></p>
+<p>使用容器名称查看日志：</p>
+<pre><code class="bash">docker logs eager_cannon
+</code></pre>
+<p><img src="/docker-helloworld/1631625123585.png" alt="image-20210914200759983"></p>
+<h3 id="5-4-停止容器"><a href="#5-4-停止容器" class="headerlink" title="5.4 停止容器"></a>5.4 停止容器</h3><p>使用<code>docker stop</code>命令来停止容器:</p>
+<pre><code class="bash">docker stop 470cf
+</code></pre>
+<p><img src="/docker-helloworld/1631625141666.png" alt="image-20210914200950223"></p>
+<p>通过<code>docker ps</code>查看，容器已经停止工作。 注意，在上述命令中，容器ID只使用了<code>470cf</code>，而没有写上完整的“470cf4dc561c”，这是由于docker会自动按照前缀搜索，如果某个容器ID可以和这个前缀匹配，则会定位到该容器。因此可以使用<code>470cf</code>这种简写的方式，当然，如果确定只有一个容器以<code>4</code>开头，也可以直接用命令<code>docker stop 4</code>。</p>
+<p><img src="/docker-helloworld/1631625151551.png" alt="image-20210914201319884"></p>
+<p>同样地，在停止容器时，也可以使用容器名称来操作:</p>
+<p><img src="/docker-helloworld/1631625159089.png" alt="image-20210914201540600"></p>
+<p><font color=#FFFFFF>实验报告来自：囧囧JOJO</font></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/7WMI1WMGw/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          HTML + CSS + JavaScript 学习笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/whNkJt2eL/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">安徽科技学院自动疫情填报 V2.1(完全自动)</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=Docker实验一:Docker入门 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/docker-helloworld/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Docker实验一:Docker入门 - 囧囧JOJO - 博客&u=https://jiongjiongjojo.gitee.io/docker-helloworld/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Docker实验一:Docker入门 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/docker-helloworld/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

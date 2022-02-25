@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>《疯狂Java讲义（第5版）》 - 踩坑与填坑 | 囧囧JOJO - 博客</title>
+
+    <meta name="description" content="&lt;h1 id=&#34;0-目录&#34;&gt;&lt;a href=&#34;#0-目录&#34; class=&#34;headerlink&#34; title=&#34;0 目录&#34;&gt;&lt;/a&gt;0 目录&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#0-%E7%9B%AE%E5%BD%95&#34;&gt;0 目录&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#1-%E6%96%87%E6%A1%A3%E6%A6%82%E8%BF%B0&#34;&gt;1 文档概述&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#2-%E8%B8%A9%E5%88%B0%E7%9A%84%E5%9D%91&#34;&gt;2 踩到的坑&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#%E4%B8%AD%E6%96%87%E5%AD%97%E7%AC%A6%E7%9A%84%E5%A4%84%E7%90%86&#34;&gt;中文字符的处理&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#%E6%B2%A1%E6%9C%89%E7%A8%8B%E5%BA%8F%E5%8C%85javadoc%E5%B7%A5%E5%85%B7%E7%9A%84%E6%B5%8B%E8%AF%95%E7%9A%84%E6%BA%90%E6%96%87%E4%BB%B6&#34;&gt;没有程序包javadoc工具的测试的源文件&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#p101-%E4%BB%A3%E7%A0%81%E6%9C%AA%E5%8A%A0%E7%B2%97&#34;&gt;P101 代码未加粗&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;#%E6%95%B0%E7%BB%84%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B%E4%BB%A3%E7%A0%81%E4%B8%8D%E5%85%A8p107&#34;&gt;数组应用举例代码不全(P107)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl02tinn2000frg9mein8ci9d" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      《疯狂Java讲义（第5版）》 - 踩坑与填坑
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-11-25T13:19:15.000Z" itemprop="datePublished">2021-11-25</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h1><ul>
+<li><p><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></p>
+</li>
+<li><p><a href="#1-%E6%96%87%E6%A1%A3%E6%A6%82%E8%BF%B0">1 文档概述</a></p>
+</li>
+<li><p><a href="#2-%E8%B8%A9%E5%88%B0%E7%9A%84%E5%9D%91">2 踩到的坑</a></p>
+<ul>
+<li><a href="#%E4%B8%AD%E6%96%87%E5%AD%97%E7%AC%A6%E7%9A%84%E5%A4%84%E7%90%86">中文字符的处理</a></li>
+</ul>
+</li>
+<li><p><a href="#%E6%B2%A1%E6%9C%89%E7%A8%8B%E5%BA%8F%E5%8C%85javadoc%E5%B7%A5%E5%85%B7%E7%9A%84%E6%B5%8B%E8%AF%95%E7%9A%84%E6%BA%90%E6%96%87%E4%BB%B6">没有程序包javadoc工具的测试的源文件</a></p>
+<ul>
+<li><a href="#p101-%E4%BB%A3%E7%A0%81%E6%9C%AA%E5%8A%A0%E7%B2%97">P101 代码未加粗</a></li>
+</ul>
+</li>
+<li><p><a href="#%E6%95%B0%E7%BB%84%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B%E4%BB%A3%E7%A0%81%E4%B8%8D%E5%85%A8p107">数组应用举例代码不全(P107)</a></p>
+</li>
+</ul>
+<span id="more"></span>
+
+<h1 id="1-文档概述"><a href="#1-文档概述" class="headerlink" title="1 文档概述"></a>1 文档概述</h1><p>该文档用来记录博主学习《疯狂Java讲义（第五版）》时，遇到的问题，以及书中的错误等，如果你在学习这本教材，希望这篇文章能对你有所帮助，毕竟我踩过的坑，都会记录在这里。当然，如果你遇到了我没遇到的坑，欢迎补充在评论区，热烈欢迎你的贡献，我会把贡献名单写进博客里！</p>
+<h1 id="2-踩到的坑"><a href="#2-踩到的坑" class="headerlink" title="2 踩到的坑"></a>2 踩到的坑</h1><h2 id="中文字符的处理"><a href="#中文字符的处理" class="headerlink" title="中文字符的处理"></a>中文字符的处理</h2><p><strong>问题描述：</strong></p>
+<p>在书的第3章的3.1.2中，按照书中的代码敲，敲完之后，生成文档的时候，终端会出现乱码报错<code>错误: 编码 GBK 的不可映射字符 (0x88)</code>，如下图所示：</p>
+<p><img src="/EAswvY27K/1637398183205.png"></p>
+<p><strong>解决方案：</strong></p>
+<p>记事本打开java源文件，另存为选择ANSI编码，保存即可。</p>
+<h2 id="没有程序包javadoc工具的测试的源文件"><a href="#没有程序包javadoc工具的测试的源文件" class="headerlink" title="没有程序包javadoc工具的测试的源文件"></a>没有程序包javadoc工具的测试的源文件</h2><p><strong>问题描述：</strong></p>
+<p>在学习第三章的3.1.2时，输入书中的<code>javadoc</code>指令后，提示没有程序包javadoc的源文件，如图所示：</p>
+<p><img src="/EAswvY27K/1637398212789.png"></p>
+<p><strong>解决方案：</strong></p>
+<p>博主认为这是书的错误，因为书中的指令明显可以看到<code>-doctitle 学习 javadoc 工具的测试 API文档</code>，这里面中英文之间包含了空格，而实际上这个指令的参数只能给出一个完整的内容，如果包含空格，那后面的内容就被当成其他参数来识别了，所以会出现这个错误。当然也可能是印刷的问题。</p>
+<p>书中的指令（错误）：</p>
+<pre><code class="bash">javadoc -d apidoc -windowtitle 测试 -doctitle 学习 javadoc 工具的测试 API 文档 -header 我的类 *Test.java
+</code></pre>
+<p>这里提供两种解决方案：</p>
+<ul>
+<li><p>方案一：</p>
+<p>直接将这一整个字符串用双引号括起来，这样就表示这是一个参数了。</p>
+<pre><code class="bash">javadoc -d apidoc -windowtitle 测试 -doctitle &quot;学习 javadoc 工具的测试 API 文档&quot; -header 囧囧JOJO的类 *Test.java
+</code></pre>
+</li>
+<li><p>方案二：</p>
+<p>删除<code>doctitle</code>参数中的空格。</p>
+<pre><code class="bash">javadoc -d apidoc -windowtitle 测试 -doctitle 学习javadoc工具的测试API文档&quot; -header 囧囧JOJO的类 *Test.java
+</code></pre>
+</li>
+</ul>
+<h2 id="P101-代码未加粗"><a href="#P101-代码未加粗" class="headerlink" title="P101 代码未加粗"></a>P101 代码未加粗</h2><p><strong>问题描述：</strong></p>
+<p>书上写的代码中，第9行代码没有加粗，与代码下方的描述冲突。<br>需要加粗的代码：</p>
+<pre><code class="java">        a = new int[4][]
+</code></pre>
+<h2 id="数组应用举例代码不全-P107"><a href="#数组应用举例代码不全-P107" class="headerlink" title="数组应用举例代码不全(P107)"></a>数组应用举例代码不全(P107)</h2><p><strong>问题描述：</strong></p>
+<p>第四章的4.6.5的示例代码<code>ArraysTest2.java</code>中，没有导入包，后面的描述也没有提到这个包。</p>
+<pre><code class="java">import java.util.function.*;
+</code></pre>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/8nFpD04OA/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Docker实验四:Docker 容器互联
+        
+      </div>
+    </a>
+  
+  
+    <a href="/CFSN2qKgP/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Hadoop实验4：MapReduce编程</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=《疯狂Java讲义（第5版）》 - 踩坑与填坑 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/EAswvY27K/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=《疯狂Java讲义（第5版）》 - 踩坑与填坑 - 囧囧JOJO - 博客&u=https://jiongjiongjojo.gitee.io/EAswvY27K/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=《疯狂Java讲义（第5版）》 - 踩坑与填坑 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/EAswvY27K/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

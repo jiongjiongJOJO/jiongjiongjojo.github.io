@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>安徽科技学院自动疫情填报 V2.1(完全自动) | 囧囧JOJO - 博客</title>
+
+    <meta name="description" content="&lt;h1 id=&#34;简介&#34;&gt;&lt;a href=&#34;#简介&#34; class=&#34;headerlink&#34; title=&#34;简介&#34;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;安徽科技学院自动完成学生健康情况填报、每日健康监测。&lt;/p&gt;
+&lt;p&gt;此源码为V2版本，V1版本也是我写的，因为专业性比较强，上手麻烦，所以写了这个V2的版本。&lt;/p&gt;
+&lt;p&gt;V2的版本只需要之前手动填报过信息，就会获取之前的信息进行自动提交。&lt;/p&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl02tinnm001zrg9mbw1b9f2n" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      安徽科技学院自动疫情填报 V2.1(完全自动)
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-09-07T08:12:47.000Z" itemprop="datePublished">2021-09-07</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>安徽科技学院自动完成学生健康情况填报、每日健康监测。</p>
+<p>此源码为V2版本，V1版本也是我写的，因为专业性比较强，上手麻烦，所以写了这个V2的版本。</p>
+<p>V2的版本只需要之前手动填报过信息，就会获取之前的信息进行自动提交。</p>
+<span id="more"></span>
+
+<p>开源不易，如果本项目对你有帮助，那么就请给个star吧。😄</p>
+<p>同时，欢迎各位老板在线打赏。下面是我的要饭码！<br><img src="/whNkJt2eL/0.jpg"></p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E7%9B%AE%E5%BD%95">目录</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97">更新日志</a></li>
+<li><a href="#%E5%8A%9F%E8%83%BD">功能</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F">使用方式</a><ul>
+<li><a href="#github-actions%E4%B8%8D%E6%8E%A8%E8%8D%90">Github Actions（不推荐）</a><ul>
+<li><a href="#1fork%E6%9C%AC%E9%A1%B9%E7%9B%AE">1.fork本项目</a></li>
+<li><a href="#2%E5%87%86%E5%A4%87%E9%9C%80%E8%A6%81%E7%9A%84%E5%8F%82%E6%95%B0">2.准备需要的参数</a></li>
+<li><a href="#3%E5%B0%86%E5%8F%82%E6%95%B0%E5%A1%AB%E5%88%B0secrets">3.将参数填到Secrets</a></li>
+<li><a href="#4%E5%BC%80%E5%90%AFactions">4.开启Actions</a></li>
+<li><a href="#5%E8%BF%9B%E8%A1%8C%E4%B8%80%E6%AC%A1push%E6%93%8D%E4%BD%9C">5.进行一次push操作</a></li>
+</ul>
+</li>
+<li><a href="#%E8%85%BE%E8%AE%AF%E4%BA%91%E5%87%BD%E6%95%B0%E6%8E%A8%E8%8D%90">腾讯云函数（推荐）</a><ul>
+<li><a href="#1%E4%B8%8B%E8%BD%BD%E4%BB%A3%E7%A0%81%E5%8C%85">1.下载代码包</a></li>
+<li><a href="#2%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0">2.新建一个函数</a></li>
+<li><a href="#3%E4%BF%AE%E6%94%B9%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0">3.修改相关参数</a></li>
+<li><a href="#4%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E8%BF%90%E8%A1%8C">4.设置自动运行</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E9%80%9A%E7%9F%A5%E6%8E%A8%E9%80%81%E6%96%B9%E5%BC%8F">通知推送方式</a></li>
+<li><a href="#%E7%94%B3%E6%98%8E">申明</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E9%A1%B9%E7%9B%AE">参考项目</a></li>
+</ul>
+<h1 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h1><p><strong>V1.0</strong> - 2021年02月18日（可能是更早，忘记了）</p>
+<pre><code>创建AHSTU_SPCP项目并开源
+</code></pre>
+<p>原项目地址：<a target="_blank" rel="noopener" href="https://github.com/jiongjiongJOJO/AHSTU_SPCP">AHSTU_SPCP</a></p>
+<p><strong>V2.0</strong> - 2021年06月02日</p>
+<pre><code>移除了原先笨重的抓包方式
+才用账号密码登录自动获取个人信息的方式提交
+</code></pre>
+<p><strong>V2.1</strong> - 2021年09月05日</p>
+<pre><code>增加异常处理，填报错误能更好的推送！
+</code></pre>
+<h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><ul>
+<li><input checked="" disabled="" type="checkbox"> 自动填报三次随机体温（36.0~36.9）</li>
+<li><input checked="" disabled="" type="checkbox"> 自动填报学生健康情况</li>
+<li><input checked="" disabled="" type="checkbox"> 每日通过微信推送成功与否的信息</li>
+</ul>
+<h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><h2 id="Github-Actions（不推荐）"><a href="#Github-Actions（不推荐）" class="headerlink" title="Github Actions（不推荐）"></a>Github Actions（不推荐）</h2><h3 id="1-fork本项目"><a href="#1-fork本项目" class="headerlink" title="1.fork本项目"></a>1.fork本项目</h3><p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/jiongjiongJOJO/AHSTU_SPCP_2">jiongjiongJOJO&#x2F;AHSTU_SPCP_2</a><br>点击右上角Fork按钮，将项目fork到自己的仓库。</p>
+<h3 id="2-准备需要的参数"><a href="#2-准备需要的参数" class="headerlink" title="2.准备需要的参数"></a>2.准备需要的参数</h3><p>学号、密码、PushPlus的token(选填)。<br>其中，后面提到的user为你的学号，password为你疫情填报系统的密码，send_key为PushPlus的token（不启用推送的话，可以不修改）</p>
+<h3 id="3-将参数填到Secrets"><a href="#3-将参数填到Secrets" class="headerlink" title="3.将参数填到Secrets"></a>3.将参数填到Secrets</h3><p>首先打开Secrets页面，如下图操作<br><img src="/whNkJt2eL/1.jpg"></p>
+<p>Name填写为“USERINFO”即可</p>
+<p>Value填入下面框中的内容（注意修改user，password，send_key）</p>
+<pre><code>&#123;
+    &quot;user&quot;: &quot;123456789&quot;,
+    &quot;password&quot;: &quot;123456789&quot;,
+    &quot;send_key&quot;: &quot;123456789&quot;
+&#125;
+</code></pre>
+<p><img src="/whNkJt2eL/2.jpg"></p>
+<h3 id="4-开启Actions"><a href="#4-开启Actions" class="headerlink" title="4.开启Actions"></a>4.开启Actions</h3><p>默认<code>Actions</code>处于禁止状态，在<code>Actions</code>选项中开启<code>Actions</code>功能，把那个绿色的长按钮点一下。如果看到左侧工作流上有黄色<code>!</code>号，还需继续开启。</p>
+<p><img src="/whNkJt2eL/3.jpg"></p>
+<h3 id="5-进行一次push操作"><a href="#5-进行一次push操作" class="headerlink" title="5.进行一次push操作"></a>5.进行一次push操作</h3><p><code>push</code>操作会触发工作流运行。</p>
+<p>删除掉<code>README.md</code>即可。完成后，每天将自动完成每日任务。</p>
+<h2 id="腾讯云函数（推荐）"><a href="#腾讯云函数（推荐）" class="headerlink" title="腾讯云函数（推荐）"></a>腾讯云函数（推荐）</h2><h3 id="1-下载代码包"><a href="#1-下载代码包" class="headerlink" title="1.下载代码包"></a>1.下载代码包</h3><p>下载地址：<a target="_blank" rel="noopener" href="https://ws28.cn/f/5l9spwvhi94">https://ws28.cn/f/5l9spwvhi94</a></p>
+<h3 id="2-新建一个函数"><a href="#2-新建一个函数" class="headerlink" title="2.新建一个函数"></a>2.新建一个函数</h3><p>打开<a target="_blank" rel="noopener" href="https://console.cloud.tencent.com/scf/list">腾讯云函数</a>，登录账号（可以用QQ登录），然后点击“新建”<br><img src="/whNkJt2eL/4.jpg"><br>然后根据下图步骤填写信息<br><img src="/whNkJt2eL/5.jpg"><br>接着点击编辑按钮关掉日志功能（很重要，因为日志会产生费用，不及时充值会停止运行）<br><img src="/whNkJt2eL/6.jpg"><br>修改超时时间和关闭日志功能，修改完点保存就行了<br><img src="/whNkJt2eL/7.jpg"></p>
+<h3 id="3-修改相关参数"><a href="#3-修改相关参数" class="headerlink" title="3.修改相关参数"></a>3.修改相关参数</h3><p>打开函数代码，找到index.py文件，修改图中圈出的内容（不要删除或添加多余的空格等内容）<br><img src="/whNkJt2eL/8.jpg"><br>其中，user后面填写自己的学号，password后面填写密码，send_key后面填写<a href="#pushplus%E6%9C%BA%E5%99%A8%E4%BA%BA">PushPlus的token</a>（可以在下方获取）<br>修改完成后点击下方的部署，等待十秒左右，会提示部署完成。</p>
+<h3 id="4-设置自动运行"><a href="#4-设置自动运行" class="headerlink" title="4.设置自动运行"></a>4.设置自动运行</h3><p>选择创建触发器<br><img src="/whNkJt2eL/9.jpg"><br>设置触发周期<br>其中Cron表达式中包含空格，下方内容为图中的表达式，可以直接复制使用</p>
+<pre><code>0 30 8 * * * *
+</code></pre>
+<p><img src="/whNkJt2eL/10.jpg"><br>点击提交后，就配置完成了，每天8:30分自动执行脚本。</p>
+<h1 id="通知推送方式"><a href="#通知推送方式" class="headerlink" title="通知推送方式"></a>通知推送方式</h1><h2 id="pushplus机器人"><a href="#pushplus机器人" class="headerlink" title="pushplus机器人"></a>pushplus机器人</h2><p>只需要一个<code>token</code>，参考<a target="_blank" rel="noopener" href="http://pushplus.hxtrip.com/doc/guide/api.html#%E4%B8%80%E3%80%81%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E6%8E%A5%E5%8F%A3">获取pushplus的token</a>。</p>
+<h1 id="申明"><a href="#申明" class="headerlink" title="申明"></a>申明</h1><p>本项目仅用于学习。</p>
+<h1 id="参考项目"><a href="#参考项目" class="headerlink" title="参考项目"></a>参考项目</h1><p><a target="_blank" rel="noopener" href="https://github.com/srcrs/UnicomTask">srcrs&#x2F;UnicomTask</a>，参考了该项目的README.md文档</p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/docker-helloworld/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Docker实验一:Docker入门
+        
+      </div>
+    </a>
+  
+  
+    <a href="/yI09C6B-d/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">安徽科技学院疫情填报和体温填报每日自动执行</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=安徽科技学院自动疫情填报 V2.1(完全自动) - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/whNkJt2eL/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=安徽科技学院自动疫情填报 V2.1(完全自动) - 囧囧JOJO - 博客&u=https://jiongjiongjojo.gitee.io/whNkJt2eL/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=安徽科技学院自动疫情填报 V2.1(完全自动) - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/whNkJt2eL/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

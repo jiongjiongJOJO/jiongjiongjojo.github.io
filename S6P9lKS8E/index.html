@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>Docker实验五：Docker 仓库管理 | 囧囧JOJO - 博客</title>
+
+    <meta name="description" content="&lt;h1 id=&#34;Docker-仓库管理&#34;&gt;&lt;a href=&#34;#Docker-仓库管理&#34; class=&#34;headerlink&#34; title=&#34;Docker 仓库管理&#34;&gt;&lt;/a&gt;Docker 仓库管理&lt;/h1&gt;&lt;p&gt;使用仓库（Repository）可以集中存放和管理镜像。&lt;/p&gt;
+&lt;p&gt;本实验包含三部分内容：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如何使用公共的 Docker 仓库。&lt;/li&gt;
+&lt;li&gt;如何使用 Registry 搭建 Docker 仓库。&lt;/li&gt;
+&lt;li&gt;如何使用 VMWare Harbor 搭建自己的Docker仓库。&lt;/li&gt;
+&lt;/ul&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl02tinn8000qrg9m1hrl284h" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Docker实验五：Docker 仓库管理
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-12-02T10:00:10.000Z" itemprop="datePublished">2021-12-02</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="Docker-仓库管理"><a href="#Docker-仓库管理" class="headerlink" title="Docker 仓库管理"></a>Docker 仓库管理</h1><p>使用仓库（Repository）可以集中存放和管理镜像。</p>
+<p>本实验包含三部分内容：</p>
+<ul>
+<li>如何使用公共的 Docker 仓库。</li>
+<li>如何使用 Registry 搭建 Docker 仓库。</li>
+<li>如何使用 VMWare Harbor 搭建自己的Docker仓库。</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h2><ul>
+<li><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></li>
+<li><a href="#1-docker-hub">1 Docker Hub</a><ul>
+<li><a href="#11-%E6%B3%A8%E5%86%8C">1.1 注册</a></li>
+<li><a href="#12-%E7%99%BB%E5%BD%95">1.2 登录</a></li>
+<li><a href="#13-%E9%80%80%E5%87%BA">1.3 退出</a></li>
+<li><a href="#14-%E6%8E%A8%E9%80%81push">1.4 推送(push)</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%9F%BA%E4%BA%8E-registry-%E6%90%AD%E5%BB%BA%E4%BB%93%E5%BA%93">2 基于 Registry 搭建仓库</a><ul>
+<li><a href="#21-registry-%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93">2.1 registry 本地仓库</a><ul>
+<li><a href="#211-%E6%90%AD%E5%BB%BA">2.1.1 搭建</a></li>
+<li><a href="#212-%E9%AA%8C%E8%AF%81">2.1.2 验证</a></li>
+</ul>
+</li>
+<li><a href="#22-registry-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93">2.2 registry 远程仓库</a><ul>
+<li><a href="#221-%E4%BF%AE%E6%94%B9%E4%BB%93%E5%BA%93%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84-docker-%E9%85%8D%E7%BD%AE">2.2.1 修改仓库服务器的 Docker 配置</a></li>
+<li><a href="#222-%E9%85%8D%E7%BD%AEtls">2.2.2 配置TLS</a></li>
+</ul>
+</li>
+<li><a href="#23-%E5%9F%BA%E4%BA%8E-vmware-harbor-%E6%90%AD%E5%BB%BA%E4%BB%93%E5%BA%93">2.3 基于 VMWare Harbor 搭建仓库</a><ul>
+<li><a href="#231-%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93">2.3.1 搭建本地仓库</a></li>
+<li><a href="#232-%E4%BF%AE%E6%94%B9-daemonjson-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">2.3.2 修改 daemon.json 配置文件</a></li>
+</ul>
+</li>
+<li><a href="#24-%E5%9F%BA%E4%BA%8E-tls-%E9%85%8D%E7%BD%AE%E5%AE%89%E5%85%A8%E6%80%A7%E6%9B%B4%E9%AB%98%E7%9A%84-harbor-%E4%BB%93%E5%BA%93">2.4 基于 TLS 配置安全性更高的 harbor 仓库</a><ul>
+<li><a href="#241-%E5%88%9B%E5%BB%BA%E8%AF%81%E4%B9%A6">2.4.1 创建证书</a></li>
+<li><a href="#242-%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6%E7%AD%BE%E5%90%8D%E8%AF%B7%E6%B1%82">2.4.2 生成证书签名请求</a></li>
+<li><a href="#243-%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6">2.4.3 生成证书</a></li>
+<li><a href="#244-%E9%85%8D%E7%BD%AEharborcfg">2.4.4 配置harbor.cfg</a></li>
+<li><a href="#245-%E9%87%8D%E6%96%B0%E5%90%AF%E5%8A%A8harbor">2.4.5 重新启动harbor</a></li>
+<li><a href="#246-%E6%B5%8B%E8%AF%95">2.4.6 测试</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-Docker-Hub"><a href="#1-Docker-Hub" class="headerlink" title="1 Docker Hub"></a>1 Docker Hub</h2><p>目前 Docker 官方维护了一个公共仓库 <a target="_blank" rel="noopener" href="https://hub.docker.com/">Docker Hub</a></p>
+<p>大部分需求都可以通过在 Docker Hub 中直接下载镜像实现。从 Docker Hub 上下载镜像时，不需要注册账号。</p>
+<p>以 hello-world 为关键词进行搜索：</p>
+<pre><code class="bash">docker search hello-world
+</code></pre>
+<p><img src="/S6P9lKS8E/1638439440069.png"></p>
+<p>可以看到Docker Hub给出的 hello-world 镜像列表，这里选择第一个镜像。</p>
+<pre><code class="bash">docker pull hello-world
+</code></pre>
+<p><img src="/S6P9lKS8E/1638439472183.png"></p>
+<p>但是，如果用 Docker Hub 存放（push）自己的镜像时，需要首先在Docker Hub上注册账号。</p>
+<h3 id="1-1-注册"><a href="#1-1-注册" class="headerlink" title="1.1 注册"></a>1.1 注册</h3><p>在 <a target="_blank" rel="noopener" href="https://hub.docker.com/">https://hub.docker.com</a> 免费注册一个 Docker 账号。打开官网后，点击 “Sign Up Docker Hub”注册账号，注册完毕后，点击“Sign In”登录网站。</p>
+<p><img src="/S6P9lKS8E/1638464017690.png"></p>
+<h3 id="1-2-登录"><a href="#1-2-登录" class="headerlink" title="1.2 登录"></a>1.2 登录</h3><p>登录需要输入用户名和密码，登录成功后，我们就可以往自己账号下的推送镜像了。</p>
+<p>使用 docker login 登录 Docker Hub。</p>
+<pre><code class="bash">docker login 
+</code></pre>
+<p><img src="/S6P9lKS8E/1638439503469.png"></p>
+<p>输入在Docker Hub网站上注册的账号和密码后，会提示登录成功（Login Succeeded）。</p>
+<h3 id="1-3-退出"><a href="#1-3-退出" class="headerlink" title="1.3 退出"></a>1.3 退出</h3><p>退出 docker hub 可以使用 docker logout 命令：</p>
+<pre><code class="bash">docker logout
+</code></pre>
+<p><img src="/S6P9lKS8E/1638439519216.png"></p>
+<h3 id="1-4-推送-push"><a href="#1-4-推送-push" class="headerlink" title="1.4 推送(push)"></a>1.4 推送(push)</h3><p>如果当前处于登出状态，需要重新登录。</p>
+<p>登录后，通过 docker push 命令将自己的镜像推送到 Docker Hub。</p>
+<pre><code class="bash">docker login
+docker tag hello-world:latest jiongjiong/hello-world:latest
+docker push jiongjiong/hello-world:latest
+</code></pre>
+<p><img src="/S6P9lKS8E/1638439532110.png"></p>
+<p>推送结束后，可以在官网上点击 Repositories 查看自己账号下的镜像。</p>
+<p><img src="/S6P9lKS8E/1638439544213.png"></p>
+<h2 id="2-基于-Registry-搭建仓库"><a href="#2-基于-Registry-搭建仓库" class="headerlink" title="2 基于 Registry 搭建仓库"></a>2 基于 Registry 搭建仓库</h2><p>在 Docker 中，当执行 docker pull image_name 时 ，实际上是从 registry.hub.docker.com 这个地址去查找，这就是 Docker 公司提供的公共仓库。</p>
+<p>在工作中，不可能把企业项目push到公有仓库进行管理。为了更好的管理镜像，Docker不仅提供了一个中央仓库，同时也允许用户搭建本地私有仓库。本节介绍如何使用registry搭建私有仓库，下节介绍如何使用VMWare Harbor搭建仓库。</p>
+<p>registry搭建仓库的实验分为两部分：单机版仓库和分布式仓库。</p>
+<h3 id="2-1-registry-本地仓库"><a href="#2-1-registry-本地仓库" class="headerlink" title="2.1 registry 本地仓库"></a>2.1 registry 本地仓库</h3><h4 id="2-1-1-搭建"><a href="#2-1-1-搭建" class="headerlink" title="2.1.1 搭建"></a>2.1.1 搭建</h4><p>Docker 官方提供了一个搭建私有仓库的镜像 registry ，只需把镜像下载下来，运行容器并暴露 5000 端口，就可以使用了。</p>
+<p>Registry服务默认会将上传的镜像保存在容器的&#x2F;var&#x2F;lib&#x2F;registry，我们将主机的&#x2F;opt&#x2F;registry目录挂载到该目录，即可实现将镜像保存到主机的&#x2F;opt&#x2F;registry目录了。</p>
+<pre><code class="bash">docker pull registry:2
+docker run -d -v /opt/registry:/var/lib/registry -p 5000:5000 --name myregistry registry:2
+docker ps -l
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462648632.png"></p>
+<p>浏览器访问<a target="_blank" rel="noopener" href="http://127.0.0.1:5000/v2/_catalog%EF%BC%8C%E5%87%BA%E7%8E%B0%E4%B8%8B%E9%9D%A2%E6%83%85%E5%86%B5%E8%AF%B4%E6%98%8Eregistry%E8%BF%90%E8%A1%8C%E6%AD%A3%E5%B8%B8%E3%80%82">http://127.0.0.1:5000/v2/_catalog，出现下面情况说明registry运行正常。</a></p>
+<p><img src="/S6P9lKS8E/1638462666292.png"></p>
+<p>可以看到，当前还没有上传任何镜像。</p>
+<h4 id="2-1-2-验证"><a href="#2-1-2-验证" class="headerlink" title="2.1.2 验证"></a>2.1.2 验证</h4><p>现在通过 push hello-world 镜像验证 registry 是否正常。</p>
+<p>注意在推送前，需要将镜像做一个新的标记（tag），标记的格式为：</p>
+<p>仓库地址&#x2F;镜像名:版本号</p>
+<p>使用 push 命令时，push的语法为：</p>
+<p>docker push 仓库地址&#x2F;镜像名:版本号</p>
+<pre><code class="bash">docker tag hello-world:latest localhost:5000/hello-world:latest
+docker push localhost:5000/hello-world:latest
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462682078.png"></p>
+<p>可以看出，hello-world 镜像推送成功。</p>
+<p>通过浏览器验证 hello-world 镜像推送成功。</p>
+<p><img src="/S6P9lKS8E/1638462695889.png"></p>
+<p>可以看到仓库中已显示 hello-world 镜像。</p>
+<p>接着，使用私有仓库下载镜像，首先移除本地的 hello-world 镜像：</p>
+<p>然后，通过pull下载镜像，pull命令的格式为：</p>
+<p>docker pull 仓库地址&#x2F;镜像名:版本号</p>
+<pre><code class="bash">docker images
+docker rmi hello-world jiongjiong/hello-world localhost:5000/hello-world
+docker images
+docker pull localhost:5000/hello-world:latest
+docker images
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462709941.png"></p>
+<p><img src="/S6P9lKS8E/1638462722436.png"></p>
+<p>可以看到 hello-world 镜像已被成功下载。</p>
+<p>对镜像做一个 hello-world:latest 的标记。</p>
+<pre><code class="bash">docker tag localhost:5000/hello-world:latest hello-world:latest
+docker images
+</code></pre>
+<p>使用本地镜像的另一个好处是，一般局域网的速度要远快于互联网，因此，push和pull的速度都较快。</p>
+<p><img src="/S6P9lKS8E/1638462733577.png"></p>
+<h3 id="2-2-registry-远程仓库"><a href="#2-2-registry-远程仓库" class="headerlink" title="2.2 registry 远程仓库"></a>2.2 registry 远程仓库</h3><p>到此为止，已经在本地系统上完成了registry仓库的搭建。然而，一般镜像仓库是需要被远程访问，即仓库服务器搭建好了之后，在其他docker客户端上可以将镜像推送到这个镜像仓库，或者从这个镜像仓库下载镜像。</p>
+<p>由于我们的实验环境只有当前桌面环境这一台服务器，为了模拟多台服务器，这里，借助于 dind 镜像。</p>
+<p>dind 镜像的功能是在 Docker 容器中运行 Docker 容器，可以用dind创建一个 registry_server 容器，作为镜像仓库；再创建一个 registry_client 容器，作为普通的docker服务器，然后从这个 docker服务器上向registry_server推送镜像或者从registry_server上下载镜像。这样就实现了，镜像仓库被远程访问的功能。</p>
+<p>首先下载dind镜像，然后创建registry_server 和 registry_client，并为这两台服务器分配IP地址。</p>
+<pre><code class="bash">docker pull jpetazzo/dind
+docker network create registry_net --subnet=172.20.0.0/16
+docker run -itd --privileged --name registry_server --hostname server --network registry_net --ip 172.20.1.1 jpetazzo/dind
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462743958.png"></p>
+<p>上述命令分别创建了 registry_server（172.20.1.1） 和 registry_client（172.20.1.2） ，registry_server 为仓库服务器， registry_client 为用于访问仓库服务器的远程机。</p>
+<p>在registry_server上部署registry:2服务：</p>
+<pre><code class="bash">docker exec -it registry_server /bin/bash
+docker pull registry:2
+docker run -d -v /opt/registry:/var/lib/registry -p 5000:5000 --name myregistry registry:2
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462757491.png"></p>
+<p>打开Chrome浏览器，输入地址：<a target="_blank" rel="noopener" href="http://172.20.1.1:5000/v2/_catalog%EF%BC%8C%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E6%98%AF%E5%90%A6%E5%90%AF%E5%8A%A8%E3%80%82">http://172.20.1.1:5000/v2/_catalog，查看服务是否启动。</a></p>
+<p><img src="/S6P9lKS8E/1638462768878.png"></p>
+<p>可见，服务已正常启动。</p>
+<p>新建一个终端标签。</p>
+<p>在新打开的终端里，进入 registry_client 。</p>
+<pre><code class="bash">docker exec -it registry_client /bin/bash
+</code></pre>
+<p>首先修改<code>/etc/hosts</code>文件，添加内容到该文件尾部：</p>
+<pre><code class="host">172.20.1.1      server
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462786697.png"></p>
+<p>然后，下载 hello-world 镜像，并推送给 registry_server</p>
+<pre><code class="bash">docker pull hello-world
+docker tag hello-world server:5000/hello-world:latest
+docker push server:5000/hello-world:latest
+</code></pre>
+<p>可以看到推送失败了。这是因为从 Docker 1.13.2 版本开始，使用 registry 时，必须使用TLS保证其安全。</p>
+<p>有两种方法，可以让镜像顺利推送到仓库服务器上。一种是修改仓库服务器的Docker配置文件 daemon.json ，将仓库服务器配置为非安全服务器。另一种方式是配置TLS认证。</p>
+<p>这里，分别用这两种方式进行配置。</p>
+<h4 id="2-2-1-修改仓库服务器的-Docker-配置"><a href="#2-2-1-修改仓库服务器的-Docker-配置" class="headerlink" title="2.2.1 修改仓库服务器的 Docker 配置"></a>2.2.1 修改仓库服务器的 Docker 配置</h4><p>编辑 &#x2F;etc&#x2F;docker&#x2F;daemon.json 文件，添加如下信息：</p>
+<pre><code class="json">&#123;
+    &quot;insecure-registries&quot;:[&quot;server:5000&quot;,&quot;172.20.1.1:5000&quot;]
+&#125;
+</code></pre>
+<p>修改完毕后，重启Docker。在 dind 中，第一次重启 Docker 的方式为：</p>
+<pre><code class="bash">ps -ef | grep dockerd
+kill -9 58
+ps -ef | grep dockerd
+service docker start
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462866707.png"></p>
+<p>在后续的实验中，可采用如下方式在 dind 中重启 Docker</p>
+<pre><code class="bash">service docker stop
+service docker start
+</code></pre>
+<p>通过 docker info 查看 insecure-registies 是否正确设置：</p>
+<pre><code class="bash">docker info
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462854329.png"></p>
+<p>可以看到，insecure-registies 已被正确设置。</p>
+<p>接下来，重新推送 hello-world 镜像：</p>
+<pre><code class="bash">docker push server:5000/hello-world
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462874075.png"></p>
+<p>通过 Chrome 验证 hello-world 镜像推送成功。</p>
+<p><img src="/S6P9lKS8E/1638462887253.png"></p>
+<p>可见，hello-world 镜像已成功推送。</p>
+<h4 id="2-2-2-配置TLS"><a href="#2-2-2-配置TLS" class="headerlink" title="2.2.2 配置TLS"></a>2.2.2 配置TLS</h4><p>接下来使用配置TLS（安全传输层协议）认证的方式配置仓库服务器和 Docker 客户端。</p>
+<p>首先，将 Docker 客户端的 daemon.json 配置文件移除，并重启Docker。</p>
+<pre><code class="bash">mv /etc/docker/daemon.json /etc/docker/daemon.json.bak
+service docker stop
+service docker start
+docker ps
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462898328.png"></p>
+<p>下载 nginx 镜像， 并尝试推送镜像仓库，确认 Docker 镜像仓库无法推送。</p>
+<pre><code class="bash">docker pull nginx
+docker tag nginx server:5000/nginx
+docker push server:5000/nginx
+</code></pre>
+<p>首先在仓库服务器上，生成带有自签名的证书：</p>
+<pre><code class="bash">mkdir -p /opt/docker/registry/certs
+openssl req -newkey rsa:4096 -nodes -sha256 -keyout /opt/docker/registry/certs/domain.key -x509 -days 365 -out /opt/docker/registry/certs/domain.crt
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462909227.png"></p>
+<p>根据提示信息输入自己的信息，在路径 &#x2F;opt&#x2F;docker&#x2F;registry&#x2F;certs 下生成签名证书。</p>
+<p>删除之前创建的 myregistry 容器，重新创建带有 TLS 认证的 registry 容器。</p>
+<pre><code class="bash">docker stop myregistry
+docker rm myregistry
+docker run -d --name myregistry -p 5000:5000 -v /opt/docker/registry/certs:/certs -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key registry:2
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462921871.png"></p>
+<p>然后回到 Client 端，首先需要创建&#x2F;etc&#x2F;docker&#x2F;certs.d&#x2F;目录。</p>
+<p>然后再该目录下创建与这个registry服务器域名一致的目录：server:5000</p>
+<pre><code class="bash">mkdir /etc/docker/certs.d
+cd /etc/docker/certs.d/
+mkdir server:5000
+</code></pre>
+<p>然后将证书 domain.crt 复制到每一个 Client 的 &#x2F;etc&#x2F;docker&#x2F;certs.d&#x2F;server:5000&#x2F; 目录下。</p>
+<p>这里，采用scp复制，复制前需要在 server 端安装 ssh 服务器，在 client 端安装 ssh 客户端。</p>
+<p>首先在 server 端配置 ssh 服务器：</p>
+<pre><code class="bash">apt-get update
+apt-get install -y openssh-server
+</code></pre>
+<p>ssh 安装完毕后，需要允许root登录，修改 &#x2F;etc&#x2F;ssh&#x2F;sshd_config 文件，将 PermitRootLogin 这一行改为：</p>
+<pre><code class="bash">PermitRootLogin yes
+</code></pre>
+<p>修改完毕后，重启 ssh 服务器，修改过程如下所示：</p>
+<pre><code class="bash">vi /etc/ssh/sshd_config 
+cat /etc/ssh/sshd_config | grep PermitRoot
+service ssh restart
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462936458.png"></p>
+<p>为仓库服务器设置root密码:</p>
+<pre><code class="bash">passwd root
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462948350.png"></p>
+<p>接着回到 Client 端安装 ssh 客户端。</p>
+<pre><code class="bash">apt-get update
+apt-get install -y openssh-client
+</code></pre>
+<p>安装完毕后，将认证文件从仓库服务器拷贝到本地。</p>
+<pre><code class="bash">scp -p root@172.20.1.1:/opt/docker/registry/certs/domain.crt /etc/docker/certs.d/server\:5000/ca.crt
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462963729.png"></p>
+<p>现在重新推送 nginx 镜像，输出信息如下：</p>
+<pre><code class="bash">docker push server:5000/nginx
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462976034.png"></p>
+<p>使用 Chrome 查看镜像列表（在提示页面点击：高级-&gt;继续）：</p>
+<p><img src="/S6P9lKS8E/1638462985074.png"></p>
+<p>可以看到 nginx 已被成功推送于仓库服务器上。</p>
+<p>从仓库服务器下载 ngnix 镜像进一步验证仓库服务器已正确配置。</p>
+<pre><code class="bash">docker images
+docker rmi nginx:latest
+docker rmi server:5000/nginx
+docker pull server:5000/nginx
+docker images
+</code></pre>
+<p><img src="/S6P9lKS8E/1638462994957.png"></p>
+<p>可见，可以顺利地从仓库服务器下载到 nginx 镜像。</p>
+<h3 id="2-3-基于-VMWare-Harbor-搭建仓库"><a href="#2-3-基于-VMWare-Harbor-搭建仓库" class="headerlink" title="2.3 基于 VMWare Harbor 搭建仓库"></a>2.3 基于 VMWare Harbor 搭建仓库</h3><p>docker 官方提供的私有仓库 registry，用起来虽然简单 ，但在管理的功能上存在不足。 Harbor是一个用于存储和分发Docker镜像的企业级Registry服务器，harbor在实现上使用了官方的docker registry v2(v2命名是distribution)服务。harbor在docker distribution的基础上增加了一些安全、访问控制、管理的功能以满足企业对于镜像仓库的需求。</p>
+<h4 id="2-3-1-搭建本地仓库"><a href="#2-3-1-搭建本地仓库" class="headerlink" title="2.3.1 搭建本地仓库"></a>2.3.1 搭建本地仓库</h4><p>首先，进入<code>~/course/docker/harbor/</code>目录， 安装 <code>docker-compose</code>， 将文件 <code>docker-compose-Linux-x86_64</code> 拷贝于目录 <code>/usr/local/bin/</code> 下，并重命名为：<code>docker-compose</code>。</p>
+<pre><code class="bash">cd ~/course/docker/harbor/
+cp docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+</code></pre>
+<p>然后解压 harbor-offline-installer-v1.2.2.tgz 压缩包，修改 harbor.cfg 将 hostname 的值修改为 127.0.0.1。</p>
+<pre><code class="bash">tar -zxf harbor-offline-installer-v1.2.2.tgz
+ls -l
+cd harbor
+ls
+vim harbor.cfg 
+cat harbor.cfg | grep hostname
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463006827.png"></p>
+<p>为install.sh添加执行权限，执行 install.sh。</p>
+<pre><code class="bash">chmod +x install.sh 
+./install.sh 
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463017513.png"></p>
+<p>安装完毕后，可使用 Chrome 浏览器访问 harbor 服务，在地址栏输入：127.0.0.1，可打开如下图所示页面。</p>
+<p><img src="/S6P9lKS8E/1638463026640.png"></p>
+<p>输入账号&#x2F;密码：admin&#x2F;Harbor12345，以管理员身份登陆到 harbor 管理页面。</p>
+<p><img src="/S6P9lKS8E/1638463035279.png"></p>
+<p>可以看到，当前存在一个library的目录，且该目录为空。</p>
+<p>在推送镜像到服务器之前，需要首先用 docker login 登陆仓库服务器。</p>
+<p>登陆账号&#x2F;密码为：admin&#x2F;Harbor12345</p>
+<pre><code class="bash">docker login 127.0.0.1
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463048154.png"></p>
+<p>现在将 nginx 镜像上传至 harbor 仓库。</p>
+<pre><code class="bash">docker pull nginx
+docker tag nginx 127.0.0.1/library/nginx
+docker push 127.0.0.1/library/nginx
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463057872.png"></p>
+<p>可以看到，镜像已成功推送到 harbor 仓库上。</p>
+<p>使用 Chrome 查看所推送的镜像，刷新 harbor 管理页面后，点击library：</p>
+<p><img src="/S6P9lKS8E/1638463104678.png"></p>
+<p>可以看到 nginx 镜像已被成功推送到 harbor 仓库上。</p>
+<p>使用 docker pull 进一步验证 harbor 仓库服务。</p>
+<p>首先删除本地的 nginx 镜像，然后从 harbor 仓库服务器上拉取。</p>
+<pre><code class="bash">docker rmi nginx 127.0.0.1/library/nginx
+docker pull 127.0.0.1/library/nginx
+docker images
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463117746.png"></p>
+<p>可以看到，ngnix 已从 harbor仓库成功下载。</p>
+<p>本地仓库在实际环境中很少使用，更常使用的仓库的远程仓库。</p>
+<p>现在基于 dind 模拟 harbor 远程仓库。</p>
+<p>基于 dind 创建两台服务器 harbor_server 和 harbor_client ， IP 地址分别设置为 172.20.2.1，172.20.2.2。</p>
+<pre><code class="bash">docker run -itd --privileged --name harbor_server --hostname server --network registry_net --ip 172.20.2.1 jpetazzo/dind
+docker run -itd --privileged --name harbor_client --hostname client --network registry_net --ip 172.20.2.2 jpetazzo/dind
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463128924.png"></p>
+<p>将 docker-compose 和 harbor 安装包拷贝到 harbor_server 中，然后进入 harbor_server 安装 docker-compose 并解压 harbor 安装包。</p>
+<pre><code class="bash">cd ..
+ls
+docker cp docker-compose-Linux-x86_64 harbor_server:/home
+docker cp harbor-offline-installer-v1.2.2.tgz harbor_server:/home
+docker exec -it harbor_server /bin/bash
+cd /home
+ls
+mv docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+tar -zxf harbor-offline-installer-v1.2.2.tgz
+ls
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463141482.png"></p>
+<p>进入harbor目录，将harbor.cfg中的IP地址改为：172.20.2.1，然后分别为&#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-compose和.&#x2F;install.sh 添加执行权限。</p>
+<pre><code class="bash">vi harbor.cfg 
+cat harbor.cfg | grep hostname
+chmod +x /usr/local/bin/docker-compose 
+chmod +x install.sh 
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463150996.png"></p>
+<p>执行 install.sh 安装 harbor。</p>
+<pre><code class="bash">./install.sh
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463165172.png"></p>
+<p>从浏览器上查看 Harbor 仓库服务，打开 Chrome 浏览器，输入地址：172.20.2.1，使用 admin&#x2F;Harbor12345 登录，可以看到当前 library 仓库为空。</p>
+<p><img src="/S6P9lKS8E/1638463174024.png"></p>
+<p>在终端另一个tab页上进入 harbor_client， 尝试推送 hello-world 镜像到 harbor 仓库服务器。</p>
+<pre><code class="bash">docker exec -it harbor_client /bin/bash
+docker pull hello-world
+docker tag hello-world 172.20.2.1/library/hello-world
+docker login 172.20.2.1
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463183788.png"></p>
+<p>可以看到，远程方式访问 harbor 仓库时，访问失败。</p>
+<p>和registry:2一样，可以通过两种方式使得远程机可以推送镜像到Harbor服务器，一种是配置 daemon.json 文件，告知 Docker 客户端，所要使用的仓库时不安全的；另一种是配置TLS认证。</p>
+<p>下面分别使用这两种方式来配置 harbor 仓库。</p>
+<h4 id="2-3-2-修改-daemon-json-配置文件"><a href="#2-3-2-修改-daemon-json-配置文件" class="headerlink" title="2.3.2 修改 daemon.json 配置文件"></a>2.3.2 修改 daemon.json 配置文件</h4><p>编辑修改 &#x2F;etc&#x2F;docker&#x2F;daemon.json 文件，添加相关内容：</p>
+<pre><code class="bash">&#123;
+    &quot;insecure-registries&quot;:[&quot;172.20.2.1&quot;]
+&#125;
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463195598.png"></p>
+<pre><code class="bash">ps -ef | grep dockerd
+kill -9 58
+service docker start
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463207358.png"></p>
+<p>使用<code>docker info</code>确认配置已生效：</p>
+<p><img src="/S6P9lKS8E/1638463217000.png"></p>
+<p>可以在 Insecure Registries 中看到 172.20.2.1，因此，配置已生效。</p>
+<p>再次使用 docker login 登录 harbor 仓库服务器，</p>
+<pre><code class="bash">docker login 172.20.2.1
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463226049.png"></p>
+<p>提示登录已成功。</p>
+<p>再次推送 hello-world 镜像，</p>
+<pre><code class="bash">docker push 172.20.2.1/library/hello-world
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463235665.png"></p>
+<p>可以看到，镜像已成功推送。</p>
+<p>通过浏览器确认镜像推送成功，切换到 Chrome 浏览器，刷新 harbor 管理页面，可以看到 hello-world 镜像已被成功推送。</p>
+<p><img src="/S6P9lKS8E/1638463246122.png"></p>
+<h3 id="2-4-基于-TLS-配置安全性更高的-harbor-仓库"><a href="#2-4-基于-TLS-配置安全性更高的-harbor-仓库" class="headerlink" title="2.4 基于 TLS 配置安全性更高的 harbor 仓库"></a>2.4 基于 TLS 配置安全性更高的 harbor 仓库</h3><p>首先在 Client 上移除 &#x2F;etc&#x2F;docker&#x2F;daemon.json 文件，并重启 Dcoker， 确认关闭不安全的配置方式。</p>
+<pre><code class="bash">mv /etc/docker/daemon.json /etc/docker/daemon.json.bak
+service docker stop
+service docker start
+docker login 172.20.1.1
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463256798.png"></p>
+<p>可以看到使用 docker login 时，无法登录，说明不安全的配置方式已关闭。</p>
+<p>回到 harbor 仓库服务器的终端，开始为 harbor 配置 https 认证。</p>
+<h4 id="2-4-1-创建证书"><a href="#2-4-1-创建证书" class="headerlink" title="2.4.1 创建证书"></a>2.4.1 创建证书</h4><p>首先创建证书的存放目录：</p>
+<pre><code class="bash">mkdir /root/ca -p
+cd /root/ca
+openssl req  -newkey rsa:4096 -nodes -sha256 -keyout ca.key -x509 -days 365 -out ca.crt
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463268473.png"></p>
+<p>其中，</p>
+<ul>
+<li>req：申请证书签署请求</li>
+<li>-newkey：新密钥</li>
+<li>-x509：可以用来显示证书的内容，转换其格式，给CSR签名等X.509证书的管理工作，这里用来自签名。</li>
+</ul>
+<p>按照提示信息输入相应内容，注意在 Common Name 提示信息处输入 harbor 服务器的仓库地址。</p>
+<h4 id="2-4-2-生成证书签名请求"><a href="#2-4-2-生成证书签名请求" class="headerlink" title="2.4.2 生成证书签名请求"></a>2.4.2 生成证书签名请求</h4><pre><code class="bash">openssl req  -newkey rsa:4096 -nodes -sha256 -keyout 172.20.2.1.key -out 172.20.2.1.csr
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463282259.png"></p>
+<p>按照自己的信息填写上述内容。注意在 Common Name 处需要填写 harbor 仓库服务器的 IP 地址。</p>
+<h4 id="2-4-3-生成证书"><a href="#2-4-3-生成证书" class="headerlink" title="2.4.3 生成证书"></a>2.4.3 生成证书</h4><p>habor仓库服务器默认只能通过域名访问，不能通过IP地址访问，这里对其进行配置，使得可以通过IP访问仓库服务器。</p>
+<pre><code class="bash">echo subjectAltName = IP:172.20.2.1 &gt; extfile.cnf
+openssl x509 -req -days 365 -in 172.20.2.1.csr -CA ca.crt -CAkey ca.key -CAcreateserial -extfile extfile.cnf -out 172.20.2.1.crt
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463292646.png"></p>
+<h4 id="2-4-4-配置harbor-cfg"><a href="#2-4-4-配置harbor-cfg" class="headerlink" title="2.4.4 配置harbor.cfg"></a>2.4.4 配置harbor.cfg</h4><p>配置 harbor.cfg 文件，</p>
+<ul>
+<li>将协议改为 https 协议，uiurlprotocol &#x3D; https</li>
+<li>设置 ssl_cert 文件路径为:&#x2F;root&#x2F;ca&#x2F;172.20.2.1.crt</li>
+<li>设置 ssl_cert_key 文件路径为：&#x2F;root&#x2F;ca&#x2F;172.20.2.1.key</li>
+</ul>
+<p>使用vi，按如下方式编辑harbor.cfg文件。</p>
+<p><img src="/S6P9lKS8E/1638463302772.png"></p>
+<h4 id="2-4-5-重新启动harbor"><a href="#2-4-5-重新启动harbor" class="headerlink" title="2.4.5 重新启动harbor"></a>2.4.5 重新启动harbor</h4><p>使用 docker-compose down 命令停止当前的harbor服务，使用 prepare 脚本使得新配置的 harbor.cfg 生效，使用 docker-compose up 命令启动新配置下的 habor 服务。</p>
+<pre><code class="bash">docker-compose down -v
+./prepare
+docker-compose up -d
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463313305.png"></p>
+<p><img src="/S6P9lKS8E/1638463323888.png"></p>
+<p>接下来需要将 harbor 仓库服务器的认证文件拷贝到 Client 远程机上。</p>
+<p>按照 registry TLS 配置实验中的方法分别为 harbor 仓库服务器和 Client 客户端安装 SSH Server 和 SSH Client，安装完毕后，将 server 端的 root 密码重置为 coursegrading。</p>
+<p>server端的 ssh 配置流程如下：</p>
+<pre><code class="bash">apt-get update
+apt-get install -y openssh-server
+vi /etc/ssh/sshd_config 
+cat /etc/ssh/sshd_config | grep PermitRootLogin
+service ssh restart
+passwd root 
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463334193.png"></p>
+<p>client端的 ssh 配置流程如下：</p>
+<pre><code class="bash">apt-get update
+apt-get install -y openssh-client
+</code></pre>
+<p>然后将 server 端制作的 ca 证书拷贝到 client 端，并添加到信任。</p>
+<pre><code class="bash">mkdir -p /etc/docker/certs.d/172.20.2.1
+scp root@172.20.2.1:/root/ca/ca.crt /etc/docker/certs.d/172.20.2.1
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463343285.png"></p>
+<p>然后重启 client 端的 Docker 服务：</p>
+<pre><code class="bash">service docker stop
+service docker start
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463353102.png"></p>
+<h4 id="2-4-6-测试"><a href="#2-4-6-测试" class="headerlink" title="2.4.6 测试"></a>2.4.6 测试</h4><p>重新使用 docker login 登录 172.20.2.1 仓库服务器：</p>
+<pre><code class="bash">docker login 172.20.2.1
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463361997.png"></p>
+<p>由于之前登陆时，账号&#x2F;密码已被系统记录，所以可以直接登录。</p>
+<p>这里，首先从 docker 官方下载 mysql 镜像，然后推送到 harbor 仓库服务器上。</p>
+<pre><code class="bash">docker pull mysql
+docker tag mysql 172.20.2.1/library/mysql
+docker push 172.20.2.1/library/mysql
+</code></pre>
+<p>可见，mysql镜像已成功推送。</p>
+<p>通过Chrome浏览器查看该镜像，首先在地址栏输入：<a target="_blank" rel="noopener" href="https://172.20.2.1/">https://172.20.2.1</a>,登录</p>
+<p><img src="/S6P9lKS8E/1638463374103.png"></p>
+<p>可以看到 mysql 镜像已被成功推送。</p>
+<p>使用docker pull 再次测试：</p>
+<pre><code class="bash">docker rmi 172.20.2.1/library/mysql mysql
+docker pull 172.20.2.1/library/mysql
+</code></pre>
+<p>查看镜像列表：</p>
+<pre><code class="bash">docker images
+</code></pre>
+<p><img src="/S6P9lKS8E/1638463383043.png"></p>
+<p>可见，带有 https 认证的harbor仓库已配置成功。</p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/QqVcDzIex/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Hive实验一：Hive安装部署及常用命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/8nFpD04OA/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Docker实验四:Docker 容器互联</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=Docker实验五：Docker 仓库管理 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/S6P9lKS8E/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Docker实验五：Docker 仓库管理 - 囧囧JOJO - 博客&u=https://jiongjiongjojo.gitee.io/S6P9lKS8E/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Docker实验五：Docker 仓库管理 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/S6P9lKS8E/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

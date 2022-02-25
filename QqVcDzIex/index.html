@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+    <title>Hive实验一：Hive安装部署及常用命令 | 囧囧JOJO - 博客</title>
+
+    <meta name="description" content="&lt;h1 id=&#34;Hive安装部署及常用命令&#34;&gt;&lt;a href=&#34;#Hive安装部署及常用命令&#34; class=&#34;headerlink&#34; title=&#34;Hive安装部署及常用命令&#34;&gt;&lt;/a&gt;Hive安装部署及常用命令&lt;/h1&gt;">
+    <meta name="keywords" content="">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<link rel="stylesheet" href="/dist/build.css?v=1643276206136.css">
+
+
+    
+<link rel="stylesheet" href="/dist/custom.css?v=1643276206136.css">
+
+
+    <script>
+        window.isPost = true
+        window.aomori = {
+            
+            
+            
+        }
+        window.aomori_logo_typed_animated = true
+        window.aomori_search_algolia = false
+
+    </script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+
+    <div class="container">
+    <header class="header">
+        <div class="header-type">
+            
+            <div class="header-type-avatar avatar avatar-sm">
+                <img src="/images/avatar.png" alt="囧囧JOJO">
+            </div>
+            
+            <div class="header-type-inner">
+                
+                    <div id="typed-strings" style="display:none">
+                        <p>囧囧JOJO - 博客</p>
+                    </div>
+                    <a class="header-type-title" id="typed" href="/"></a>
+                
+    
+                
+            </div>
+        </div>
+        <div class="header-menu">
+            <div class="header-menu-inner">
+                
+                <a href="/">首页</a>
+                
+                <a href="/archives">存档</a>
+                
+                <a href="/about">关于</a>
+                
+            </div>
+            <div class="header-menu-social">
+                
+    <a class="social" target="_blank" href="https://github.com/jiongjiongJOJO">
+        <box-icon type='logo' name='github'></box-icon>
+    </a>
+
+            </div>
+        </div>
+
+        <div class="header-menu-mobile">
+            <div class="header-menu-mobile-inner" id="mobile-menu-open">
+                <i class="icon icon-menu"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="header-menu-mobile-menu">
+        <div class="header-menu-mobile-menu-bg"></div>
+        <div class="header-menu-mobile-menu-wrap">
+            <div class="header-menu-mobile-menu-inner">
+                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
+                    <i class="icon icon-cross"></i>
+                </div>
+                <div class="header-menu-mobile-menu-list">
+                    
+                    <a href="/">首页</a>
+                    
+                    <a href="/archives">存档</a>
+                    
+                    <a href="/about">关于</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="container">
+        <div class="main">
+            <section class="inner">
+                <section class="inner-main">
+                    <div class="post">
+    <article id="post-cl02tinn8000org9m43e0d0mo" class="article article-type-post" itemscope
+    itemprop="blogPost">
+
+    <div class="article-inner">
+
+        
+          
+        
+        
+        
+
+        
+        <header class="article-header">
+            
+  
+    <h1 class="article-title" itemprop="name">
+      Hive实验一：Hive安装部署及常用命令
+    </h1>
+  
+
+        </header>
+        
+
+        <div class="article-more-info article-more-info-post hairline">
+
+            <div class="article-date">
+  <time datetime="2021-12-03T02:53:53.000Z" itemprop="datePublished">2021-12-03</time>
+</div>
+
+            
+
+            
+            <div class="article-tag">
+                <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li></ul>
+            </div>
+            
+
+            
+
+        </div>
+
+        <div class="article-entry post-inner-html hairline" itemprop="articleBody">
+            <h1 id="Hive安装部署及常用命令"><a href="#Hive安装部署及常用命令" class="headerlink" title="Hive安装部署及常用命令"></a>Hive安装部署及常用命令</h1><span id="more"></span>
+
+<h2 id="0-目录"><a href="#0-目录" class="headerlink" title="0 目录"></a>0 目录</h2><ul>
+<li><a href="#0-%E7%9B%AE%E5%BD%95">0 目录</a></li>
+<li><a href="#1-%E5%AE%9E%E9%AA%8C%E5%87%86%E5%A4%87">1 实验准备</a><ul>
+<li><a href="#11-%E5%90%AF%E5%8A%A8hadoop%E9%9B%86%E7%BE%A4">1.1 启动Hadoop集群</a></li>
+<li><a href="#12-%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9">1.2 资源文件夹</a></li>
+<li><a href="#13-%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95">1.3 工作目录</a></li>
+<li><a href="#14-%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE">1.4 准备数据</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%AE%89%E8%A3%85hive%E5%8F%8A%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83">2 安装Hive及配置环境</a><ul>
+<li><a href="#21-hive%E5%AE%89%E8%A3%85">2.1 Hive安装</a></li>
+<li><a href="#22-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">2.2 配置环境变量</a></li>
+</ul>
+</li>
+<li><a href="#3-%E6%B5%8B%E8%AF%95hive">3 测试Hive</a></li>
+<li><a href="#4-%E5%90%AF%E5%8A%A8hive">4 启动Hive</a></li>
+<li><a href="#5-ddl%E5%91%BD%E4%BB%A4">5 DDL命令</a><ul>
+<li><a href="#51-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C">5.1 数据库操作</a><ul>
+<li><a href="#511-%E5%88%9B%E5%BB%BA%E7%AE%80%E5%8D%95%E6%95%B0%E6%8D%AE%E5%BA%93">5.1.1 创建简单数据库</a></li>
+<li><a href="#512-%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93">5.1.2 查看数据库</a></li>
+<li><a href="#513-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93">5.1.3 删除数据库</a></li>
+</ul>
+</li>
+<li><a href="#52-%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%93%8D%E4%BD%9C">5.2 数据表操作</a><ul>
+<li><a href="#521-%E5%BB%BA%E8%A1%A8%E6%93%8D%E4%BD%9C">5.2.1 建表操作</a><ul>
+<li><a href="#5211-%E5%88%9B%E5%BB%BA%E5%86%85%E9%83%A8%E8%A1%A8">5.2.1.1 创建内部表</a></li>
+<li><a href="#5212-%E5%88%9B%E5%BB%BA%E5%A4%96%E9%83%A8%E8%A1%A8">5.2.1.2 创建外部表</a></li>
+<li><a href="#5213-%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA%E8%A1%A8">5.2.1.3 创建分区表</a></li>
+<li><a href="#5214-%E5%88%9B%E5%BB%BA%E6%A1%B6%E8%A1%A8">5.2.1.4 创建桶表</a></li>
+</ul>
+</li>
+<li><a href="#522-%E4%BF%AE%E6%94%B9%E8%A1%A8">5.2.2 修改表</a><ul>
+<li><a href="#5221-%E9%87%8D%E5%91%BD%E5%90%8D%E8%A1%A8">5.2.2.1 重命名表</a></li>
+<li><a href="#5222-%E5%A2%9E%E5%8A%A0%E5%AD%97%E6%AE%B5">5.2.2.2 增加字段</a></li>
+<li><a href="#5223-%E4%BF%AE%E6%94%B9%E5%AD%97%E6%AE%B5%E5%AD%97%E6%AE%B5%E9%87%8D%E5%91%BD%E5%90%8D-%E4%BF%AE%E6%94%B9%E4%BD%8D%E7%BD%AE-%E7%B1%BB%E5%9E%8B%E6%88%96%E6%B3%A8%E9%87%8A">5.2.2.3 修改字段：字段重命名、修改位置、类型或注释</a></li>
+<li><a href="#5224-%E5%88%A0%E9%99%A4%E6%88%96%E6%9B%BF%E6%8D%A2%E5%AD%97%E6%AE%B5">5.2.2.4 删除或替换字段</a></li>
+<li><a href="#5225-%E4%BF%AE%E6%94%B9%E8%A1%A8%E7%9A%84%E5%B1%9E%E6%80%A7">5.2.2.5 修改表的属性</a></li>
+<li><a href="#5226-%E4%BF%AE%E6%94%B9%E8%A1%A8%E5%88%86%E5%8C%BA%E4%BF%A1%E6%81%AF">5.2.2.6 修改表分区信息</a></li>
+</ul>
+</li>
+<li><a href="#523-%E5%A4%8D%E5%88%B6%E4%B8%80%E4%B8%AA%E7%A9%BA%E8%A1%A8">5.2.3 复制一个空表</a></li>
+<li><a href="#524-%E5%88%A0%E9%99%A4%E8%A1%A8">5.2.4 删除表</a></li>
+<li><a href="#525%E5%88%A0%E9%99%A4%E5%88%86%E5%8C%BA">5.2.5.删除分区</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#6-dml%E5%91%BD%E4%BB%A4">6 DML命令</a><ul>
+<li><a href="#61-%E5%86%85%E9%83%A8%E8%A1%A8%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">6.1 内部表基本操作</a><ul>
+<li><a href="#611-%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93exercise">6.1.1 创建数据库exercise</a></li>
+<li><a href="#612-%E6%89%93%E5%BC%80%E6%95%B0%E6%8D%AE%E5%BA%93exercise%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E8%A1%A8stuinfo">6.1.2 打开数据库exercise，创建数据表stuInfo</a></li>
+<li><a href="#613-%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E8%A1%A8%E4%B8%AD%E5%86%85%E5%AE%B9">6.1.3 查看数据表中内容</a></li>
+<li><a href="#614-%E5%90%91stuinfo%E4%B8%AD%E5%AF%BC%E5%85%A5%E6%9C%AC%E5%9C%B0%E6%95%B0%E6%8D%AE">6.1.4 向stuinfo中导入本地数据</a></li>
+<li><a href="#615-%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E8%A1%A8%E4%B8%AD%E5%86%85%E5%AE%B9">6.1.5 查看数据表中内容</a></li>
+<li><a href="#616-%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E8%A1%A8stuinfo1">6.1.6 创建数据表stuinfo1</a></li>
+<li><a href="#617-%E5%8A%A0%E8%BD%BDhdfs%E4%B8%AD%E6%95%B0%E6%8D%AE%E5%88%B0%E8%A1%A8%E4%B8%AD">6.1.7 加载hdfs中数据到表中</a></li>
+<li><a href="#618-%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E4%B8%AD%E5%88%9B%E5%BB%BA%E8%A1%A8%E5%B9%B6%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AEas-select">6.1.8 查询语句中创建表并加载数据（as select）</a></li>
+<li><a href="#619-%E5%88%9B%E5%BB%BAstuinfo3%E5%B9%B6%E9%80%9A%E8%BF%87insert%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE">6.1.9 创建stuinfo3并通过insert插入数据</a></li>
+<li><a href="#6110-%E5%88%A0%E9%99%A4stuinfo3%E8%A1%A8%E8%A7%82%E5%AF%9F%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%92%8C%E6%96%87%E4%BB%B6%E7%9A%84%E5%8F%98%E5%8C%96">6.1.10 删除stuinfo3表，观察目录结构和文件的变化</a></li>
+</ul>
+</li>
+<li><a href="#62-%E5%A4%96%E9%83%A8%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">6.2 外部表的基本操作</a><ul>
+<li><a href="#621-%E5%88%9B%E5%BB%BA%E5%A4%96%E9%83%A8%E8%A1%A8">6.2.1 创建外部表</a></li>
+<li><a href="#622-%E6%9F%A5%E7%9C%8B%E5%A4%96%E9%83%A8%E8%A1%A8%E4%B8%AD%E4%BF%A1%E6%81%AF">6.2.2 查看外部表中信息</a></li>
+<li><a href="#623-%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%A4%96%E9%83%A8%E8%A1%A8">6.2.3 创建另一个外部表</a></li>
+<li><a href="#624-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE">6.2.4 导入数据</a></li>
+<li><a href="#625-%E6%9F%A5%E7%9C%8B%E8%A1%A8%E4%B8%AD%E4%BF%A1%E6%81%AF%E5%92%8Chdfs%E4%B8%AD%E6%96%87%E4%BB%B6">6.2.5 查看表中信息和hdfs中文件</a></li>
+<li><a href="#626-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E8%A1%A8ext_stu%E5%92%8Cext_stu1%E5%B9%B6%E8%A7%82%E5%AF%9F%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E7%9A%84%E5%8F%98%E5%8C%96">6.2.6 删除数据表ext_stu和ext_stu1，并观察目录结构的变化</a></li>
+</ul>
+</li>
+<li><a href="#63-%E5%88%86%E5%8C%BA%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">6.3 分区表的基本操作</a><ul>
+<li><a href="#631-%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA%E8%A1%A8">6.3.1 创建分区表</a></li>
+<li><a href="#632-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A7%82%E5%AF%9F%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%9C%E5%8F%98%E5%8C%96">6.3.2 导入数据，并观察目录结果变化</a></li>
+<li><a href="#633-%E5%88%A0%E9%99%A4%E5%88%86%E5%8C%BA%E8%A7%82%E5%AF%9Fhfds%E7%9B%AE%E5%BD%95userhivewarehousestu_ptn%E7%BB%93%E6%9E%84%E5%8F%98%E5%8C%96">6.3.3 删除分区（观察hfds目录&#x2F;user&#x2F;hive&#x2F;warehouse&#x2F;stu_ptn结构变化）</a></li>
+<li><a href="#634-%E9%80%9A%E8%BF%87%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E5%90%91%E8%A1%A8%E4%B8%AD%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE">6.3.4 通过查询语句向表中插入数据</a></li>
+<li><a href="#635-%E5%A4%9A%E6%8F%92%E5%85%A5%E6%A8%A1%E5%BC%8F">6.3.5 多插入模式</a></li>
+<li><a href="#636-%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E8%87%AA%E5%8A%A8%E5%88%86%E5%8C%BA%E6%A8%A1%E5%BC%8F">6.3.6 动态分区（自动分区模式）</a><ul>
+<li><a href="#6361-%E5%88%9B%E5%BB%BA%E5%88%86%E5%8C%BA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5%E7%9A%84%E5%88%86%E5%8C%BA%E8%A1%A8">6.3.6.1 创建分区表（创建多个字段的分区表）</a></li>
+<li><a href="#6362-%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0">6.3.6.2 设置参数</a></li>
+<li><a href="#6363-%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE%E8%A7%82%E5%AF%9F%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%8F%98%E5%8C%96">6.3.6.3 插入数据（观察目录结构变化）</a></li>
+<li><a href="#6364-%E8%AF%B4%E6%98%8E">6.3.6.4 说明</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#64-%E5%88%86%E6%A1%B6%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">6.4 分桶表的基本操作</a><br>  - <a href="#641-%E5%88%9B%E5%BB%BA%E5%88%86%E6%A1%B6%E8%A1%A8">6.4.1 创建分桶表</a><br>  - <a href="#642-%E5%BC%80%E5%90%AF%E5%88%86%E6%A1%B6%E5%8A%9F%E8%83%BD">6.4.2 开启分桶功能</a></li>
+<li><a href="#65-%E5%BD%95%E5%85%A5%E6%95%B0%E6%8D%AE">6.5 录入数据</a></li>
+<li><a href="#66-%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA">6.6 数据导出</a><ul>
+<li><a href="#661-%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%9A%84%E7%BB%93%E6%9E%9C%E5%AF%BC%E5%87%BA%E5%88%B0%E6%9C%AC%E5%9C%B0">6.6.1 将查询的结果导出到本地</a><ul>
+<li><a href="#6611-%E5%8D%95%E9%87%8D%E5%AF%BC%E5%87%BA">6.6.1.1 单重导出</a></li>
+<li><a href="#6612-%E5%A4%9A%E9%87%8D%E5%AF%BC%E5%87%BA">6.6.1.2 多重导出</a></li>
+</ul>
+</li>
+<li><a href="#662-%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%9A%84%E7%BB%93%E6%9E%9C%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AF%BC%E5%87%BA%E5%88%B0%E6%9C%AC%E5%9C%B0">6.6.2 将查询的结果格式化导出到本地</a></li>
+<li><a href="#663-%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%9A%84%E7%BB%93%E6%9E%9C%E5%AF%BC%E5%87%BA%E5%88%B0-hdfs-%E4%B8%8A%E6%B2%A1%E6%9C%89-local">6.6.3 将查询的结果导出到 HDFS 上(没有 local)</a></li>
+<li><a href="#664-hadoop-%E5%91%BD%E4%BB%A4%E5%AF%BC%E5%87%BA%E5%88%B0%E6%9C%AC%E5%9C%B0">6.6.4 Hadoop 命令导出到本地</a></li>
+<li><a href="#665-export%E5%AF%BC%E5%87%BA%E5%88%B0hdfs">6.6.5 export导出到hdfs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-实验准备"><a href="#1-实验准备" class="headerlink" title="1 实验准备"></a>1 实验准备</h2><h3 id="1-1-启动Hadoop集群"><a href="#1-1-启动Hadoop集群" class="headerlink" title="1.1 启动Hadoop集群"></a>1.1 启动Hadoop集群</h3><p>首先按照顺序启动四个Docker容器</p>
+<pre><code class="bashbash">docker start master
+docker start slave1
+docker start slave2
+docker start slave3
+</code></pre>
+<p>接着使用以下命令，进入到master环境内：</p>
+<pre><code class="bash">docker exec -it --privileged master /bin/bash
+</code></pre>
+<p>然后在master容器内启动Hadoop服务</p>
+<pre><code class="bash">start-dfs.sh
+start-yarn.sh
+mr-jobhistory-daemon.sh start historyserver
+</code></pre>
+<h3 id="1-2-资源文件夹"><a href="#1-2-资源文件夹" class="headerlink" title="1.2 资源文件夹"></a>1.2 资源文件夹</h3><p>资源文件夹位于<code>/cgsrc</code>，该文件夹存放了所有实验中需要用到的安装包。</p>
+<p>文件夹中的内容是只读的，需要使用时请挂载到docker容器上。</p>
+<p>在《hadoop安装部署实验》中，我们将该资源文件夹挂载到了每个docker容器的<code>/cgsrc</code>目录上</p>
+<p><img src="/QqVcDzIex/1638688679820.png"></p>
+<h3 id="1-3-工作目录"><a href="#1-3-工作目录" class="headerlink" title="1.3 工作目录"></a>1.3 工作目录</h3><p>本实验的工作目录为<code>~/course/hive/hive_op</code>，<strong>在桌面右键打开新的终端</strong>并使用以下命令创建和初始化工作目录：</p>
+<pre><code class="bash">mkdir -p ~/course/hive/hive_op
+cd ~/course/hive/hive_op
+</code></pre>
+<h3 id="1-4-准备数据"><a href="#1-4-准备数据" class="headerlink" title="1.4 准备数据"></a>1.4 准备数据</h3><p>在桌面新打开的终端上，在本实验的工作目录<code>~/course/hive/hive_op</code>下创建<code>student.txt</code>文件,并写入如下数据:</p>
+<pre><code class="tex">1001,zhangsan,F,19,XG
+1002,wangwu,F,20,XG
+1003,liwei,M,19,WL
+1004,liulan,F,20,WL
+1005,zhaozilin,M,18,GS
+1006,huangfei,M,21,XG
+1007,wuwei,F,20,GS
+1008,yangfang,M,17,XG
+1009,zhanwang,F,19,GS
+1010,wanggui,F,20,WL
+1011,lilei,M,16,JC
+1012,liulei,F,20,JC
+1013,zhaolin,M,18,WL
+1014,huanghu,M,21,JC
+1015,weiwei,F,21,WLW
+</code></pre>
+<p>使用如下命令进入<strong>master</strong>节点：</p>
+<pre><code class="bash">docker exec -it --privileged master bash
+</code></pre>
+<p>在<strong>master</strong>节点上，使用如下命令将<code>student.txt</code>上传至hdfs的<code>/hive/test</code>目录下：</p>
+<pre><code class="bash">hadoop fs -mkdir -p /hive/test
+hadoop fs -put /course/hive/hive_op/student.txt  /hive/test
+</code></pre>
+<h2 id="2-安装Hive及配置环境"><a href="#2-安装Hive及配置环境" class="headerlink" title="2 安装Hive及配置环境"></a>2 安装Hive及配置环境</h2><h3 id="2-1-Hive安装"><a href="#2-1-Hive安装" class="headerlink" title="2.1 Hive安装"></a>2.1 Hive安装</h3><p>在桌面右键打开新的终端，执行如下命令进入<strong>master</strong>节点：</p>
+<pre><code class="bash">docker exec -it --privileged master /bin/bash
+</code></pre>
+<p>从<code> /cgsrc</code> 中将 Hive 的安装文件复制到 <code>/usr/loacl</code> 目录下</p>
+<pre><code class="bash">cp /cgsrc/apache-hive-1.2.1-bin.tar.gz /usr/local/
+</code></pre>
+<p>执行如下命令解压：</p>
+<pre><code class="bash">cd /usr/local
+tar -zxvf apache-hive-1.2.1-bin.tar.gz
+rm -f apache-hive-1.2.1-bin.tar.gz
+</code></pre>
+<p>将解压得到的<code>apache-hive-1.2.1-bin</code> 文件夹重命名为 <code>hive</code></p>
+<pre><code class="bash">mv apache-hive-1.2.1-bin/ hive
+</code></pre>
+<h3 id="2-2-配置环境变量"><a href="#2-2-配置环境变量" class="headerlink" title="2.2 配置环境变量"></a>2.2 配置环境变量</h3><p>使用vim编辑器打开 <code>~/.bashrc</code> 文件：</p>
+<pre><code class="bash">vim ~/.bashrc
+</code></pre>
+<p>然后在该文件最末加入下面一行内容：</p>
+<pre><code class="bash">export HIVE_HOME=/usr/local/hive
+export PATH=$PATH:$HIVE_HOME/bin
+</code></pre>
+<p>保存后执行如下命令使配置生效：</p>
+<pre><code class="bash">source ~/.bashrc
+</code></pre>
+<h2 id="3-测试Hive"><a href="#3-测试Hive" class="headerlink" title="3 测试Hive"></a>3 测试Hive</h2><p>执行如下命令启动hive：</p>
+<pre><code class="bash">hive
+</code></pre>
+<p>若得到如下输出则安装成功：</p>
+<p><img src="/QqVcDzIex/1638688772782.png"></p>
+<p>至此Hive安装成功。</p>
+<p>输入<code>quit;</code>可以退出Hive Console</p>
+<h2 id="4-启动Hive"><a href="#4-启动Hive" class="headerlink" title="4 启动Hive"></a>4 启动Hive</h2><p>在<strong>master</strong>节点上输入如下命令启动 Hive服务 ：</p>
+<pre><code>hive --service hiveserver2 &amp;
+</code></pre>
+<p>接着在<strong>master</strong>节点上输入如下命令进入beeline终端并连接Hive:</p>
+<pre><code>beeline
+!connect jdbc:hive2://localhost:10000
+</code></pre>
+<p>输入账号&#x2F;密码：root&#x2F;root</p>
+<p><img src="/QqVcDzIex/1638688787524.png"></p>
+<h2 id="5-DDL命令"><a href="#5-DDL命令" class="headerlink" title="5 DDL命令"></a>5 DDL命令</h2><h3 id="5-1-数据库操作"><a href="#5-1-数据库操作" class="headerlink" title="5.1 数据库操作"></a>5.1 数据库操作</h3><h4 id="5-1-1-创建简单数据库"><a href="#5-1-1-创建简单数据库" class="headerlink" title="5.1.1 创建简单数据库"></a>5.1.1 创建简单数据库</h4><pre><code class="bash">CREATE DATABASE testdb1;
+CREATE DATABASE IF NOT EXISTS testdb2;
+</code></pre>
+<p>创建数据库的同时，设置数据库的存储路径:</p>
+<pre><code class="bash">CREATE DATABASE testdb3 LOCATION &#39;/user/mydb&#39;;
+</code></pre>
+<p>创建数据库的同时，给数据库添加注释(描述信息保存在元数据表DBS的DESC项中):</p>
+<pre><code class="bash">CREATE DATABASE testdb4 COMMENT &#39;This is a test database4&#39;;
+</code></pre>
+<p><img src="/QqVcDzIex/1638688809149.png"></p>
+<h4 id="5-1-2-查看数据库"><a href="#5-1-2-查看数据库" class="headerlink" title="5.1.2 查看数据库"></a>5.1.2 查看数据库</h4><pre><code class="bash">SHOW DATABASES;
+SHOW DATABASES LIKE &quot;testdb*&quot;;
+</code></pre>
+<p>执行效果如下：</p>
+<p><img src="/QqVcDzIex/1638688826391.png"></p>
+<p>查看当前数据库:</p>
+<pre><code class="bash">select current_database();
+</code></pre>
+<p>修改（数据库的元数据信息不可更改）:</p>
+<pre><code class="bash">alter database testdb4 set dbproperties(&#39;date&#39;=&#39;2019-10-10&#39;);
+</code></pre>
+<p>查看库的详细属性信息:</p>
+<pre><code class="bash">desc database extended testdb4;
+</code></pre>
+<p><img src="/QqVcDzIex/1638688841410.png"></p>
+<h4 id="5-1-3-删除数据库"><a href="#5-1-3-删除数据库" class="headerlink" title="5.1.3 删除数据库"></a>5.1.3 删除数据库</h4><pre><code class="bash">drop database testdb1;
+</code></pre>
+<p>打开库，并建立数据表，删除数据库:</p>
+<pre><code class="bash">use testdb4;
+create table mytable(ling string);
+drop database testdb4;
+</code></pre>
+<p><img src="/QqVcDzIex/1638688855970.png"></p>
+<p>查看出错原因，并执行下列删除操作</p>
+<pre><code class="bash">drop database testdb4 cascade;
+</code></pre>
+<p><img src="/QqVcDzIex/1638688865685.png"></p>
+<h3 id="5-2-数据表操作"><a href="#5-2-数据表操作" class="headerlink" title="5.2 数据表操作"></a>5.2 数据表操作</h3><h4 id="5-2-1-建表操作"><a href="#5-2-1-建表操作" class="headerlink" title="5.2.1 建表操作"></a>5.2.1 建表操作</h4><h5 id="5-2-1-1-创建内部表"><a href="#5-2-1-1-创建内部表" class="headerlink" title="5.2.1.1 创建内部表"></a>5.2.1.1 创建内部表</h5><pre><code class="bash">create table if not exists t1(
+id int,
+name string,
+gender string,
+age int,
+depart string
+);
+</code></pre>
+<p><img src="/QqVcDzIex/1638688897861.png"></p>
+<h5 id="5-2-1-2-创建外部表"><a href="#5-2-1-2-创建外部表" class="headerlink" title="5.2.1.2 创建外部表"></a>5.2.1.2 创建外部表</h5><pre><code class="bash">create external table if not exists t2(
+id int,
+name string,
+gender string,
+age int,
+depart string
+);
+</code></pre>
+<p><img src="/QqVcDzIex/1638688921067.png"></p>
+<h5 id="5-2-1-3-创建分区表"><a href="#5-2-1-3-创建分区表" class="headerlink" title="5.2.1.3 创建分区表"></a>5.2.1.3 创建分区表</h5><pre><code class="bash">create table if not exists t3(
+id int,
+name string,
+gender string,
+age int
+)partitioned by (depart string);
+</code></pre>
+<p><img src="/QqVcDzIex/1638688937529.png"></p>
+<h5 id="5-2-1-4-创建桶表"><a href="#5-2-1-4-创建桶表" class="headerlink" title="5.2.1.4 创建桶表"></a>5.2.1.4 创建桶表</h5><pre><code class="bash">create table if not exists t4(
+id int,
+name string,
+gender string,
+age int,
+depart string
+)clustered by (id) into 3 buckets;
+</code></pre>
+<p><img src="/QqVcDzIex/1638688952745.png"></p>
+<h4 id="5-2-2-修改表"><a href="#5-2-2-修改表" class="headerlink" title="5.2.2 修改表"></a>5.2.2 修改表</h4><h5 id="5-2-2-1-重命名表"><a href="#5-2-2-1-重命名表" class="headerlink" title="5.2.2.1 重命名表"></a>5.2.2.1 重命名表</h5><pre><code class="bash">alter table t4 rename to tb4;
+</code></pre>
+<h5 id="5-2-2-2-增加字段"><a href="#5-2-2-2-增加字段" class="headerlink" title="5.2.2.2 增加字段"></a>5.2.2.2 增加字段</h5><p>为t1表增加字段score</p>
+<pre><code class="bash">alter table t1 add columns(score float);
+</code></pre>
+<p>查看增加字段后的表结构</p>
+<pre><code class="bash">desc t1;
+</code></pre>
+<p>查看增加字段后表的详细信息</p>
+<pre><code class="bash">desc formatted t1;
+</code></pre>
+<p><img src="/QqVcDzIex/1638688971452.png"></p>
+<p><img src="/QqVcDzIex/1638688982229.png"></p>
+<h5 id="5-2-2-3-修改字段：字段重命名、修改位置、类型或注释"><a href="#5-2-2-3-修改字段：字段重命名、修改位置、类型或注释" class="headerlink" title="5.2.2.3 修改字段：字段重命名、修改位置、类型或注释"></a>5.2.2.3 修改字段：字段重命名、修改位置、类型或注释</h5><p>将字段score的类型由float改为int</p>
+<pre><code class="bash">alter table t1 change score score int;
+</code></pre>
+<p>将字段score的名字改为grade类型改为double</p>
+<pre><code class="bash">alter table t1 change score grade double;
+</code></pre>
+<p>将字段grade类型改为int，位置调整到sex字段后</p>
+<pre><code class="bash">alter table t1 change grade grade int after gender;
+</code></pre>
+<p>注意：即使字段名或字段类型没有改变，也需要完全指定旧的字段名，并给出新的字段名及类型</p>
+<p><img src="/QqVcDzIex/1638688999166.png"></p>
+<h5 id="5-2-2-4-删除或替换字段"><a href="#5-2-2-4-删除或替换字段" class="headerlink" title="5.2.2.4 删除或替换字段"></a>5.2.2.4 删除或替换字段</h5><pre><code class="bash">alter table t1 replace columns(id string,name string,sex string,age int);
+</code></pre>
+<p>移除之前所有字段并重新指定了新的字段</p>
+<h5 id="5-2-2-5-修改表的属性"><a href="#5-2-2-5-修改表的属性" class="headerlink" title="5.2.2.5 修改表的属性"></a>5.2.2.5 修改表的属性</h5><pre><code>alter table t1 set tblproperties(&#39;alter_date&#39;=&#39;2019-8-27&#39;);
+</code></pre>
+<p><img src="/QqVcDzIex/1638689012537.png"></p>
+<h5 id="5-2-2-6-修改表分区信息"><a href="#5-2-2-6-修改表分区信息" class="headerlink" title="5.2.2.6 修改表分区信息"></a>5.2.2.6 修改表分区信息</h5><p>添加分区</p>
+<pre><code class="bash">alter table 分区表名 add if not exists partition(分区字段名=分区字段值);
+</code></pre>
+<p>添加分区的同时可以使用location指定路径。 为t3表增加一个depart为’XG’的分区，观察hdfs中目录结构的变化</p>
+<pre><code class="bash">alter table t3 add if not exists partition(depart=&#39;XG&#39;);
+</code></pre>
+<p>查看分区</p>
+<pre><code class="bash">show partitions t3;
+</code></pre>
+<p>重命名分区</p>
+<pre><code class="bash">ALTER TABLE t3 PARTITION (depart=&#39;XG&#39;) RENAME TO PARTITION (depart=&#39;WLW&#39;);
+</code></pre>
+<p><img src="/QqVcDzIex/1638689028083.png"></p>
+<h4 id="5-2-3-复制一个空表"><a href="#5-2-3-复制一个空表" class="headerlink" title="5.2.3 复制一个空表"></a>5.2.3 复制一个空表</h4><pre><code class="bash">create table empty like t1;
+</code></pre>
+<h4 id="5-2-4-删除表"><a href="#5-2-4-删除表" class="headerlink" title="5.2.4 删除表"></a>5.2.4 删除表</h4><pre><code class="bash">drop table if exists t1;
+</code></pre>
+<h4 id="5-2-5-删除分区"><a href="#5-2-5-删除分区" class="headerlink" title="5.2.5.删除分区"></a>5.2.5.删除分区</h4><pre><code>alter table 分区表名 drop if exists partition(分区字段名=分区字段值);
+alter table t3 drop partition(depart=&#39;WLW&#39;);
+</code></pre>
+<p><img src="/QqVcDzIex/1638689042997.png"></p>
+<h2 id="6-DML命令"><a href="#6-DML命令" class="headerlink" title="6 DML命令"></a>6 DML命令</h2><p>数据导入有以下几种方法：</p>
+<p>1.向表中装载数据（Load）</p>
+<pre><code>load data [local] inpath &quot;path&quot; [overwrite] into table tb_name [partition (partcol1=val1,…)];
+</code></pre>
+<p><code>load data</code>:表示加载数据 <code>local</code>:表示从本地加载数据到 hive 表；否则从 HDFS 加载数据到 hive 表 <code>inpath</code>:表示加载数据的路径 <code>overwrite</code>:表示覆盖表中已有数据，否则表示追加 <code>into table</code>:表示加载到哪张表 <code>tb_name</code>:表示具体的表 <code>partition</code>:表示上传到指定分区</p>
+<p>2.使用<code>insert</code>实现数据导入</p>
+<p>3.查询语句中创建表并加载数据（As Select）</p>
+<p>4.使用<code>sqoop</code>实现数据导入</p>
+<h3 id="6-1-内部表基本操作"><a href="#6-1-内部表基本操作" class="headerlink" title="6.1 内部表基本操作"></a>6.1 内部表基本操作</h3><h4 id="6-1-1-创建数据库exercise"><a href="#6-1-1-创建数据库exercise" class="headerlink" title="6.1.1 创建数据库exercise"></a>6.1.1 创建数据库exercise</h4><pre><code class="bash">create database if not exists exercise;
+</code></pre>
+<h4 id="6-1-2-打开数据库exercise，创建数据表stuInfo"><a href="#6-1-2-打开数据库exercise，创建数据表stuInfo" class="headerlink" title="6.1.2 打开数据库exercise，创建数据表stuInfo"></a>6.1.2 打开数据库exercise，创建数据表stuInfo</h4><pre><code class="bash">use exercise;
+create table if not exists stuinfo(
+id int,
+name string,
+gender string,
+age int,
+depart string
+)row format delimited fields terminated by &#39;,&#39; lines terminated by &#39;\n&#39; stored as textfile;
+</code></pre>
+<h4 id="6-1-3-查看数据表中内容"><a href="#6-1-3-查看数据表中内容" class="headerlink" title="6.1.3 查看数据表中内容"></a>6.1.3 查看数据表中内容</h4><pre><code class="bash">select * from stuinfo;
+</code></pre>
+<p><img src="/QqVcDzIex/1638689056669.png"></p>
+<h4 id="6-1-4-向stuinfo中导入本地数据"><a href="#6-1-4-向stuinfo中导入本地数据" class="headerlink" title="6.1.4 向stuinfo中导入本地数据"></a>6.1.4 向stuinfo中导入本地数据</h4><pre><code class="bash">load data local inpath &#39;/course/hive/hive_op/student.txt&#39; into table stuinfo;
+</code></pre>
+<h4 id="6-1-5-查看数据表中内容"><a href="#6-1-5-查看数据表中内容" class="headerlink" title="6.1.5 查看数据表中内容"></a>6.1.5 查看数据表中内容</h4><pre><code class="bash">select * from stuinfo;
+</code></pre>
+<p><img src="/QqVcDzIex/1638689068050.png"></p>
+<h4 id="6-1-6-创建数据表stuinfo1"><a href="#6-1-6-创建数据表stuinfo1" class="headerlink" title="6.1.6 创建数据表stuinfo1"></a>6.1.6 创建数据表stuinfo1</h4><pre><code class="bash">create table stuinfo1 like stuinfo;
+</code></pre>
+<h4 id="6-1-7-加载hdfs中数据到表中"><a href="#6-1-7-加载hdfs中数据到表中" class="headerlink" title="6.1.7 加载hdfs中数据到表中"></a>6.1.7 加载hdfs中数据到表中</h4><pre><code class="bash">load data inpath &#39;/hive/test/student.txt&#39; into table stuinfo1;
+</code></pre>
+<p>观察hdfs的<code>/hive/test</code>目录下的文件在加载前后的变化</p>
+<h4 id="6-1-8-查询语句中创建表并加载数据（as-select）"><a href="#6-1-8-查询语句中创建表并加载数据（as-select）" class="headerlink" title="6.1.8 查询语句中创建表并加载数据（as select）"></a>6.1.8 查询语句中创建表并加载数据（as select）</h4><pre><code class="bash">create table stuinfo2 as select * from stuinfo1;
+</code></pre>
+<h4 id="6-1-9-创建stuinfo3并通过insert插入数据"><a href="#6-1-9-创建stuinfo3并通过insert插入数据" class="headerlink" title="6.1.9 创建stuinfo3并通过insert插入数据"></a>6.1.9 创建stuinfo3并通过insert插入数据</h4><pre><code class="bash">create table stuinfo3 like stuinfo;
+insert into table stuinfo3 select * from stuinfo1;
+select * from stuinfo3;
+</code></pre>
+<h4 id="6-1-10-删除stuinfo3表，观察目录结构和文件的变化"><a href="#6-1-10-删除stuinfo3表，观察目录结构和文件的变化" class="headerlink" title="6.1.10 删除stuinfo3表，观察目录结构和文件的变化"></a>6.1.10 删除stuinfo3表，观察目录结构和文件的变化</h4><pre><code class="bash">drop table stuinfo3;
+</code></pre>
+<p><img src="/QqVcDzIex/1638689086310.png"></p>
+<h3 id="6-2-外部表的基本操作"><a href="#6-2-外部表的基本操作" class="headerlink" title="6.2 外部表的基本操作"></a>6.2 外部表的基本操作</h3><h4 id="6-2-1-创建外部表"><a href="#6-2-1-创建外部表" class="headerlink" title="6.2.1 创建外部表"></a>6.2.1 创建外部表</h4><pre><code>create external table ext_stu1 like stuinfo location &#39;/hive/test&#39;;
+</code></pre>
+<h4 id="6-2-2-查看外部表中信息"><a href="#6-2-2-查看外部表中信息" class="headerlink" title="6.2.2 查看外部表中信息"></a>6.2.2 查看外部表中信息</h4><pre><code>select * from ext_stu1;
+</code></pre>
+<p><img src="/QqVcDzIex/1638689097818.png"></p>
+<h4 id="6-2-3-创建另一个外部表"><a href="#6-2-3-创建另一个外部表" class="headerlink" title="6.2.3 创建另一个外部表"></a>6.2.3 创建另一个外部表</h4><pre><code class="bash">create external table ext_stu like stuinfo;
+</code></pre>
+<h4 id="6-2-4-导入数据"><a href="#6-2-4-导入数据" class="headerlink" title="6.2.4 导入数据"></a>6.2.4 导入数据</h4><pre><code class="bash">load data inpath &#39;/hive/test/student.txt&#39; into table ext_stu;
+</code></pre>
+<p><strong>注意</strong>：执行命名前，先确保hdfs上<code>/hive/test/student.txt</code>文件存在，若不存在，先参考实验准备步骤将数据文件上传至hdfs。</p>
+<h4 id="6-2-5-查看表中信息和hdfs中文件"><a href="#6-2-5-查看表中信息和hdfs中文件" class="headerlink" title="6.2.5 查看表中信息和hdfs中文件"></a>6.2.5 查看表中信息和hdfs中文件</h4><pre><code class="bash">select * from ext_stu;
+select * from ext_stu1;
+dfs -ls /hive/test;
+</code></pre>
+<p><img src="/QqVcDzIex/1638689108198.png"></p>
+<h4 id="6-2-6-删除数据表ext-stu和ext-stu1，并观察目录结构的变化"><a href="#6-2-6-删除数据表ext-stu和ext-stu1，并观察目录结构的变化" class="headerlink" title="6.2.6 删除数据表ext_stu和ext_stu1，并观察目录结构的变化"></a>6.2.6 删除数据表ext_stu和ext_stu1，并观察目录结构的变化</h4><pre><code class="bash">drop table ext_stu1;
+drop table ext_stu;
+</code></pre>
+<h3 id="6-3-分区表的基本操作"><a href="#6-3-分区表的基本操作" class="headerlink" title="6.3 分区表的基本操作"></a>6.3 分区表的基本操作</h3><h4 id="6-3-1-创建分区表"><a href="#6-3-1-创建分区表" class="headerlink" title="6.3.1 创建分区表"></a>6.3.1 创建分区表</h4><pre><code class="bash">create table if not exists stu_ptn(
+id int,
+name string,
+gender string,
+age int
+)partitioned by (depart string) row format delimited fields terminated by &#39;,&#39; lines terminated by &#39;\n&#39;;
+</code></pre>
+<h4 id="6-3-2-导入数据，并观察目录结果变化"><a href="#6-3-2-导入数据，并观察目录结果变化" class="headerlink" title="6.3.2 导入数据，并观察目录结果变化"></a>6.3.2 导入数据，并观察目录结果变化</h4><pre><code class="bash">load data local inpath &#39;/course/hive/hive_op/student.txt&#39; into table stu_ptn partition(depart=&#39;JC&#39;);
+select * from stu_ptn; 
+</code></pre>
+<p>分析结果产生的原因</p>
+<p><img src="/QqVcDzIex/1638689121931.png"></p>
+<h4 id="6-3-3-删除分区（观察hfds目录-x2F-user-x2F-hive-x2F-warehouse-x2F-stu-ptn结构变化）"><a href="#6-3-3-删除分区（观察hfds目录-x2F-user-x2F-hive-x2F-warehouse-x2F-stu-ptn结构变化）" class="headerlink" title="6.3.3 删除分区（观察hfds目录&#x2F;user&#x2F;hive&#x2F;warehouse&#x2F;stu_ptn结构变化）"></a>6.3.3 删除分区（观察hfds目录&#x2F;user&#x2F;hive&#x2F;warehouse&#x2F;stu_ptn结构变化）</h4><pre><code class="bash">alter table stu_ptn drop partition(depart=&#39;JC&#39;);
+</code></pre>
+<h4 id="6-3-4-通过查询语句向表中插入数据"><a href="#6-3-4-通过查询语句向表中插入数据" class="headerlink" title="6.3.4 通过查询语句向表中插入数据"></a>6.3.4 通过查询语句向表中插入数据</h4><pre><code class="bash">insert overwrite table stu_ptn partition(depart=&#39;JC&#39;) select id,name,gender,age from stuinfo where depart=&#39;JC&#39;;
+select * from stu_ptn;
+</code></pre>
+<p><img src="/QqVcDzIex/1638689132632.png"></p>
+<h4 id="6-3-5-多插入模式"><a href="#6-3-5-多插入模式" class="headerlink" title="6.3.5 多插入模式"></a>6.3.5 多插入模式</h4><pre><code class="bash">from stuinfo
+insert overwrite table stu_ptn partition(depart=&#39;GS&#39;) select id,name,gender,age where depart=&#39;GS&#39;
+insert overwrite table stu_ptn partition(depart=&#39;WLW&#39;) select id,name,gender,age where depart=&#39;WLW&#39;
+insert overwrite table stu_ptn partition(depart=&#39;XG&#39;) select id,name,gender,age where depart=&#39;XG&#39;;
+</code></pre>
+<p><img src="/QqVcDzIex/1638689142123.png"></p>
+<p>查看hdfs目录<code>/user/hive/warehouse/stu_ptn</code>结构变化 查询表中数据：<code>select * from stu_ptn;</code> 查看分区表对应的分区：<code>show partitions stu_ptn;</code> 添加分区：<code>alter table stu_ptn add partition(depart=&#39;WL&#39;);</code> 上诉是静态分区。 </p>
+<h4 id="6-3-6-动态分区（自动分区模式）"><a href="#6-3-6-动态分区（自动分区模式）" class="headerlink" title="6.3.6 动态分区（自动分区模式）"></a>6.3.6 动态分区（自动分区模式）</h4><h5 id="6-3-6-1-创建分区表（创建多个字段的分区表）"><a href="#6-3-6-1-创建分区表（创建多个字段的分区表）" class="headerlink" title="6.3.6.1 创建分区表（创建多个字段的分区表）"></a>6.3.6.1 创建分区表（创建多个字段的分区表）</h5><pre><code class="bash">create table stu_ptn1(id int,name string,age int) partitioned by(depart string,gender string);
+</code></pre>
+<h5 id="6-3-6-2-设置参数"><a href="#6-3-6-2-设置参数" class="headerlink" title="6.3.6.2 设置参数"></a>6.3.6.2 设置参数</h5><pre><code class="bash">set hive.exec.dynamic.partition.mode=nonstrict;
+set hive.exec.dynamic.partition=true;
+</code></pre>
+<h5 id="6-3-6-3-插入数据（观察目录结构变化）"><a href="#6-3-6-3-插入数据（观察目录结构变化）" class="headerlink" title="6.3.6.3 插入数据（观察目录结构变化）"></a>6.3.6.3 插入数据（观察目录结构变化）</h5><pre><code class="bash">insert overwrite table stu_ptn1 partition(depart,gender) select id,name,age,depart,gender from stuinfo;
+</code></pre>
+<h5 id="6-3-6-4-说明"><a href="#6-3-6-4-说明" class="headerlink" title="6.3.6.4 说明"></a>6.3.6.4 说明</h5><p>查询插入动态分区字段需要放在最后一个字段，否则会将最后一个字段默认为分区字段 多字段分区的时候，目录结构按照分区字段顺序进行划分 分区表使用的时候，分区字段和普通字段一样，只是在建表和添加数据的时候不一样</p>
+<h3 id="6-4-分桶表的基本操作"><a href="#6-4-分桶表的基本操作" class="headerlink" title="6.4 分桶表的基本操作"></a>6.4 分桶表的基本操作</h3><h4 id="6-4-1-创建分桶表"><a href="#6-4-1-创建分桶表" class="headerlink" title="6.4.1 创建分桶表"></a>6.4.1 创建分桶表</h4><pre><code class="bash">create table if not exists stu_buk(
+id int,
+name string,
+gender string,
+age int,
+depart string
+)clustered by (age) into 3 buckets;
+</code></pre>
+<h4 id="6-4-2-开启分桶功能"><a href="#6-4-2-开启分桶功能" class="headerlink" title="6.4.2 开启分桶功能"></a>6.4.2 开启分桶功能</h4><pre><code class="bash">set hive.enforce.bucketing=true;
+</code></pre>
+<h3 id="6-5-录入数据"><a href="#6-5-录入数据" class="headerlink" title="6.5 录入数据"></a>6.5 录入数据</h3><pre><code class="bash">insert into table stu_buk select id,name,gender,age,depart from stuinfo;
+或
+insert overwrite table stu_buk select * from stuinfo;
+insert overwrite table stu_buk select * from stuinfo cluster by age;（没有开启分桶功能，但这是reducetask为3个即设置 mapreduce.job.reduces=3）
+</code></pre>
+<p><img src="/QqVcDzIex/1638689154401.png"></p>
+<h3 id="6-6-数据导出"><a href="#6-6-数据导出" class="headerlink" title="6.6 数据导出"></a>6.6 数据导出</h3><h4 id="6-6-1-将查询的结果导出到本地"><a href="#6-6-1-将查询的结果导出到本地" class="headerlink" title="6.6.1 将查询的结果导出到本地"></a>6.6.1 将查询的结果导出到本地</h4><h5 id="6-6-1-1-单重导出"><a href="#6-6-1-1-单重导出" class="headerlink" title="6.6.1.1 单重导出"></a>6.6.1.1 单重导出</h5><pre><code class="bash">insert overwrite local directory &#39;/course/hive/hive_op/hive-data/stuinfo&#39; select * from stuinfo;
+</code></pre>
+<p>一个或多个文件会被写入到<code>/course/hive/hive_op/hive-data/stuinfo</code>目录下，具体个数取决于调用的<code>reducer</code>个数</p>
+<p><img src="/QqVcDzIex/1638689172297.png"></p>
+<h5 id="6-6-1-2-多重导出"><a href="#6-6-1-2-多重导出" class="headerlink" title="6.6.1.2 多重导出"></a>6.6.1.2 多重导出</h5><pre><code class="bash">from stuinfo insert overwrite local directory &#39;/course/hive/hive_op/hive-data/stu-18&#39; select * where age=18
+insert overwrite local directory &#39;/course/hive/hive_op/hive-data/stu-19&#39; select * where age=19;
+</code></pre>
+<p>注意：数据写入到文件系统时进行文本序列化，且每列用<code>^A</code>来分隔，<code>\n</code>来换行。</p>
+<p><img src="/QqVcDzIex/1638689181151.png"></p>
+<h4 id="6-6-2-将查询的结果格式化导出到本地"><a href="#6-6-2-将查询的结果格式化导出到本地" class="headerlink" title="6.6.2 将查询的结果格式化导出到本地"></a>6.6.2 将查询的结果格式化导出到本地</h4><pre><code class="bash">insert overwrite local directory &#39;/course/hive/hive_op/hive-data/stu_ptn_jc&#39;
+row format delimited fields terminated by &#39;,&#39; lines terminated by &#39;\n&#39;
+select * from stu_ptn where depart=&#39;JC&#39;;
+</code></pre>
+<p><img src="/QqVcDzIex/1638689189852.png"></p>
+<h4 id="6-6-3-将查询的结果导出到-HDFS-上-没有-local"><a href="#6-6-3-将查询的结果导出到-HDFS-上-没有-local" class="headerlink" title="6.6.3 将查询的结果导出到 HDFS 上(没有 local)"></a>6.6.3 将查询的结果导出到 HDFS 上(没有 local)</h4><pre><code class="bash">insert overwrite directory &#39;/hive/stu_ptn_gs&#39;
+row format delimited fields terminated by &#39;,&#39; lines terminated by &#39;\n&#39;
+select * from stu_ptn where depart=&#39;GS&#39;;
+</code></pre>
+<p><img src="/QqVcDzIex/1638689198673.png"></p>
+<h4 id="6-6-4-Hadoop-命令导出到本地"><a href="#6-6-4-Hadoop-命令导出到本地" class="headerlink" title="6.6.4 Hadoop 命令导出到本地"></a>6.6.4 Hadoop 命令导出到本地</h4><p>在<strong>master</strong>节点上执行如下命令（不是在hive控制台执行该命令，导出前确保本地<code>/course/hive/hive_op/hive-data/000000_0</code>文件不存在）</p>
+<pre><code class="bash">hadoop fs -get /hive/stu_ptn_jc/000000_0 /course/hive/hive_op/hive-data/;
+</code></pre>
+<h4 id="6-6-5-export导出到hdfs"><a href="#6-6-5-export导出到hdfs" class="headerlink" title="6.6.5 export导出到hdfs"></a>6.6.5 export导出到hdfs</h4><pre><code class="bash">export table stu_ptn to &#39;/hive/stu_ptn&#39;;
+</code></pre>
+<p>整个表的数据及元数据都导出到hdfs的<code>/hive/stu_ptn/</code>目录下。</p>
+<p><img src="/QqVcDzIex/1638689210114.png"></p>
+
+        </div>
+
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+<nav class="article-nav">
+  
+    <a href="/ODim-ao91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-caption">下一篇</div>
+      <div class="article-nav-title">
+        
+          Hive实验二：Hive的复杂数据类型、内置函数与自定义函数
+        
+      </div>
+    </a>
+  
+  
+    <a href="/S6P9lKS8E/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-caption">上一篇</div>
+      <div class="article-nav-title">Docker实验五：Docker 仓库管理</div>
+    </a>
+  
+</nav>
+
+
+    <section class="share">
+        <div class="share-title">分享</div>
+        <a class="share-item" target="_blank"
+            href="https://twitter.com/share?text=Hive实验一：Hive安装部署及常用命令 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/QqVcDzIex/">
+            <box-icon type='logo' name='twitter'></box-icon>
+        </a>
+        <a class="share-item" target="_blank"
+            href="https://www.facebook.com/sharer.php?title=Hive实验一：Hive安装部署及常用命令 - 囧囧JOJO - 博客&u=https://jiongjiongjojo.gitee.io/QqVcDzIex/">
+            <box-icon name='facebook-square' type='logo' ></box-icon>
+        </a>
+        <!-- <a class="share-item" target="_blank"
+            href="https://service.weibo.com/share/share.php?title=Hive实验一：Hive安装部署及常用命令 - 囧囧JOJO - 博客&url=https://jiongjiongjojo.gitee.io/QqVcDzIex/&pic=">
+            <div class="n-icon n-icon-weibo"></div>
+        </a> -->
+    </section>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </section>
+            </section>
+
+            
+            <aside class="sidebar ">
+                
+
+
+<div class="widget" id="widget">
+    
+      
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/" rel="tag">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hive/" rel="tag">Hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%A5%E9%97%A8/" rel="tag">入门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A9%E6%B1%A0%E9%BE%99%E7%8F%A0/" rel="tag">天池龙珠</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap widget-recent-posts">
+    <div class="widget-title"><span>Recent Posts</span></div>
+    <div class="widget-inner">
+      <ul>
+        
+          <li>
+            <a href="/rtbmdk9d8/">Linux系统安装IDEA保姆级教程</a>
+          </li>
+        
+          <li>
+            <a href="/aMhN6pCDy/">《天池龙珠 - 机器学习训练营》03.机器学习算法： 基于LightGBM的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/wjIToohDP/">《天池龙珠 - 机器学习训练营》02.机器学习算法： 基于XGBoost的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/4oorP7ZZn/">《天池龙珠 - 机器学习训练营》01.机器学习算法：基于逻辑回归的分类预测 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/osN4d6gl7/">《天池龙珠 - SQL训练营》06.SQL进阶：综合练习题-10道经典SQL题目，配套数据与解答</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget-wrap widget-archive">
+    <div class="widget-title"><span>Archive</span></div>
+    <div class="widget-inner">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li></ul>
+    </div>
+  </div>
+
+
+    
+</div>
+
+<div id="backtop"><i class="icon icon-arrow-up"></i></div>
+            </aside>
+            
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
+    </div>
+
+    <!-- Please do not remove this -->
+    <!-- 开源不易，请勿删除 -->
+    <div class="footer-wrap">
+        <div class="footer-inner"> 
+            囧囧JOJO - 博客 &copy; 2022<br>
+            Powered By Hexo · Theme By <a href="https://linhong.me/" target="_blank">Aomori</a> · <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Github</a>
+        </div>
+    </div>
+
+</footer>
+
+
+
+
+
+
+<script src="/dist/build.js?1643276206136.js"></script>
+
+
+<script src="/dist/custom.js?1643276206136.js"></script>
+
+
+
+<!-- 百度链接提交 -->
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>
